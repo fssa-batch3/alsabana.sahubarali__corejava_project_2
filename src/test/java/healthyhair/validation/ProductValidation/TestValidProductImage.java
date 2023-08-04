@@ -1,14 +1,14 @@
 package healthyhair.validation.ProductValidation;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 
 import org.junit.jupiter.api.Test;
 
 import healthyhair.validation.ProductValidator;
 import healthyhair.validation.exception.InvalidProductException;
 
-public class TestValidProductImage {
+ class TestValidProductImage {
 
 	@Test
 

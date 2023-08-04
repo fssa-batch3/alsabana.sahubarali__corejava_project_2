@@ -1,14 +1,13 @@
 package healthyhair.validation.ProductValidation;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.jupiter.api.Test;
 
 import healthyhair.validation.ProductValidator;
 import healthyhair.validation.exception.InvalidProductException;
 
-public class TestValidProductCost {
+class TestValidProductCost {
 
 	@Test
 
@@ -31,7 +30,7 @@ public class TestValidProductCost {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	@Test
 
 	void validProductNameCostContainsLetter() {
@@ -42,7 +41,7 @@ public class TestValidProductCost {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	@Test
 
 	void validProductNameCostTooSmall() {
@@ -53,6 +52,7 @@ public class TestValidProductCost {
 			System.out.println(e.getMessage());
 		}
 	}
+
 	@Test
 
 	void validProductNameCostToooSmall() {

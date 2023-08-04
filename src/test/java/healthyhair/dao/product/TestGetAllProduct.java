@@ -1,13 +1,13 @@
 package healthyhair.dao.product;
 
 import healthyhair.DAO.exception.DAOException; 
+
 import healthyhair.model.Product;
 import healthyhair.services.*;
 import healthyhair.DAO.*;
 import healthyhair.service.exception.ServiceException;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 
 
-public class TestGetAllProduct {
+ class TestGetAllProduct {
 
 	@Test
 	void ValidGetSuccess() {

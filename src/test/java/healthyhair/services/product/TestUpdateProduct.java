@@ -2,15 +2,16 @@ package healthyhair.services.product;
 
 import org.junit.jupiter.api.Test;
 
+
 import healthyhair.DAO.exception.DAOException;
 import healthyhair.model.Product;
 
 import healthyhair.DAO.*;
 
-public class TestUpdateProduct {
+ class TestUpdateProduct {
 	@Test
 
-	public void updateTask() {
+	 void updateTask() {
 		ProductDAO productDAO = new ProductDAO();
 		Product product1 = new Product("Ayurvedic shampoo", 300,
 				"https://www.gkhair.co.in/cdn/shop/files/Balancing-banner_023150bb-42a3-4452-bbe8-aa23828dfdd1_1600x.png?v=1673589283",

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="6" failures="6" name="healthyhair.validation.UserValidation.TestValidateUsername" time="0.001" errors="0" skipped="0">
+<testsuite tests="0" failures="0" name="healthyhair.validation.ProductValidation.TestValidProductCategory" time="0" errors="0" skipped="0">
   <properties>
     <property name="jansi.mode" value="force"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
@@ -61,61 +61,4 @@
     <property name="m2e.build.project.data.socket.port" value="59256"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="healthyhair.validation.UserValidation.TestValidateUsername" name="healthyhair.validation.UserValidation.TestValidateUsername.testInvalidUsernameStartingWithNumber" time="0.001">
-    <failure message="org/junit/Assert" type="java.lang.NoClassDefFoundError">java.lang.NoClassDefFoundError: org/junit/Assert
-	at healthyhair.validation.UserValidation.TestValidateUsername.testInvalidUsernameStartingWithNumber(TestValidateUsername.java:27)
-Caused by: java.lang.ClassNotFoundException: org.junit.Assert
-	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
-	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
-	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520)
-	... 19 more
-</failure>
-    <system-out>user name is not valid
-</system-out>
-  </testcase>
-  <testcase classname="healthyhair.validation.UserValidation.TestValidateUsername" name="healthyhair.validation.UserValidation.TestValidateUsername.testInvalidUsernameStartingWithSpecialCharacter" time="0">
-    <failure message="org/junit/Assert" type="java.lang.NoClassDefFoundError">java.lang.NoClassDefFoundError: org/junit/Assert
-	at healthyhair.validation.UserValidation.TestValidateUsername.testInvalidUsernameStartingWithSpecialCharacter(TestValidateUsername.java:38)
-Caused by: java.lang.ClassNotFoundException: org.junit.Assert
-	... 19 more
-</failure>
-    <system-out>user name is not valid
-</system-out>
-  </testcase>
-  <testcase classname="healthyhair.validation.UserValidation.TestValidateUsername" name="healthyhair.validation.UserValidation.TestValidateUsername.testInvalidUsernameTooShort" time="0">
-    <failure message="org/junit/Assert" type="java.lang.NoClassDefFoundError">java.lang.NoClassDefFoundError: org/junit/Assert
-	at healthyhair.validation.UserValidation.TestValidateUsername.testInvalidUsernameTooShort(TestValidateUsername.java:61)
-Caused by: java.lang.ClassNotFoundException: org.junit.Assert
-	... 19 more
-</failure>
-    <system-out>user name is not valid
-</system-out>
-  </testcase>
-  <testcase classname="healthyhair.validation.UserValidation.TestValidateUsername" name="healthyhair.validation.UserValidation.TestValidateUsername.testInvalidUsernameWithSpaces" time="0">
-    <failure message="org/junit/Assert" type="java.lang.NoClassDefFoundError">java.lang.NoClassDefFoundError: org/junit/Assert
-	at healthyhair.validation.UserValidation.TestValidateUsername.testInvalidUsernameWithSpaces(TestValidateUsername.java:50)
-Caused by: java.lang.ClassNotFoundException: org.junit.Assert
-	... 19 more
-</failure>
-    <system-out>user name is not valid
-</system-out>
-  </testcase>
-  <testcase classname="healthyhair.validation.UserValidation.TestValidateUsername" name="healthyhair.validation.UserValidation.TestValidateUsername.testInvalidUsernameTooLong" time="0">
-    <failure message="org/junit/Assert" type="java.lang.NoClassDefFoundError">java.lang.NoClassDefFoundError: org/junit/Assert
-	at healthyhair.validation.UserValidation.TestValidateUsername.testInvalidUsernameTooLong(TestValidateUsername.java:72)
-Caused by: java.lang.ClassNotFoundException: org.junit.Assert
-	... 19 more
-</failure>
-    <system-out>user name is not valid
-</system-out>
-  </testcase>
-  <testcase classname="healthyhair.validation.UserValidation.TestValidateUsername" name="healthyhair.validation.UserValidation.TestValidateUsername.testValidUsername" time="0">
-    <failure message="org/junit/Assert" type="java.lang.NoClassDefFoundError">java.lang.NoClassDefFoundError: org/junit/Assert
-	at healthyhair.validation.UserValidation.TestValidateUsername.testValidUsername(TestValidateUsername.java:16)
-Caused by: java.lang.ClassNotFoundException: org.junit.Assert
-	... 19 more
-</failure>
-    <system-out>The user name is valid.
-</system-out>
-  </testcase>
 </testsuite>

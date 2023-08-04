@@ -1,19 +1,17 @@
 package healthyhair.validation.UserValidation;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import healthyhair.service.exception.ServiceException;
 import healthyhair.validation.UserValidator;
 import healthyhair.validation.exception.InvalidUserException;
 
-public class TestValidPassword {
+class TestValidPassword {
 
 	@Test
 	void testValidPassword() {
-		UserValidator userValidator = new UserValidator();
+
 		try {
 
 			assertTrue(UserValidator.validatePassword("Password@123"));
@@ -26,7 +24,7 @@ public class TestValidPassword {
 
 	@Test
 	void testInvalidPasswordWithoutSpecialCharacter() {
-		UserValidator userValidator = new UserValidator();
+
 		try {
 
 			assertFalse(UserValidator.validatePassword("Password123"));
@@ -38,7 +36,7 @@ public class TestValidPassword {
 
 	@Test
 	void testInvalidPasswordWithoutNumbers() {
-		UserValidator userValidator = new UserValidator();
+
 		try {
 
 			assertFalse(UserValidator.validatePassword("Password@"));
@@ -50,7 +48,7 @@ public class TestValidPassword {
 
 	@Test
 	void testInvalidPasswordWithoutCapitalLetter() {
-		UserValidator userValidator = new UserValidator();
+
 		try {
 
 			assertFalse(UserValidator.validatePassword("password@123"));
@@ -62,7 +60,7 @@ public class TestValidPassword {
 
 	@Test
 	void testInvalidPasswordWithoutSmallLetter() {
-		UserValidator userValidator = new UserValidator();
+
 		try {
 
 			assertFalse(UserValidator.validatePassword("PASSWORD@123"));
@@ -74,7 +72,7 @@ public class TestValidPassword {
 
 	@Test
 	void testInvalidPasswordShorterLength() {
-		UserValidator userValidator = new UserValidator();
+
 		try {
 
 			assertFalse(UserValidator.validatePassword("Pa"));

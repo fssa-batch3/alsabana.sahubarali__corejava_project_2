@@ -1,14 +1,14 @@
 package healthyhair.validation.UserValidation;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 
 import org.junit.jupiter.api.Test;
 
 import healthyhair.validation.UserValidator;
 import healthyhair.validation.exception.InvalidUserException;
 
-public class TestValidEmail {
+ class TestValidEmail {
 
 	@Test
 	void testValidEmail() {
@@ -23,7 +23,7 @@ public class TestValidEmail {
 	}
 
 	@Test
-	public void testInvalidEmailWithoutAtSymbol() {
+	 void testInvalidEmailWithoutAtSymbol() {
 		try {
 
 			assertFalse(UserValidator.validateEmail("soffan2906gmail.com"));
@@ -34,7 +34,7 @@ public class TestValidEmail {
 	}
 
 	@Test
-	public void testInvalidEmailWithoutcom() {
+	 void testInvalidEmailWithoutcom() {
 		try {
 
 			assertFalse(UserValidator.validateEmail("soffan2906@"));

@@ -1,8 +1,6 @@
 package healthyhair.services.user;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.Assert.*;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
@@ -14,10 +12,10 @@ import healthyhair.model.User;
 import healthyhair.services.*;
 import healthyhair.DAO.*;
 
-public class TestRegisterFeature {
+class TestRegisterFeature {
 
 	@Test
-	public void testRegistrationSuccess() {
+	void testRegistrationSuccess() {
 
 		UserService userservice = new UserService();
 		User user1 = new User("sabin@gmail.com", "sabin", "passWord@786", "buyer", "8015059760");
@@ -34,7 +32,7 @@ public class TestRegisterFeature {
 	}
 
 	@Test
-	public void testRegistrationFail() {
+	 void testRegistrationFail() {
 		UserService userService = new UserService();
 
 		User invalidUser = new User("", "JohnDoe", "Password@123", "buyer", "");
@@ -49,7 +47,7 @@ public class TestRegisterFeature {
 	}
 
 	@Test
-	public void testUserNull() {
+	 void testUserNull() {
 		UserService userservice = new UserService();
 		User user1 = null;
 		try {

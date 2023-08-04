@@ -1,16 +1,15 @@
 package healthyhair.validation.UserValidation;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.jupiter.api.Test;
 
 import healthyhair.validation.UserValidator;
 import healthyhair.validation.exception.InvalidUserException;
 
-public class TestValidateUsername {
+class TestValidateUsername {
 	@Test
-	public void testValidUsername() {
+	void testValidUsername() {
 		try {
 
 			assertTrue(UserValidator.validateName("sabana"));
@@ -21,7 +20,7 @@ public class TestValidateUsername {
 	}
 
 	@Test
-	public void testInvalidUsernameStartingWithNumber() {
+	void testInvalidUsernameStartingWithNumber() {
 		try {
 
 			assertFalse(UserValidator.validateName("1Sabana"));
@@ -32,7 +31,7 @@ public class TestValidateUsername {
 	}
 
 	@Test
-	public void testInvalidUsernameStartingWithSpecialCharacter() {
+	void testInvalidUsernameStartingWithSpecialCharacter() {
 		try {
 
 			assertFalse(UserValidator.validateName("@sabana"));
@@ -44,7 +43,7 @@ public class TestValidateUsername {
 	}
 
 	@Test
-	public void testInvalidUsernameWithSpaces() {
+	void testInvalidUsernameWithSpaces() {
 		try {
 
 			assertFalse(UserValidator.validateName("mow sabin"));
@@ -55,7 +54,7 @@ public class TestValidateUsername {
 	}
 
 	@Test
-	public void testInvalidUsernameTooShort() {
+	void testInvalidUsernameTooShort() {
 		try {
 
 			assertFalse(UserValidator.validateName("SA"));

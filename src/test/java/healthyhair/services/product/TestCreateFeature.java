@@ -1,7 +1,7 @@
 package healthyhair.services.product;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 
 import org.junit.jupiter.api.Test;
 import healthyhair.service.exception.ServiceException;
@@ -9,9 +9,9 @@ import healthyhair.service.exception.ServiceException;
 import healthyhair.model.Product;
 import healthyhair.services.ProductService;
 
-public class TestCreateFeature {
+ class TestCreateFeature {
 	@Test
-	public void testCreateSuccess() {
+	 void testCreateSuccess() {
 
 		ProductService productservice = new ProductService();
 		Product product1 = new Product("Ayurvedashampoo", 390,
@@ -33,7 +33,7 @@ public class TestCreateFeature {
 
 	@Test
 
-	public void testCreateFail() {
+	 void testCreateFail() {
 
 		ProductService productservice = new ProductService();
 		Product product2 = new Product("  shampoo", 300, "",
