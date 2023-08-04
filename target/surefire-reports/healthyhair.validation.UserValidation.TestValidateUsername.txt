@@ -1,0 +1,43 @@
+-------------------------------------------------------------------------------
+Test set: healthyhair.validation.UserValidation.TestValidateUsername
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 6, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec <<< FAILURE!
+healthyhair.validation.UserValidation.TestValidateUsername.testInvalidUsernameTooLong()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NoClassDefFoundError: org/junit/Assert
+	at healthyhair.validation.UserValidation.TestValidateUsername.testInvalidUsernameTooLong(TestValidateUsername.java:72)
+Caused by: java.lang.ClassNotFoundException: org.junit.Assert
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520)
+	... 19 more
+
+healthyhair.validation.UserValidation.TestValidateUsername.testInvalidUsernameTooShort()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NoClassDefFoundError: org/junit/Assert
+	at healthyhair.validation.UserValidation.TestValidateUsername.testInvalidUsernameTooShort(TestValidateUsername.java:61)
+Caused by: java.lang.ClassNotFoundException: org.junit.Assert
+	... 19 more
+
+healthyhair.validation.UserValidation.TestValidateUsername.testInvalidUsernameWithSpaces()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NoClassDefFoundError: org/junit/Assert
+	at healthyhair.validation.UserValidation.TestValidateUsername.testInvalidUsernameWithSpaces(TestValidateUsername.java:50)
+Caused by: java.lang.ClassNotFoundException: org.junit.Assert
+	... 19 more
+
+healthyhair.validation.UserValidation.TestValidateUsername.testValidUsername()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NoClassDefFoundError: org/junit/Assert
+	at healthyhair.validation.UserValidation.TestValidateUsername.testValidUsername(TestValidateUsername.java:16)
+Caused by: java.lang.ClassNotFoundException: org.junit.Assert
+	... 19 more
+
+healthyhair.validation.UserValidation.TestValidateUsername.testInvalidUsernameStartingWithSpecialCharacter()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NoClassDefFoundError: org/junit/Assert
+	at healthyhair.validation.UserValidation.TestValidateUsername.testInvalidUsernameStartingWithSpecialCharacter(TestValidateUsername.java:38)
+Caused by: java.lang.ClassNotFoundException: org.junit.Assert
+	... 19 more
+
+healthyhair.validation.UserValidation.TestValidateUsername.testInvalidUsernameStartingWithNumber()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NoClassDefFoundError: org/junit/Assert
+	at healthyhair.validation.UserValidation.TestValidateUsername.testInvalidUsernameStartingWithNumber(TestValidateUsername.java:27)
+Caused by: java.lang.ClassNotFoundException: org.junit.Assert
+	... 19 more
+
