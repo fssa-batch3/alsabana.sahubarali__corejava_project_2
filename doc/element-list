@@ -1,0 +1,12 @@
+healthyhair.DAO
+healthyhair.DAO.exception
+healthyhair.dao.product
+healthyhair.model
+healthyhair.service.exception
+healthyhair.services
+healthyhair.services.product
+healthyhair.services.user
+healthyhair.validation
+healthyhair.validation.exception
+healthyhair.validation.ProductValidation
+healthyhair.validation.UserValidation
