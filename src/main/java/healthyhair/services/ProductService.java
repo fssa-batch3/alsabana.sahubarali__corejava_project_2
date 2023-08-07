@@ -1,11 +1,12 @@
 package healthyhair.services;
 
 import healthyhair.DAO.exception.DAOException;
+
+import healthyhair.DAO.*;
 import healthyhair.model.Product;
 
 import java.util.List;
 
-import healthyhair.DAO.ProductDAO;
 import healthyhair.service.exception.ServiceException;
 import healthyhair.validation.ProductValidator;
 import healthyhair.validation.exception.InvalidProductException;
@@ -17,7 +18,7 @@ public class ProductService {
 		try {
 			ProductValidator.validateProduct(product);
 			if (productDAO.create(product)) {
-				System.out.println(product.getProduct_name()+ "  Succesfully product created");
+				System.out.println(product.getProduct_name() + "  Succesfully product created");
 				return true;
 			} else {
 				System.out.println("Creating failed");
@@ -58,6 +59,22 @@ public class ProductService {
 		}
 	}
 
+	public boolean deleteProduct(int productId) throws ServiceException {
+		ProductDAO productDAO = new ProductDAO();
+		try {
 
+			if (productDAO.delete(productId)) {
+				System.out.println("Product with ID " + productId + " successfully deleted.");
+				return true;
+			} else {
+				System.out.println("Deletion failed for product with ID " + productId + ".");
+				return false;
+			}
+
+		} catch (DAOException e) {
+
+			throw new ServiceException(e.getMessage(), e);
+		}
+	}
 
 }

@@ -23,8 +23,7 @@ public class ProductDAO {
 	public boolean create(Product product) throws DAOException {
 		final String QUERY = "INSERT INTO product (product_name, cost, product_image, product_detail, category) VALUES (?, ?, ?, ?, ?)";
 
-		try (Connection connection = getConnection(); 
-				PreparedStatement pmt = connection.prepareStatement(QUERY)) {
+		try (Connection connection = getConnection(); PreparedStatement pmt = connection.prepareStatement(QUERY)) {
 			pmt.setString(1, product.getProduct_name());
 			pmt.setInt(2, product.getCost());
 			pmt.setString(3, product.getProduct_img());
@@ -87,7 +86,7 @@ public class ProductDAO {
 		}
 	}
 
-	public void delete(int productId) throws DAOException {
+	public boolean delete(int productId) throws DAOException {
 		ProductDAO productDAO = new ProductDAO();
 		try (Connection connection = productDAO.getConnection();
 				PreparedStatement stmt = connection.prepareStatement("DELETE from product WHERE product_id=?")) {
@@ -95,10 +94,10 @@ public class ProductDAO {
 			stmt.setInt(1, productId);
 
 			int rows = stmt.executeUpdate();
-			System.out.println("No of rows inserted :" + rows);
+			return rows > 0;
 
 		} catch (SQLException e) {
-			throw new DAOException("Error in delete product method");
+			throw new DAOException("Error in delete product method",e);
 		}
 
 	}

@@ -19,7 +19,7 @@ public class Product {
 	public Product(int product_id, String product_name, int cost, String product_img, String product_detail,
 			String category) {
 		this.product_name = product_name;
-		this.setProduct_id(product_id);
+		this.product_id = product_id;
 		this.cost = cost;
 		this.product_img = product_img;
 		this.product_detail = product_detail;

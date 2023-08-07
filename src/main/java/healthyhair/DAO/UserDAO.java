@@ -66,7 +66,6 @@ public class UserDAO {
 		try (PreparedStatement pstmt = getConnection().prepareStatement(SELECTQUERY)) {
 
 			pstmt.setString(1, user.getEmail());
-			pstmt.setString(2, user.getPassword());
 
 			try (ResultSet rs = pstmt.executeQuery()) {
 				String passwordfromDb = rs.getString("password");
@@ -107,8 +106,6 @@ public class UserDAO {
 
 			int rows = stmt.executeUpdate();
 			System.out.println("No of rows inserted :" + rows);
-			stmt.close();
-			connection.close();
 
 		} catch (SQLException e) {
 			throw new DAOException("Error in deleteTask method");

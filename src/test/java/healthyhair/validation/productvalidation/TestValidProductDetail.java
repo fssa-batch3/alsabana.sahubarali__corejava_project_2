@@ -1,4 +1,4 @@
-package healthyhair.validation.ProductValidation;
+package healthyhair.validation.productvalidation;
 
 
 import static org.junit.Assert.*;

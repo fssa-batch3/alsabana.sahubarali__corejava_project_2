@@ -1,15 +1,13 @@
 package healthyhair.dao.product;
 
 import healthyhair.DAO.exception.DAOException;
-
+import healthyhair.DAO.*;
 import healthyhair.model.Product;
 import healthyhair.services.*;
-import healthyhair.DAO.*;
 import healthyhair.service.exception.ServiceException;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -29,10 +27,10 @@ class TestGetAllProduct {
 			List<Product> list = productDAO.getAllProduct();
 			assertNotNull(list);
 
-			for (Product p : list) {
-				System.out.println(p.toString());
-			}
-
+//			for (Product p : list) {
+//				System.out.println(p.toString());
+//			}
+//
 			System.out.println("Successfully Viewed");
 
 		} catch (DAOException | ServiceException e) {
@@ -40,21 +38,20 @@ class TestGetAllProduct {
 		}
 
 	}
-//
-//	@Test
-//	void ValidGetFail() throws DAOException {
-//		ProductService service = new ProductService();
-//		ProductDAO productDAO = new ProductDAO();
-//		try {
-//
-//			List<Product> list = service.getAllProduct();
-//
-//			assertFalse(list == null);
-//
-//		} catch (DAOException | ServiceException e) {
-//			e.printStackTrace();
-//
-//		}
-//	}
 
+	@Test
+	void testGetFail() {
+		ProductService service = new ProductService();
+
+		try {
+
+			List<Product> list = service.getAllProduct(null);
+
+			assertFalse(list == null);
+
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+	}
 }

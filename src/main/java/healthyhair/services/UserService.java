@@ -4,13 +4,10 @@ import healthyhair.model.User;
 
 import healthyhair.validation.UserValidator;
 import healthyhair.validation.exception.InvalidUserException;
-
-import java.sql.SQLException;
-
 import com.google.protobuf.ServiceException;
 
-import healthyhair.DAO.UserDAO;
 import healthyhair.DAO.exception.DAOException;
+import healthyhair.DAO.*;
 
 public class UserService {
 

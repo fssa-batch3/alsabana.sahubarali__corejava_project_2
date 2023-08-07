@@ -2,15 +2,16 @@ package healthyhair.services.user;
 
 import static org.junit.Assert.*;
 
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
 import com.google.protobuf.ServiceException;
 
 import healthyhair.DAO.exception.DAOException;
+import healthyhair.DAO.*;
 import healthyhair.model.User;
 import healthyhair.services.*;
-import healthyhair.DAO.*;
 
 class TestRegisterFeature {
 

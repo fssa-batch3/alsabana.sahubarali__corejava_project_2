@@ -1,4 +1,4 @@
-package healthyhair.validation.UserValidation;
+package healthyhair.validation.uservalidation;
 
 import static org.junit.jupiter.api.Assertions.*;
 
