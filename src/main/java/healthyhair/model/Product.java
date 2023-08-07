@@ -27,7 +27,7 @@ public class Product {
 	}
 
 	public Product() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public String getProduct_name(String string) {
@@ -85,7 +85,8 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product [product_name = " + product_name + ", cost = " + cost + ", product_img=" + product_img
-				+ ", product_detail = " + product_detail + ", category=" + category + ", product_id=" + product_id + "]";
+				+ ", product_detail = " + product_detail + ", category=" + category + ", product_id=" + product_id
+				+ "]";
 	}
 
 	public void getProduct_id(int i) {

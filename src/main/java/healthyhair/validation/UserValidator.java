@@ -12,23 +12,21 @@ public class UserValidator {
 		// User is valid if username is valid and email is valid and password is valid
 
 		if (user != null && validateName(user.getUsername()) && validateEmail(user.getEmail())
-				&& validatePassword(user.getPassword()) && ValidateMobileNo(user.getNumber())) {
+				&& validatePassword(user.getPassword()) && ValidateMobileNo(user.getNumber())
+				&& validateType(user.getType())) {
 			return true;
 		} else {
 			throw new InvalidUserException("User details not valid");
 		}
 	}
 
-	public static boolean validateId(int id) throws InvalidUserException {
-		try {
-			if (id > 0) {
-				System.out.println("The id is valid");
-			} else {
+	public static boolean validateUserId(int id) throws InvalidUserException {
 
-				throw new InvalidUserException("print some valid id.");
-			}
-		} catch (Exception e) {
-			System.out.println("The value is valid");
+		if (id > 0) {
+			System.out.println("The id is valid");
+		} else {
+
+			throw new InvalidUserException("print some valid id.");
 		}
 
 		return id > 0;
@@ -108,5 +106,13 @@ public class UserValidator {
 		}
 		return isMatch;
 
+	}
+
+	public static boolean validateType(String type) throws InvalidUserException {
+
+		if (type != null && !type.isBlank())
+			return true;
+		else
+			return false;
 	}
 }

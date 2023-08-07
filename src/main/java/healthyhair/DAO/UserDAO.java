@@ -12,20 +12,6 @@ public class UserDAO {
 		return DriverManager.getConnection("jdbc:mysql://localhost:3306/healthyhair", "root", "123456");
 	}
 
-	// Get user from DB
-	public boolean login(User user) throws SQLException {
-
-		Connection connection = getConnection();
-		String query = "SELECT * FROM USER WHERE Email = ? AND PASSWORD = ?";
-		PreparedStatement pmt = connection.prepareStatement(query);
-		pmt.setString(1, user.getEmail());
-		pmt.setString(2, user.getPassword());
-
-		ResultSet rs = pmt.executeQuery();
-
-		return rs.next();
-	}
-
 	public boolean register(User user) throws DAOException {
 
 		String query = "INSERT INTO USER (EMAIL ,NAME,PASSWORD,TYPE,phonenumber) VALUES (?,?,?,?,?)";
@@ -63,9 +49,19 @@ public class UserDAO {
 		}
 	}
 
+	private String userPasswordFromDb;
+
+	public String getUserPasswordFromDb() {
+		return userPasswordFromDb;
+	}
+
+	public void setUserPasswordFromDb(String userPasswordFromDb) {
+		this.userPasswordFromDb = userPasswordFromDb;
+	}
+
 	public boolean isLogin(User user) throws DAOException {
 
-		final String SELECTQUERY = "SELECT email, password FROM user WHERE email = ? AND password = ?";
+		final String SELECTQUERY = "SELECT email, password FROM user WHERE email = ?";
 
 		try (PreparedStatement pstmt = getConnection().prepareStatement(SELECTQUERY)) {
 
@@ -73,7 +69,9 @@ public class UserDAO {
 			pstmt.setString(2, user.getPassword());
 
 			try (ResultSet rs = pstmt.executeQuery()) {
-				return rs.next(); // Return true if the user email and password exists
+				String passwordfromDb = rs.getString("password");
+				setUserPasswordFromDb(passwordfromDb);
+				return rs.next();
 			}
 
 		} catch (SQLException e) {

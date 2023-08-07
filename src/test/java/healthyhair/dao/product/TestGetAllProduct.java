@@ -1,6 +1,6 @@
 package healthyhair.dao.product;
 
-import healthyhair.DAO.exception.DAOException; 
+import healthyhair.DAO.exception.DAOException;
 
 import healthyhair.model.Product;
 import healthyhair.services.*;
@@ -9,13 +9,12 @@ import healthyhair.service.exception.ServiceException;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-
-
- class TestGetAllProduct {
+class TestGetAllProduct {
 
 	@Test
 	void ValidGetSuccess() {
@@ -29,11 +28,11 @@ import org.junit.jupiter.api.Test;
 					"ayurvedic")));
 			List<Product> list = productDAO.getAllProduct();
 			assertNotNull(list);
-			  
-			for(Product p:list) {
+
+			for (Product p : list) {
 				System.out.println(p.toString());
 			}
-			
+
 			System.out.println("Successfully Viewed");
 
 		} catch (DAOException | ServiceException e) {
@@ -41,5 +40,21 @@ import org.junit.jupiter.api.Test;
 		}
 
 	}
+//
+//	@Test
+//	void ValidGetFail() throws DAOException {
+//		ProductService service = new ProductService();
+//		ProductDAO productDAO = new ProductDAO();
+//		try {
+//
+//			List<Product> list = service.getAllProduct();
+//
+//			assertFalse(list == null);
+//
+//		} catch (DAOException | ServiceException e) {
+//			e.printStackTrace();
+//
+//		}
+//	}
 
 }

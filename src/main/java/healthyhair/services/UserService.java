@@ -17,11 +17,6 @@ public class UserService {
 	public boolean registerUser(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
 
-//		if (user == null) {
-//			System.out.println("User cannot be null");
-//			return false;
-//		}
-
 		try {
 			UserValidator.validateUser(user);
 			if (userDAO.isEmailAlreadyRegistered(user.getEmail())) {
@@ -49,7 +44,7 @@ public class UserService {
 			UserValidator.validatePassword(user.getPassword());
 
 			UserDAO userDAO = new UserDAO();
-			if (userDAO.login(user)) {
+			if (userDAO.isLogin(user) && (userDAO.getUserPasswordFromDb().equals(user.getPassword()))) {
 				System.out.println(user.getEmail() + " Successfully logged in");
 				return true;
 			} else {
@@ -59,16 +54,6 @@ public class UserService {
 			throw new ServiceException(e.getLocalizedMessage());
 		}
 
-	}
-
-	public static void main(String[] args) throws ServiceException {
-		UserService reg = new UserService();
-
-//		User user1 = new User("sabin@gmail.com","sabin","passWord@786","Buyer");
-		User user2 = new User("sabingmail.com", "passWord@786");
-
-//		reg.registerUser(user1);
-		reg.loginUser(user2);
 	}
 
 }
