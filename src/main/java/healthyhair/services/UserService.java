@@ -2,6 +2,7 @@ package healthyhair.services;
 
 import healthyhair.model.User;
 
+
 import healthyhair.validation.UserValidator;
 import healthyhair.validation.exception.InvalidUserException;
 import com.google.protobuf.ServiceException;
@@ -29,7 +30,7 @@ public class UserService {
 
 		} catch (DAOException | InvalidUserException e) {
 
-			throw new ServiceException(e.getMessage());
+			throw new ServiceException(e);
 		}
 
 	}

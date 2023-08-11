@@ -19,6 +19,7 @@ import healthyhair.validation.exception.InvalidUserException;
 			System.out.println("Your email is valid");
 		} catch (InvalidUserException e) {
 			System.out.println(e.getMessage());
+			fail();
 		}
 	}
 

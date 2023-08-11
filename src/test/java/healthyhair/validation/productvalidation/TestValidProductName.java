@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.jupiter.api.Test;
 
 import healthyhair.validation.ProductValidator;
-import healthyhair.validation.exception.InvalidProductException;
+import healthyhair.validation.exception.InvalidProductInputException;
 
 class TestValidProductName {
 	@Test
@@ -14,8 +14,9 @@ class TestValidProductName {
 
 			assertTrue(ProductValidator.validateProductName("Ayuvedic shampoo"));
 			System.out.println("Product name is valid");
-		} catch (InvalidProductException e) {
+		} catch (InvalidProductInputException e) {
 			System.out.println(e.getMessage());
+			fail();
 		}
 	}
 
@@ -25,7 +26,7 @@ class TestValidProductName {
 
 			assertFalse(ProductValidator.validateProductName("@!Hair colour %^shampoo"));
 			System.out.println("Product name shouldn't contains special character");
-		} catch (InvalidProductException e) {
+		} catch (InvalidProductInputException e) {
 
 			System.out.println(e.getMessage());
 		}
@@ -37,7 +38,7 @@ class TestValidProductName {
 
 			assertFalse(ProductValidator.validateProductName("pro"));
 			System.out.println("Product name shouldn't be too small ");
-		} catch (InvalidProductException e) {
+		} catch (InvalidProductInputException e) {
 			System.out.println(e.getMessage());
 		}
 	}
@@ -48,7 +49,7 @@ class TestValidProductName {
 			assertFalse(ProductValidator.validateProductName(
 					"Sabannnnnnnnnnnnnnnnnnnnnnnnnna.................................................................................................................................."));
 			System.out.println("Product name should not be too long ");
-		} catch (InvalidProductException e) {
+		} catch (InvalidProductInputException e) {
 			System.out.println(e.getMessage());
 		}
 	}

@@ -26,8 +26,8 @@ public class Product {
 		this.category = category;
 	}
 
-	public Product() {
-
+	public Product(int product_id) {
+		this.product_id = product_id;
 	}
 
 	public String getProduct_name(String string) {

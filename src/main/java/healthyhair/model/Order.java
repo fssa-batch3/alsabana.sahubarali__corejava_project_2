@@ -2,15 +2,39 @@ package healthyhair.model;
 
 public class Order {
 	private int order_id;
-	private int product_id;
+	private Product orderedProduct;
 	private int quantity;
-	private int user_id;
+	private User orderedUser;
 
-	public Order(int order_id, int product_id, int quantity, int user_id) {
+	public Order(int order_id, Product orderedProduct, int quantity, User orderedUser) {
+
 		this.order_id = order_id;
-		this.product_id = product_id;
+		this.orderedProduct = orderedProduct;
 		this.quantity = quantity;
-		this.user_id = user_id;
+		this.orderedUser = orderedUser;
+	}
+
+	public Order(Product orderedProduct, int quantity, User orderedUser) {
+
+		this.orderedProduct = orderedProduct;
+		this.quantity = quantity;
+		this.orderedUser = orderedUser;
+	}
+
+	public User getUser() {
+		return orderedUser;
+	}
+
+	public void setUser(User user) {
+		this.orderedUser = user;
+	}
+
+	public Product getProduct() {
+		return orderedProduct;
+	}
+
+	public void setProduct(Product product) {
+		this.orderedProduct = product;
 	}
 
 	public int getOrder_id() {
@@ -21,14 +45,6 @@ public class Order {
 		this.order_id = order_id;
 	}
 
-	public int getProduct_id() {
-		return product_id;
-	}
-
-	public void setProduct_id(int product_id) {
-		this.product_id = product_id;
-	}
-
 	public int getQuantity() {
 		return quantity;
 	}
@@ -36,21 +52,5 @@ public class Order {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-
-	public int getUser_id() {
-		return user_id;
-	}
-
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
-	}
-
-	@Override
-	public String toString() {
-		return "Order [order_id=" + order_id + ", product_id=" + product_id + ", quantity=" + quantity + ", user_id="
-				+ user_id + "]";
-	}
-	
-	
 
 }

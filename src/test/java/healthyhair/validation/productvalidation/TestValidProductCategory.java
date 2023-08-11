@@ -2,10 +2,11 @@ package healthyhair.validation.productvalidation;
 
 import static org.junit.Assert.*;
 
+
 import org.junit.jupiter.api.Test;
 
 import healthyhair.validation.ProductValidator;
-import healthyhair.validation.exception.InvalidProductException;
+import healthyhair.validation.exception.InvalidProductInputException;
 
 class TestValidProductCategory {
 
@@ -15,8 +16,9 @@ class TestValidProductCategory {
 		try {
 			assertTrue(ProductValidator.validateProductCategory("ayurvedic range"));
 			System.out.println("Category is valid");
-		} catch (InvalidProductException e) {
+		} catch (InvalidProductInputException e) {
 			System.out.println(e.getMessage());
+			fail();
 		}
 
 	}
@@ -26,7 +28,7 @@ class TestValidProductCategory {
 	void validCategoryFail() {
 		try {
 			assertFalse(ProductValidator.validateProductCategory(""));
-		} catch (InvalidProductException e) {
+		} catch (InvalidProductInputException e) {
 			System.out.println(e.getMessage());
 		}
 	}

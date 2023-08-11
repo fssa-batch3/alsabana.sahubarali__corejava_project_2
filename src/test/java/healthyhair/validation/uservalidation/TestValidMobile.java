@@ -17,7 +17,8 @@ class TestValidMobile {
 			System.out.println("Your mobile number is correct");
 		} catch (InvalidUserException e) {
 
-			System.out.println("Your number is not correct");
+			System.out.println(e.getMessage());
+			fail();
 		}
 	}
 

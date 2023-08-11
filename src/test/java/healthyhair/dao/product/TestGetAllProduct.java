@@ -1,6 +1,7 @@
 package healthyhair.dao.product;
 
 import healthyhair.DAO.exception.DAOException;
+
 import healthyhair.DAO.*;
 import healthyhair.model.Product;
 import healthyhair.services.*;
@@ -34,7 +35,7 @@ class TestGetAllProduct {
 			System.out.println("Successfully Viewed");
 
 		} catch (DAOException | ServiceException e) {
-			e.printStackTrace();
+			fail();
 		}
 
 	}

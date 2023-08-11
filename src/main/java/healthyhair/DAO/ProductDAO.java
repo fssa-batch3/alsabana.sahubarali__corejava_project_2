@@ -1,8 +1,5 @@
 package healthyhair.DAO;
 
-import java.sql.Connection;
-
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,19 +8,13 @@ import java.util.List;
 
 import healthyhair.DAO.exception.DAOException;
 import healthyhair.model.Product;
-import healthyhair.model.User;
 
 public class ProductDAO {
-
-	public Connection getConnection() throws SQLException {
-
-		return DriverManager.getConnection("jdbc:mysql://localhost:3306/healthyhair", "root", "123456");
-	}
 
 	public boolean create(Product product) throws DAOException {
 		final String QUERY = "INSERT INTO product (product_name, cost, product_image, product_detail, category) VALUES (?, ?, ?, ?, ?)";
 
-		try (Connection connection = getConnection(); PreparedStatement pmt = connection.prepareStatement(QUERY)) {
+		try (PreparedStatement pmt = UserDAO.getConnection().prepareStatement(QUERY)) {
 			pmt.setString(1, product.getProduct_name());
 			pmt.setInt(2, product.getCost());
 			pmt.setString(3, product.getProduct_img());
@@ -42,9 +33,8 @@ public class ProductDAO {
 	public List<Product> getAllProduct() throws DAOException {
 		List<Product> product1 = new ArrayList<>();
 
-		try (Connection connection = getConnection();
-				PreparedStatement stmt = connection.prepareStatement(
-						"SELECT product_id, product_name,cost, product_image,product_detail,category FROM product");
+		try (PreparedStatement stmt = UserDAO.getConnection().prepareStatement(
+				"SELECT product_id, product_name,cost, product_image,product_detail,category FROM product");
 				ResultSet rs = stmt.executeQuery()) {
 
 			while (rs.next()) {
@@ -68,9 +58,8 @@ public class ProductDAO {
 
 	public boolean update(Product product) throws DAOException {
 		ProductDAO productDAO = new ProductDAO();
-		try (Connection connection = productDAO.getConnection();
-				PreparedStatement stmt = connection.prepareStatement(
-						"UPDATE product SET  product_name=?,cost=?,product_image=?,product_detail=?,category=? WHERE product_id=?")) {
+		try (PreparedStatement stmt = UserDAO.getConnection().prepareStatement(
+				"UPDATE product SET  product_name=?,cost=?,product_image=?,product_detail=?,category=? WHERE product_id=?")) {
 
 			stmt.setString(1, product.getProduct_name());
 			stmt.setInt(2, product.getCost());
@@ -88,8 +77,8 @@ public class ProductDAO {
 
 	public boolean delete(int productId) throws DAOException {
 		ProductDAO productDAO = new ProductDAO();
-		try (Connection connection = productDAO.getConnection();
-				PreparedStatement stmt = connection.prepareStatement("DELETE from product WHERE product_id=?")) {
+		try (PreparedStatement stmt = UserDAO.getConnection()
+				.prepareStatement("DELETE from product WHERE product_id=?")) {
 
 			stmt.setInt(1, productId);
 
@@ -97,7 +86,7 @@ public class ProductDAO {
 			return rows > 0;
 
 		} catch (SQLException e) {
-			throw new DAOException("Error in delete product method",e);
+			throw new DAOException("Error in delete product method", e);
 		}
 
 	}

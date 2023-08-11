@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.jupiter.api.Test;
 
 import healthyhair.validation.ProductValidator;
-import healthyhair.validation.exception.InvalidProductException;
+import healthyhair.validation.exception.InvalidProductInputException;
 
 class TestValidProductCost {
 
@@ -15,8 +15,9 @@ class TestValidProductCost {
 		try {
 			assertTrue(ProductValidator.validateProductCost(480));
 			System.out.println("Product cost is valid");
-		} catch (InvalidProductException e) {
+		} catch (InvalidProductInputException e) {
 			System.out.println(e.getMessage());
+			fail();
 		}
 	}
 
@@ -26,7 +27,7 @@ class TestValidProductCost {
 		try {
 			assertFalse(ProductValidator.validateProductCost(480097));
 			System.out.println("Product cost isn't valid It is too costly");
-		} catch (InvalidProductException e) {
+		} catch (InvalidProductInputException e) {
 			System.out.println(e.getMessage());
 		}
 	}
@@ -37,7 +38,7 @@ class TestValidProductCost {
 		try {
 			assertFalse(ProductValidator.validateProductCost(0000));
 			System.out.println("Product cost should not be zero");
-		} catch (InvalidProductException e) {
+		} catch (InvalidProductInputException e) {
 			System.out.println(e.getMessage());
 		}
 	}
@@ -48,7 +49,7 @@ class TestValidProductCost {
 		try {
 			assertFalse(ProductValidator.validateProductCost(22));
 			System.out.println("Product cost should not be two digit");
-		} catch (InvalidProductException e) {
+		} catch (InvalidProductInputException e) {
 			System.out.println(e.getMessage());
 		}
 	}
@@ -59,7 +60,7 @@ class TestValidProductCost {
 		try {
 			assertFalse(ProductValidator.validateProductCost(9));
 			System.out.println("Product cost should not be one digit");
-		} catch (InvalidProductException e) {
+		} catch (InvalidProductInputException e) {
 			System.out.println(e.getMessage());
 		}
 	}

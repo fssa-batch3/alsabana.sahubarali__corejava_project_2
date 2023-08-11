@@ -4,33 +4,48 @@ import java.sql.*;
 
 import healthyhair.DAO.exception.DAOException;
 import healthyhair.model.User;
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class UserDAO {
 
-	// connect to database
-	public Connection getConnection() throws SQLException {
-		return DriverManager.getConnection("jdbc:mysql://localhost:3306/healthyhair", "root", "123456");
+	public static Connection getConnection() throws SQLException {
+		
+		String DB_URL;
+		String DB_USER;
+		String DB_PASSWORD;
+
+		if (System.getenv("CI") != null) {
+			DB_URL = System.getenv("DB_URL");
+			DB_USER = System.getenv("DB_USER");
+			DB_PASSWORD = System.getenv("DB_PASSWORD");
+		} else {
+			Dotenv env = Dotenv.load();
+			DB_URL = env.get("DB_URL");
+			DB_USER = env.get("DB_USER");
+			DB_PASSWORD = env.get("DB_PASSWORD");
+		}
+		
+		return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 	}
 
 	public boolean register(User user) throws DAOException {
 
-		String query = "INSERT INTO USER (EMAIL ,NAME,PASSWORD,TYPE,phonenumber) VALUES (?,?,?,?,?)";
+		String query = "INSERT INTO user (email,name,password,phonenumber,type) VALUES (?,?,?,?,?)";
 
 		try (Connection connection = getConnection(); PreparedStatement pmt = connection.prepareStatement(query)) {
 
 			pmt.setString(1, user.getEmail());
 			pmt.setString(2, user.getUsername());
 			pmt.setString(3, user.getPassword());
-			pmt.setString(4, user.getType());
-			pmt.setString(5, user.getNumber());
+			pmt.setString(4, user.getNumber());
+			pmt.setString(5, user.getType());
 
 			int rows = pmt.executeUpdate();
 
-			// Return successful or not
-			return rows == 1;
+			return rows > 0;
 
 		} catch (SQLException e) {
-			throw new DAOException("Error while registering the user");
+			throw new DAOException("Error while registering the user", e);
 		}
 	}
 
@@ -45,7 +60,7 @@ public class UserDAO {
 				return rs.next();
 			}
 		} catch (SQLException e) {
-			throw new DAOException("Error in getting the email exist");
+			throw new DAOException("Error in getting the email exist", e);
 		}
 	}
 
@@ -74,14 +89,14 @@ public class UserDAO {
 			}
 
 		} catch (SQLException e) {
-			throw new DAOException("Error in loggin in");
+			throw new DAOException("Error in loggin in", e);
 		}
 
 	}
 
 	public void updateUser(User user) throws DAOException {
 		UserDAO userDAO = new UserDAO();
-		try (Connection connection = userDAO.getConnection();
+		try (Connection connection = getConnection();
 				PreparedStatement stmt = connection
 						.prepareStatement("UPDATE user SET  password=?,name=?,phonenumber=? WHERE email=?")) {
 
@@ -93,13 +108,13 @@ public class UserDAO {
 			int rows = stmt.executeUpdate();
 			System.out.println("No of rows inserted :" + rows);
 		} catch (SQLException e) {
-			throw new DAOException("Error in updateUser method");
+			throw new DAOException("Error in updateUser method", e);
 		}
 	}
 
 	public void deleteUser(String email) throws DAOException {
 		UserDAO userDAO = new UserDAO();
-		try (Connection connection = userDAO.getConnection();
+		try (Connection connection = getConnection();
 				PreparedStatement stmt = connection.prepareStatement("DELETE from user WHERE email=?")) {
 
 			stmt.setString(1, email);
@@ -108,7 +123,7 @@ public class UserDAO {
 			System.out.println("No of rows inserted :" + rows);
 
 		} catch (SQLException e) {
-			throw new DAOException("Error in deleteTask method");
+			throw new DAOException("Error in deleteTask method", e);
 		}
 
 	}

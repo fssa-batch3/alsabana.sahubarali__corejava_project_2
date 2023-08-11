@@ -16,6 +16,7 @@ class TestValidateType {
 			System.out.println("Type is valid");
 		} catch (InvalidUserException e) {
 			System.out.println(e.getMessage());
+			fail();
 		}
 
 	}

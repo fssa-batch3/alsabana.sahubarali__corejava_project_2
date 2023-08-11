@@ -12,16 +12,17 @@ import healthyhair.services.UserService;
 class TestLoginFeature {
 
 	@Test
-	 void testRegistrationSuccess() {
+	void testRegistrationSuccess() {
 
 		UserService userservice = new UserService();
-		User user1 = new User("sabin@gmail.com", "sabin", "passWord@786", "buyer", "8015059760");
+		User user1 = new User("sabin320@gmail.com", "sabin", "passWord@786", "buyer", "8015059760");
 
 		try {
 			assertTrue(userservice.registerUser(user1));
 			System.out.println("Successfully registered " + user1.getUsername());
 		} catch (ServiceException e) {
-			System.out.println("Registered failed");
+			// fail();
+			System.out.println(e.getMessage());
 
 		}
 
@@ -29,7 +30,7 @@ class TestLoginFeature {
 
 	@Test
 
-	 void loginSuccess() {
+	void loginSuccess() {
 		UserService userService = new UserService();
 		User user1 = new User("sabin@gmail.com", "sabin", "passWord@786", "buyer", "8015059760");
 		try {
@@ -37,6 +38,7 @@ class TestLoginFeature {
 			assertTrue(userService.loginUser(user1));
 			System.out.println("Succesfully logged in " + user1.getUsername());
 		} catch (ServiceException e) {
+			// fail();
 			System.out.println(e.getMessage());
 
 		}
@@ -44,7 +46,7 @@ class TestLoginFeature {
 
 	@Test
 
-	 void loginFailed() {
+	void loginFailed() {
 		UserService userService = new UserService();
 		User user2 = new User("alsa@gmail.com", "Password@796");
 		try {

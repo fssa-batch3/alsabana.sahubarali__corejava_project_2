@@ -1,5 +1,7 @@
 package healthyhair.validation.uservalidation;
 
+import static org.junit.Assert.fail;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
@@ -17,8 +19,8 @@ class TestValidPassword {
 			assertTrue(UserValidator.validatePassword("Password@123"));
 			System.out.println("Your password is valid");
 		} catch (InvalidUserException e) {
-
-			System.out.println("Your password is not valid");
+			System.out.println(e.getMessage());
+			fail();
 		}
 	}
 

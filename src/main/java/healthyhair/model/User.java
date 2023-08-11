@@ -6,13 +6,17 @@ public class User {
 	private String password;
 	private String number;
 	private String type;
-	private String userId;
+	private int userId;
 
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public User(int userId) {
 		this.userId = userId;
 	}
 
@@ -25,7 +29,7 @@ public class User {
 		this.number = number;
 	}
 
-	public User(String email, String username, String password, String type, String number, String userId) {
+	public User(String email, String username, String password, String type, String number, int userId) {
 		super();
 		this.email = email;
 		this.username = username;
@@ -40,6 +44,7 @@ public class User {
 		this.email = email;
 		this.password = password;
 	}
+
 
 	public String getEmail() {
 		return email;

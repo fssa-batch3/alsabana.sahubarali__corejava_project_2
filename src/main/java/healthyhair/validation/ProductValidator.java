@@ -5,22 +5,30 @@ import java.util.regex.Pattern;
 
 import healthyhair.model.Product;
 import healthyhair.validation.exception.InvalidProductException;
+import healthyhair.validation.exception.InvalidProductInputException;
 
 public class ProductValidator {
 
 	public static boolean validateProduct(Product product) throws InvalidProductException {
-		if (product != null && validateProductName(product.getProduct_name()) && validateProductCost(product.getCost())
-				&& validateProductImageURL(product.getProduct_img())
-				&& validateProductDetail(product.getProduct_detail())
-				&& validateProductCategory(product.getCategory())) {
-			System.out.println("All details are valid");
-			return true;
-		} else {
+
+		if (product == null) {
 			throw new InvalidProductException("Product details are not valid");
 		}
+
+		try {
+
+			return validateProductName(product.getProduct_name()) && validateProductCost(product.getCost())
+					&& validateProductImageURL(product.getProduct_img())
+					&& validateProductDetail(product.getProduct_detail())
+					&& validateProductCategory(product.getCategory());
+
+		} catch (InvalidProductInputException e) {
+			throw new InvalidProductException("details are not valid");
+		}
+
 	}
 
-	public static boolean validateProductName(String productName) throws InvalidProductException {
+	public static boolean validateProductName(String productName) throws InvalidProductInputException {
 		boolean match = false;
 
 		String regex = "^[A-Za-z0-9\\s]{10,50}$";
@@ -30,12 +38,12 @@ public class ProductValidator {
 		if (match) {
 			System.out.println("The product name is valid.");
 		} else {
-			throw new InvalidProductException("The product name is not valid");
+			throw new InvalidProductInputException("The product name is not valid");
 		}
 		return match;
 	}
 
-	public static boolean validateProductCost(int cost) throws InvalidProductException {
+	public static boolean validateProductCost(int cost) throws InvalidProductInputException {
 		boolean match = false;
 
 		String regex = "^\\d{3,4}$";
@@ -45,13 +53,13 @@ public class ProductValidator {
 		if (match) {
 			System.out.println("The product cost is valid.");
 		} else {
-			throw new InvalidProductException("The product cost should be a 4-digit number.");
+			throw new InvalidProductInputException("The product cost should be a 4-digit number.");
 		}
 
 		return match;
 	}
 
-	public static boolean validateProductImageURL(String imageUrl) throws InvalidProductException {
+	public static boolean validateProductImageURL(String imageUrl) throws InvalidProductInputException {
 		boolean match = false;
 
 		String regex = "^(https?|ftp)://.*$";
@@ -61,13 +69,13 @@ public class ProductValidator {
 		if (match) {
 			System.out.println("The product image URL is valid.");
 		} else {
-			throw new InvalidProductException("The product image URL is not valid.");
+			throw new InvalidProductInputException("The product image URL is not valid.");
 		}
 
 		return match;
 	}
 
-	public static boolean validateProductDetail(String productDetail) throws InvalidProductException {
+	public static boolean validateProductDetail(String productDetail) throws InvalidProductInputException {
 		boolean match = false;
 
 		int lengthOfWords = 100;
@@ -77,14 +85,22 @@ public class ProductValidator {
 			match = true;
 			System.out.println("The product detail is valid.");
 		} else {
-			throw new InvalidProductException("The product detail is not valid.");
+			throw new InvalidProductInputException("The product detail is not valid.");
 		}
 
 		return match;
 	}
 
-	public static boolean validateProductCategory(String category) throws InvalidProductException {
+	public static boolean validateProductCategory(String category) throws InvalidProductInputException {
 		if (category != null && !category.isEmpty())
+			return true;
+		else
+			return false;
+
+	}
+
+	public static boolean validateProductId(int productId) throws InvalidProductInputException {
+		if (productId > 0)
 			return true;
 		else
 			return false;

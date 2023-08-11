@@ -14,14 +14,13 @@ class TestDeleteProduct {
 	void deleteSuccess() {
 		ProductService productService = new ProductService();
 		try {
-			assertTrue(productService.deleteProduct(54));
+			assertTrue(productService.deleteProduct(6));
 		} catch (ServiceException e) {
 			System.out.println(e.getMessage());
 		}
 
 	}
-	
-	
+
 	@Test
 
 	void deleteFail() {

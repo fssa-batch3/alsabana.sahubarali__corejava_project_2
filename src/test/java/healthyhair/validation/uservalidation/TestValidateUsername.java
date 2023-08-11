@@ -15,7 +15,8 @@ class TestValidateUsername {
 			assertTrue(UserValidator.validateName("sabana"));
 			System.out.println("username is valid");
 		} catch (InvalidUserException e) {
-			System.out.println("username is not valid");
+			System.out.println(e.getMessage());
+			fail();
 		}
 	}
 
