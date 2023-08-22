@@ -22,11 +22,9 @@ CREATE TABLE IF NOT EXISTS product(
   );
   
   
-  
-  select* from product;
+select* from product;
 CREATE TABLE IF NOT EXISTS orders (
-	order_id INT AUTO_INCREMENT PRIMARY KEY,
-    product_id INT,
+order_id INT AUTO_INCREMENT PRIMARY KEY,
 product_name varchar(50),
  cost int,
  product_image varchar(500),
@@ -35,12 +33,20 @@ product_name varchar(50),
     user_id INT,
     user_name varchar(50)
 );
+ALTER TABLE orders
+ADD COLUMN product_id INT;
 
- ALTER TABLE orders
-  ADD CONSTRAINT fk_product_product_id
-    FOREIGN KEY (product_id)
-    REFERENCES product(product_id);
+ALTER TABLE orders
+ADD CONSTRAINT fk_product_productid
+FOREIGN KEY (product_id)
+REFERENCES product(product_id);
+    
  describe orders;
 select* from orders;
 
 
+
+ALTER TABLE orders
+ADD CONSTRAINT fk_user_user_id
+FOREIGN KEY (user_id)
+REFERENCES user(user_id);
