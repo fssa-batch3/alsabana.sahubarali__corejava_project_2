@@ -7,7 +7,7 @@ import com.fssa.healthyhair.validation.UserValidator;
 import com.fssa.healthyhair.validation.exception.InvalidUserException;
 import com.google.protobuf.ServiceException;
 
-public class UserService {
+public class UserService { 
 
 	public boolean registerUser(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();

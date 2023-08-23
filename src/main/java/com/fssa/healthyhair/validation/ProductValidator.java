@@ -15,11 +15,11 @@ public class ProductValidator {
 			throw new InvalidProductException("Product details are not valid");
 		}
 
-		try {
+		try { 
 			// Validate various product details
-			return validateProductName(product.getProduct_name()) && validateProductCost(product.getCost())
-					&& validateProductImageURL(product.getProduct_img())
-					&& validateProductDetail(product.getProduct_detail())
+			return validateProductName(product.getProductName()) && validateProductCost(product.getCost())
+					&& validateProductImageURL(product.getProductImg())
+					&& validateProductDetail(product.getProductDetail())
 					&& validateProductCategory(product.getCategory());
 		} catch (InvalidProductInputException e) {
 			throw new InvalidProductException("Product inputs detail are not valid");

@@ -15,10 +15,10 @@ public class ProductDAO {
 		final String QUERY = "INSERT INTO product (product_name, cost, product_image, product_detail, category) VALUES (?, ?, ?, ?, ?)";
 
 		try (PreparedStatement pmt = UserDAO.getConnection().prepareStatement(QUERY)) {
-			pmt.setString(1, product.getProduct_name());
+			pmt.setString(1, product.getProductName());
 			pmt.setInt(2, product.getCost());
-			pmt.setString(3, product.getProduct_img());
-			pmt.setString(4, product.getProduct_detail());
+			pmt.setString(3, product.getProductImg());
+			pmt.setString(4, product.getProductDetail());
 			pmt.setString(5, product.getCategory());
 
 			int rowsAffected = pmt.executeUpdate();
@@ -57,16 +57,15 @@ public class ProductDAO {
 	}
 
 	public boolean update(Product product) throws DAOException {
-		ProductDAO productDAO = new ProductDAO();
 		try (PreparedStatement stmt = UserDAO.getConnection().prepareStatement(
 				"UPDATE product SET  product_name=?,cost=?,product_image=?,product_detail=?,category=? WHERE product_id=?")) {
 
-			stmt.setString(1, product.getProduct_name());
+			stmt.setString(1, product.getProductName());
 			stmt.setInt(2, product.getCost());
-			stmt.setString(3, product.getProduct_img());
-			stmt.setString(4, product.getProduct_detail());
+			stmt.setString(3, product.getProductImg());
+			stmt.setString(4, product.getProductDetail());
 			stmt.setString(5, product.getCategory());
-			stmt.setInt(6, product.getProduct_id());
+			stmt.setInt(6, product.getProductId());
 
 			int rows = stmt.executeUpdate();
 			return rows > 0;
@@ -76,7 +75,7 @@ public class ProductDAO {
 	}
 
 	public boolean delete(int productId) throws DAOException {
-		ProductDAO productDAO = new ProductDAO();
+
 		try (PreparedStatement stmt = UserDAO.getConnection()
 				.prepareStatement("DELETE from product WHERE product_id=?")) {
 

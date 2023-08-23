@@ -16,12 +16,13 @@ public class ProductService {
 		try {
 			ProductValidator.validateProduct(product);
 			if (productDAO.create(product)) {
- 				System.out.println(product.getProduct_name() + "  Succesfully product created");
+ 				System.out.println(product.getProductName() + "  Succesfully product created");
 				return true;
 			} else {
 				System.out.println("Creating failed");
 				return false;
 			}
+			
 
 		} catch (InvalidProductException | DAOException e) {
 
@@ -46,7 +47,7 @@ public class ProductService {
 		try {
 			ProductValidator.validateProduct(product);
 			if (productDAO.update(product)) {
-				System.out.println(product.getProduct_name() + " Successfully updated");
+				System.out.println(product.getProductName() + " Successfully updated");
 				return true;
 			} else {
 				System.out.println("Update failed");

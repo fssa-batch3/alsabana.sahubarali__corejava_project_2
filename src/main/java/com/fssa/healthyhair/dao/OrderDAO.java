@@ -9,7 +9,7 @@ import java.util.List;
 import com.fssa.healthyhair.dao.exception.DAOException;
 import com.fssa.healthyhair.model.Order;
 import com.fssa.healthyhair.model.Product;
-import com.fssa.healthyhair.model.User;
+import com.fssa.healthyhair.model.User; 
 
 public class OrderDAO {
 
@@ -18,14 +18,14 @@ public class OrderDAO {
 
 		try (PreparedStatement pmt = UserDAO.getConnection().prepareStatement(QUERY)) {
 			pmt.setInt(1, order.getOrder_id());
-			pmt.setInt(2, order.getProduct().getProduct_id());
+			pmt.setInt(2, order.getProduct().getProductId());
 			pmt.setInt(3, order.getQuantity());
 			pmt.setInt(4, order.getUser().getUserId());
 			pmt.setString(5, order.getAddress());
 
 			int rows = pmt.executeUpdate();
 			return rows > 0;
-		} catch (SQLException e) { 
+		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
 	}
@@ -55,12 +55,12 @@ public class OrderDAO {
 				int orderId = rs.getInt("order_id");
 
 				// Create Product object with retrieved data
-//				Product product = new Product();
-//				product.setProduct_name(productname);
-//				product.setCost(productcost);
-//				product.setProduct_img(productImageURL);
-//				product.setProduct_detail(productDetail);
-//				product.setCategory(category);
+				Product product = new Product();
+				product.setProductName(productname);
+				product.setCost(productcost);
+				product.setProductImg(productImageURL);
+				product.setProductDetail(productDetail);
+				product.setCategory(category);
 
 				// Create User object with retrieved data
 				User user = new User();
@@ -71,7 +71,7 @@ public class OrderDAO {
 				// Create Order object and add to the list
 				Order order = new Order();
 				order.setUser(user);
-			//	order.setProduct(product);
+				order.setProduct(product);
 				order.setQuantity(quantity);
 				order.setAddress(address);
 				order.setOrder_id(orderId);

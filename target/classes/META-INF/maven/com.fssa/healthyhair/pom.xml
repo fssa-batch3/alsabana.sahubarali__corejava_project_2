@@ -51,5 +51,10 @@
 		</dependency>
 
 
+		<dependency>
+			<groupId>com.fssa</groupId>
+			<artifactId>healthyhairapp</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>

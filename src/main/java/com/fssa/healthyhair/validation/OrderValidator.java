@@ -11,7 +11,7 @@ public class OrderValidator {
 		try {
 			if (order != null && validateQuantity(order.getQuantity()) && validateAddress(order.getAddress())
 					&& UserValidator.validateUserId(order.getUser().getUserId())
-					&& ProductValidator.validateProductId(order.getProduct().getProduct_id())) {
+					&& ProductValidator.validateProductId(order.getProduct().getProductId())) {
 				return true;
 			}
 		} catch (InvalidOrderException | InvalidUserException e) {

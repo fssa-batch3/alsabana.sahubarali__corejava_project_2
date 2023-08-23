@@ -31,7 +31,7 @@ public class User {
 		this.password = password;
 		this.type = type;
 		this.number = number;
-	}
+	} 
 
 	public User(String email, String username, String password, String type, String number, int userId) {
 		super();

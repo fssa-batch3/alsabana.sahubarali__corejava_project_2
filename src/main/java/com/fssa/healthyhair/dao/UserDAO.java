@@ -107,7 +107,7 @@ public class UserDAO {
 			stmt.setString(4, user.getEmail());
 
 			int rows = stmt.executeUpdate();
-			System.out.println("No of rows inserted :" + rows);
+			
 		} catch (SQLException e) {
 			throw new DAOException("Error in updateUser method", e);
 		}
@@ -121,7 +121,7 @@ public class UserDAO {
 			stmt.setString(1, email);
 
 			int rows = stmt.executeUpdate();
-			System.out.println("No of rows inserted :" + rows);
+			
 
 		} catch (SQLException e) {
 			throw new DAOException("Error in deleteTask method", e);
