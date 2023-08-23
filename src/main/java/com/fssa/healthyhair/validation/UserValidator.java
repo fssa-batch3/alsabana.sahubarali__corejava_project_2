@@ -2,7 +2,6 @@ package com.fssa.healthyhair.validation;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 
 import com.fssa.healthyhair.model.User;
 import com.fssa.healthyhair.validation.exception.InvalidUserException;
@@ -84,9 +83,11 @@ public class UserValidator {
 
 	}
 
-	public static boolean validateType(String type)  throws InvalidUserException{
-
-		return type != null && !type.isBlank();
+	public static boolean validateType(String type) throws InvalidUserException {
+		if (!type.isBlank())
+			return true;
+		else
+			throw new InvalidUserException("The mobile number is: Invalid");
 
 	}
 }

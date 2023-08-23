@@ -35,7 +35,7 @@ public class ProductValidator {
 		boolean match = m.matches();
 
 		if (match) {
-			return true;
+			return true; 
 		} else {
 			// Throw exception with a descriptive error message
 			throw new InvalidProductInputException(

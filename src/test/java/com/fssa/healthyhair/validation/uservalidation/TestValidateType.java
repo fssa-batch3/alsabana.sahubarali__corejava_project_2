@@ -18,7 +18,7 @@ class TestValidateType {
 			System.out.println(e.getMessage());
 			fail();
 		}
-
+ 
 	}
 
 	@Test

@@ -1,6 +1,5 @@
 package com.fssa.healthyhair.dao.product;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -30,10 +29,10 @@ class TestGetAllProduct {
 			List<Product> list = productDAO.getAllProduct();
 			assertNotNull(list);
  
-//			for (Product p : list) {
-//				System.out.println(p.toString());
-//			}
-//
+			for (Product p : list) {
+				System.out.println(p.toString());
+			} 
+
 			System.out.println("Successfully Viewed");
 
 		} catch (DAOException | ServiceException e) {
@@ -50,7 +49,7 @@ class TestGetAllProduct {
 
 			List<Product> list = service.getAllProduct(null);
 
-			assertFalse(list == null);
+			assertNotNull(list);
 
 		} catch (ServiceException e) {
 			e.printStackTrace();

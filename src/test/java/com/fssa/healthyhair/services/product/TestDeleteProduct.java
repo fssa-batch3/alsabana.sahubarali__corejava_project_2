@@ -16,9 +16,9 @@ class TestDeleteProduct {
 		try {
 			assertTrue(productService.deleteProduct(7));
 		} catch (ServiceException e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}
- 
+  
 	}
 
 	@Test
@@ -28,7 +28,7 @@ class TestDeleteProduct {
 		try {
 			assertFalse(productService.deleteProduct(524));
 		} catch (ServiceException e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}
 
 	}

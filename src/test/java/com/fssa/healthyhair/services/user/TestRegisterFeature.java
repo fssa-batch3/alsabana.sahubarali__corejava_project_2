@@ -25,10 +25,10 @@ class TestRegisterFeature {
 			System.out.println("Successfully registered " + user1.getUsername());
 		} catch (ServiceException e) {
 			e.printStackTrace();
-		//	fail();
+		
 
 		}
-
+ 
 	}
 
 	@Test
@@ -40,9 +40,9 @@ class TestRegisterFeature {
 		try {
 
 			assertFalse(userService.registerUser(invalidUser));
-			System.out.println("please fill your input");
+			System.err.println("please fill your input");
 		} catch (ServiceException e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}
 	}
 
@@ -52,9 +52,9 @@ class TestRegisterFeature {
 		User user1 = null;
 		try {
 			assertFalse(userservice.registerUser(user1));
-			System.out.println("Can not be null");
+			System.err.println("Can not be null");
 		} catch (ServiceException e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 
 		}
 

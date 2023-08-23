@@ -14,16 +14,16 @@ import com.fssa.healthyhair.services.OrderService;
 
 class TestCreateOrder {
 	private final Order order = new Order();
-
+ 
 	@Test
 
-	void testOrderSuccess() {
+	void testOrderSuccess() { 
 		User user = new User();
 		user.setUserId(1);
 
 		order.setUser(user);
 
-		Product product1 = new Product(7, "Ayurvedashampoo", 3700,
+		Product product1 = new Product(6, "Ayurvedashampoo", 3700,
 				"https://www.gkhair.co.in/cdn/shop/files/Balancing-banner_023150bb-42a3-4452-bbe8-aa23828dfdd1_1600x.png?v=1673589283",
 				"A power-packed, leave in scalp serum strengthens hair roots and promotes fast and healthy hair growth.\r\n"
 						+ "A vital scalp treatment that helps remove dead skin cells, product build up and give roots the chance to thrive, control hyper production of scalp serum, tackle itchiness and flakiness.",
@@ -53,10 +53,10 @@ class TestCreateOrder {
 	    
 	    try {
 	        assertFalse(orderService.createOrder(invalidOrder));
-	        System.out.println("Order creation should have failed due to invalid input");
+	        System.err.println("Order creation should have failed due to invalid input");
 	    } catch (ServiceException e) {
 	        // The creation attempt should result in a ServiceException due to invalid input
-	        System.out.println("Order creation failed" + e.getMessage());
+	        System.err.println("Order creation failed" + e.getMessage());
 	    }
 	}
 

@@ -28,7 +28,7 @@ class TestUpdateProduct {
 			System.out.println("Successfully updated");
 		} catch (DAOException e) {
 			fail();
-		}
+		} 
 
 	}
 
@@ -43,7 +43,7 @@ class TestUpdateProduct {
 			assertFalse(productDAO.update(product1));
 			System.out.println("Successfully updated");
 		} catch (DAOException e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}
 
 	}

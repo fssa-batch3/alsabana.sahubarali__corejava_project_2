@@ -19,20 +19,20 @@ class TestValidPassword {
 			assertTrue(UserValidator.validatePassword("Password@123"));
 			System.out.println("Your password is valid");
 		} catch (InvalidUserException e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 			fail();
 		}
-	}
+	} 
 
-	@Test
+	@Test 
 	void testInvalidPasswordWithoutSpecialCharacter() {
 
 		try {
 
 			assertFalse(UserValidator.validatePassword("Password123"));
-			System.out.println("Your password is not valid");
+			System.err.println("Your password is not valid");
 		} catch (InvalidUserException e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}
 	}
 
@@ -42,9 +42,9 @@ class TestValidPassword {
 		try {
 
 			assertFalse(UserValidator.validatePassword("Password@"));
-			System.out.println("Your password is not valid");
+			System.err.println("Your password is not valid");
 		} catch (InvalidUserException e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}
 	}
 
@@ -54,9 +54,9 @@ class TestValidPassword {
 		try {
 
 			assertFalse(UserValidator.validatePassword("password@123"));
-			System.out.println("Your password is not valid");
+			System.err.println("Your password is not valid");
 		} catch (InvalidUserException e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}
 	}
 
@@ -66,9 +66,9 @@ class TestValidPassword {
 		try {
 
 			assertFalse(UserValidator.validatePassword("PASSWORD@123"));
-			System.out.println("Your password is valid");
+			System.err.println("Your password is valid");
 		} catch (InvalidUserException e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}
 	}
 
@@ -78,9 +78,9 @@ class TestValidPassword {
 		try {
 
 			assertFalse(UserValidator.validatePassword("Pa"));
-			System.out.println("Your password is valid");
+			System.err.println("Your password is valid");
 		} catch (InvalidUserException e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 
 		}
 	}

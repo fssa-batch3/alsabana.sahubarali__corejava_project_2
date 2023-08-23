@@ -19,7 +19,7 @@ public class OrderValidator {
 			throw new InvalidOrderException("Order Details are not valid");
 		}
 		return false;
-	}
+	} 
 
 	public static boolean validateQuantity(int quantity) throws InvalidOrderException {
 		if (quantity >= 0)

@@ -7,17 +7,17 @@ public class Order {
 	private User orderedUser;
 	private String address;
 
-	public Order(int order_id, Product orderedProduct, int quantity, User orderedUser) {
+	public Order(int orderId, Product orderedProduct, int quantity, User orderedUser) {
 
-		this.orderId = order_id;
-		this.orderedProduct = orderedProduct; 
+		this.orderId = orderId;
+		this.orderedProduct = orderedProduct;    
 		this.quantity = quantity;
 		this.orderedUser = orderedUser;
 	}
 
-	public Order(int order_id, Product orderedProduct, int quantity, User orderedUser, String address) {
+	public Order(int orderId, Product orderedProduct, int quantity, User orderedUser, String address) {
 
-		this.orderId = order_id;
+		this.orderId = orderId;
 		this.orderedProduct = orderedProduct;
 		this.quantity = quantity;
 		this.orderedUser = orderedUser;

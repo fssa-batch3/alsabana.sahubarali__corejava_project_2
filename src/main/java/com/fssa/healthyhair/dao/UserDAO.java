@@ -2,6 +2,7 @@ package com.fssa.healthyhair.dao;
 
 import java.sql.*;
 
+
 import com.fssa.healthyhair.dao.exception.DAOException;
 import com.fssa.healthyhair.model.User;
 

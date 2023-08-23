@@ -20,11 +20,11 @@ class TestLoginFeature {
 			assertTrue(userservice.registerUser(user1));
 			System.out.println("Successfully registered " + user1.getUsername());
 		} catch (ServiceException e) {
-			// fail();
-			System.out.println(e.getMessage());
+
+			System.err.println(e.getMessage());
 
 		}
- 
+
 	}
 
 	@Test
@@ -37,8 +37,8 @@ class TestLoginFeature {
 			assertTrue(userService.loginUser(user1));
 			System.out.println("Succesfully logged in " + user1.getUsername());
 		} catch (ServiceException e) {
-			// fail();
-			System.out.println(e.getMessage());
+
+			System.err.println(e.getMessage());
 
 		}
 	}

@@ -15,12 +15,12 @@ class TestValidProductCategory {
 	 void validCategorySuccess() {
 		try {
 			assertTrue(ProductValidator.validateProductCategory("ayurvedic range"));
-			System.out.println("Category is valid");
+			
 		} catch (InvalidProductInputException e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 			fail();
 		}
- 
+  
 	}
 
 	@Test
@@ -29,7 +29,7 @@ class TestValidProductCategory {
 		try {
 			assertFalse(ProductValidator.validateProductCategory(""));
 		} catch (InvalidProductInputException e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}
 	}
 

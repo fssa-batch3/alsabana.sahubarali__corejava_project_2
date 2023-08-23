@@ -13,7 +13,7 @@ public class ProductDAO {
 
 	public boolean create(Product product) throws DAOException {
 		final String QUERY = "INSERT INTO product (product_name, cost, product_image, product_detail, category) VALUES (?, ?, ?, ?, ?)";
-
+      
 		try (PreparedStatement pmt = UserDAO.getConnection().prepareStatement(QUERY)) {
 			pmt.setString(1, product.getProductName());
 			pmt.setInt(2, product.getCost());
@@ -22,7 +22,7 @@ public class ProductDAO {
 			pmt.setString(5, product.getCategory());
 
 			int rowsAffected = pmt.executeUpdate();
-
+ 
 			return rowsAffected > 0;
 		} catch (SQLException e) {
 
