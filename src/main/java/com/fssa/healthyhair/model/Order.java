@@ -10,7 +10,7 @@ public class Order {
 	public Order(int order_id, Product orderedProduct, int quantity, User orderedUser) {
 
 		this.order_id = order_id;
-		this.orderedProduct = orderedProduct;
+		this.orderedProduct = orderedProduct; 
 		this.quantity = quantity;
 		this.orderedUser = orderedUser;
 	}

@@ -9,7 +9,7 @@ public class User {
 	private int userId;
 
 	public int getUserId() {
-		return userId;
+		return userId; 
 	}
 
 	public User() {

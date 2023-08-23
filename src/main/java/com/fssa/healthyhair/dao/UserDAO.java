@@ -10,7 +10,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 public class UserDAO {
 
 	public static Connection getConnection() throws SQLException {
-		
+
 		String DB_URL;
 		String DB_USER;
 		String DB_PASSWORD;
@@ -25,7 +25,7 @@ public class UserDAO {
 			DB_USER = env.get("DB_USER");
 			DB_PASSWORD = env.get("DB_PASSWORD");
 		}
-		
+
 		return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 	}
 
@@ -96,7 +96,7 @@ public class UserDAO {
 	}
 
 	public void updateUser(User user) throws DAOException {
-		UserDAO userDAO = new UserDAO();
+
 		try (Connection connection = getConnection();
 				PreparedStatement stmt = connection
 						.prepareStatement("UPDATE user SET  password=?,name=?,phonenumber=? WHERE email=?")) {
@@ -114,7 +114,7 @@ public class UserDAO {
 	}
 
 	public void deleteUser(String email) throws DAOException {
-		UserDAO userDAO = new UserDAO();
+
 		try (Connection connection = getConnection();
 				PreparedStatement stmt = connection.prepareStatement("DELETE from user WHERE email=?")) {
 

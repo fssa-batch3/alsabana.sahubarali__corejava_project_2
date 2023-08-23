@@ -10,101 +10,102 @@ import com.fssa.healthyhair.validation.exception.InvalidProductInputException;
 public class ProductValidator {
 
 	public static boolean validateProduct(Product product) throws InvalidProductException {
-
+		// Check if the product object is null
 		if (product == null) {
 			throw new InvalidProductException("Product details are not valid");
 		}
 
 		try {
-
+			// Validate various product details
 			return validateProductName(product.getProduct_name()) && validateProductCost(product.getCost())
 					&& validateProductImageURL(product.getProduct_img())
 					&& validateProductDetail(product.getProduct_detail())
 					&& validateProductCategory(product.getCategory());
-
 		} catch (InvalidProductInputException e) {
-			throw new InvalidProductException("details are not valid");
+			throw new InvalidProductException("Product inputs detail are not valid");
 		}
-
 	}
 
 	public static boolean validateProductName(String productName) throws InvalidProductInputException {
-		boolean match = false;
+		// Regular expression to validate product name format
 
 		String regex = "^[A-Za-z0-9\\s]{10,50}$";
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(productName);
-		match = m.matches();
+		boolean match = m.matches();
+
 		if (match) {
-			System.out.println("The product name is valid.");
+			return true;
 		} else {
-			throw new InvalidProductInputException("The product name is not valid");
+			// Throw exception with a descriptive error message
+			throw new InvalidProductInputException(
+					"Invalid product name format. The product name should be alphanumeric and between 10 to 50 characters.");
 		}
-		return match;
 	}
 
 	public static boolean validateProductCost(int cost) throws InvalidProductInputException {
-		boolean match = false;
-
+//		cost
 		String regex = "^\\d{3,4}$";
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(Integer.toString(cost));
-		match = m.matches();
-		if (match) {
-			System.out.println("The product cost is valid.");
-		} else {
-			throw new InvalidProductInputException("The product cost should be a 4-digit number.");
-		}
+		boolean match = m.matches();
 
-		return match;
+		if (match) {
+			return true;
+		} else {
+			// Throw exception with a descriptive error message
+			throw new InvalidProductInputException(
+					"Invalid product cost format. The product cost should be a 3 or 4-digit number.");
+		}
 	}
 
 	public static boolean validateProductImageURL(String imageUrl) throws InvalidProductInputException {
-		boolean match = false;
-
 		String regex = "^(https?|ftp)://.*$";
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(imageUrl);
-		match = m.matches();
-		if (match) {
-			System.out.println("The product image URL is valid.");
-		} else {
-			throw new InvalidProductInputException("The product image URL is not valid.");
-		}
+		boolean match = m.matches();
 
-		return match;
+		if (match) {
+			return true;
+		} else {
+			// Throw exception with a descriptive error message
+			throw new InvalidProductInputException(
+					"Invalid product image URL format. Please provide a valid URL starting with 'http' or 'https'.");
+		}
 	}
 
 	public static boolean validateProductDetail(String productDetail) throws InvalidProductInputException {
-		boolean match = false;
-
-		int lengthOfWords = 100;
-
-		if (productDetail != null && productDetail.trim().length() >= lengthOfWords
-				&& productDetail.trim().length() <= 400) {
-			match = true;
-			System.out.println("The product detail is valid.");
+		int minLength = 100;// Set the minimum length of product details
+		int maxLength = 400;// Set the maximum length of product details
+		
+		
+		// Handle the case where product details are empty or null
+		if (productDetail != null && !productDetail.isEmpty() && productDetail.trim().length() >= minLength
+				&& productDetail.trim().length() <= maxLength) {
+			return true;
 		} else {
-			throw new InvalidProductInputException("The product detail is not valid.");
+			// Throw exception with a descriptive error message
+			throw new InvalidProductInputException(
+					"Invalid product detail length. The product detail should be between " + minLength + " and "
+							+ maxLength + " characters.");
 		}
-
-		return match;
 	}
 
 	public static boolean validateProductCategory(String category) throws InvalidProductInputException {
-		if (category != null && !category.isEmpty())
+		if (category != null && !category.isEmpty()) {
 			return true;
-		else
-			return false;
-
+		} else {
+			// Throw exception with a descriptive error message
+			throw new InvalidProductInputException("Invalid product category. Please provide a valid category.");
+		}
 	}
 
 	public static boolean validateProductId(int productId) throws InvalidProductInputException {
-		if (productId > 0)
+		if (productId > 0) {
 			return true;
-		else
-			return false;
-
+		} else {
+			// Throw exception with a descriptive error message
+			throw new InvalidProductInputException("Invalid product ID. Product ID should be a positive integer.");
+		}
 	}
-
 }

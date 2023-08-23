@@ -29,7 +29,7 @@ class TestGetAllProduct {
 					"ayurvedic")));
 			List<Product> list = productDAO.getAllProduct();
 			assertNotNull(list);
-
+ 
 //			for (Product p : list) {
 //				System.out.println(p.toString());
 //			}
@@ -57,4 +57,4 @@ class TestGetAllProduct {
 			System.out.println(e.getMessage());
 		}
 	}
-}
+} 

@@ -71,7 +71,7 @@ public class ProductDAO {
 			int rows = stmt.executeUpdate();
 			return rows > 0;
 		} catch (SQLException e) {
-			throw new DAOException("Error in update Product");
+			throw new DAOException("Error while updating Product");
 		}
 	}
 

@@ -26,14 +26,6 @@ public class Product {
 		this.category = category;
 	}
 
-	public Product(int product_id) {
-		this.product_id = product_id;
-	}
-
-	public String getProduct_name(String string) {
-		return product_name;
-	}
-
 	public String getProduct_name() {
 		return product_name;
 	}
@@ -87,10 +79,6 @@ public class Product {
 		return "Product [product_name = " + product_name + ", cost = " + cost + ", product_img=" + product_img
 				+ ", product_detail = " + product_detail + ", category=" + category + ", product_id=" + product_id
 				+ "]";
-	}
-
-	public void getProduct_id(int i) {
-
 	}
 
 }

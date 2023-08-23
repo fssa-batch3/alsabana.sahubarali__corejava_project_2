@@ -16,7 +16,7 @@ public class ProductService {
 		try {
 			ProductValidator.validateProduct(product);
 			if (productDAO.create(product)) {
-				System.out.println(product.getProduct_name() + "  Succesfully product created");
+ 				System.out.println(product.getProduct_name() + "  Succesfully product created");
 				return true;
 			} else {
 				System.out.println("Creating failed");

@@ -22,7 +22,7 @@ class TestUpdateProduct {
 				"A power-packed, leave in scalp serum strengthens hair roots and promotes fast and healthy hair growth.\r\n"
 						+ "A vital scalp treatment that helps remove dead skin cells, product build up and give roots the chance to thrive, control hyper production of scalp serum, tackle itchiness and flakiness.",
 				"ayurvedic");
-
+ 
 		try {
 			assertTrue(productDAO.update(product1));
 			System.out.println("Successfully updated");

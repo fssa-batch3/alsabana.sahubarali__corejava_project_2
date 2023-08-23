@@ -37,14 +37,12 @@ ALTER TABLE orders
 ADD COLUMN product_id INT;
 
 ALTER TABLE orders
-ADD CONSTRAINT fk_product_productid
+ADD CONSTRAINT fk_product_product_id
 FOREIGN KEY (product_id)
 REFERENCES product(product_id);
     
  describe orders;
 select* from orders;
-
-
 
 ALTER TABLE orders
 ADD CONSTRAINT fk_user_user_id

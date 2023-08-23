@@ -9,18 +9,18 @@ public class OrderValidator {
 
 	public static boolean validateOrder(Order order) throws InvalidOrderException, InvalidProductInputException {
 		try {
-			if (order != null && validateQuantity(order.getQuantity())
+			if (order != null && validateQuantity(order.getQuantity()) && validateAddress(order.getAddress())
 					&& UserValidator.validateUserId(order.getUser().getUserId())
 					&& ProductValidator.validateProductId(order.getProduct().getProduct_id())) {
 				return true;
 			}
 		} catch (InvalidOrderException | InvalidUserException e) {
-			e.printStackTrace();
+			
 			throw new InvalidOrderException("Order Details are not valid");
-		}
+		} 
 		return false;
 	}
-
+ 
 	public static boolean validateQuantity(int quantity) throws InvalidOrderException {
 		if (quantity > 0)
 			return true;
@@ -28,11 +28,12 @@ public class OrderValidator {
 			throw new InvalidOrderException("Quantity is not not valid");
 	}
 
-//	public static boolean validateOrderId(int orderId) throws InvalidOrderException {
-//		if (orderId > 0)
-//			return true;
-//		else
-//			throw new InvalidOrderException("Order ID is not not valid");
-//	}
+	public static boolean validateAddress(String address) throws InvalidOrderException {
+		if (address != null && !address.isEmpty())
+			return false;
+		else
+			throw new InvalidOrderException("Address should not be null");
+
+	}
 
 }

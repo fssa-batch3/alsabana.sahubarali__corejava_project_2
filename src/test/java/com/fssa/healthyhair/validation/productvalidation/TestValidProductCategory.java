@@ -12,7 +12,7 @@ class TestValidProductCategory {
 
 	@Test
 
-	void validCategorySuccess() {
+	 void validCategorySuccess() {
 		try {
 			assertTrue(ProductValidator.validateProductCategory("ayurvedic range"));
 			System.out.println("Category is valid");
@@ -20,7 +20,7 @@ class TestValidProductCategory {
 			System.out.println(e.getMessage());
 			fail();
 		}
-
+ 
 	}
 
 	@Test

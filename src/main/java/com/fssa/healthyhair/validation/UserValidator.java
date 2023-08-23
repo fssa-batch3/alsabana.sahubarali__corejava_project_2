@@ -20,14 +20,11 @@ public class UserValidator {
 
 	public static boolean validateUserId(int id) throws InvalidUserException {
 
-		if (id > 0) {
-			System.out.println("The id is valid");
-		} else {
-
+		if (id > 0)
+			return true;
+		else
 			throw new InvalidUserException("print some valid id.");
-		}
 
-		return id > 0;
 	}
 
 	public static boolean validateName(String name) throws InvalidUserException {
@@ -38,13 +35,11 @@ public class UserValidator {
 		Matcher m = p.matcher(name);
 		match = m.matches();
 		if (match) {
-			System.out.println("The user name is valid.");
+			return true;
 		} else {
-
 			throw new InvalidUserException("The user name is not valid");
 		}
 
-		return match;
 	}
 
 	public static boolean validatePassword(String password) throws InvalidUserException {
@@ -53,7 +48,7 @@ public class UserValidator {
 			String pattern_string = "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=])(?=.*[^\\s]).{8,}$";
 			match = Pattern.matches(pattern_string, password);
 			if (match) {
-				System.out.println("Valid password.");
+				return true;
 			} else {
 
 				throw new InvalidUserException("Invalid password.");
@@ -74,12 +69,11 @@ public class UserValidator {
 		String regex = "^.*@.*\\..*$";
 		isMatch = Pattern.matches(regex, email);
 		if (isMatch) {
-			System.out.println("The email address is Valid");
+			return true;
 		} else {
 
 			throw new InvalidUserException("The email address is not valid");
 		}
-		return isMatch;
 
 	}
 

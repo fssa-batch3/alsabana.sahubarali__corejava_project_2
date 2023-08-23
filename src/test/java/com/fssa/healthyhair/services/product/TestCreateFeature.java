@@ -19,7 +19,7 @@ class TestCreateFeature {
 						+ "A vital scalp treatment that helps remove dead skin cells, product build up and give roots the chance to thrive, control hyper production of scalp serum, tackle itchiness and flakiness.",
 				"ayurvedic");
 
-		try {
+	 	try {
 
 			assertTrue(productservice.createProduct(product1));
 			System.out.println("Your product successfully created");
@@ -30,7 +30,7 @@ class TestCreateFeature {
 	}
 
 	@Test
-
+ 
 	void testCreateProductFail() {
 
 		ProductService productservice = new ProductService();
