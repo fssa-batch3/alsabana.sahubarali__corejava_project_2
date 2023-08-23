@@ -55,8 +55,8 @@ public class Order {
 		this.orderedUser = orderedUser;
 	}
 
-	public User getUser() {
-		return orderedUser;
+	public User getOrderedUser1() {
+		return orderedUser; 
 	}
 
 	public void setUser(User user) {

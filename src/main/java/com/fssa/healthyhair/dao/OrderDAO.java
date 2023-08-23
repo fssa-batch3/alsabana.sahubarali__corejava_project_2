@@ -20,7 +20,7 @@ public class OrderDAO {
 			pmt.setInt(1, order.getOrder_id());
 			pmt.setInt(2, order.getProduct().getProductId());
 			pmt.setInt(3, order.getQuantity());
-			pmt.setInt(4, order.getUser().getUserId());
+			pmt.setInt(4, order.getOrderedUser1().getUserId());
 			pmt.setString(5, order.getAddress());
 
 			int rows = pmt.executeUpdate();

@@ -9,22 +9,17 @@ import com.fssa.healthyhair.validation.exception.InvalidUserException;
 
 public class UserValidator {
 	public static boolean validateUser(User user) throws InvalidUserException {
-		if (user != null && validateName(user.getUsername()) && validateEmail(user.getEmail())
-				&& validatePassword(user.getPassword()) && ValidateMobileNo(user.getNumber())
-				&& validateType(user.getType())) {
-			return true;
-		} else {
-			throw new InvalidUserException("User details not valid");
-		}
+		return user != null && validateName(user.getUsername()) && validateEmail(user.getEmail())
+				&& validatePassword(user.getPassword()) && validateMobileNo(user.getNumber())
+				&& validateType(user.getType());
+
 	}
 
 	public static boolean validateUserId(int id) throws InvalidUserException {
-
 		if (id > 0)
 			return true;
 		else
 			throw new InvalidUserException("print some valid id.");
-
 	}
 
 	public static boolean validateName(String name) throws InvalidUserException {
@@ -44,20 +39,16 @@ public class UserValidator {
 
 	public static boolean validatePassword(String password) throws InvalidUserException {
 		boolean match = false;
-		try {
-			String pattern_string = "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=])(?=.*[^\\s]).{8,}$";
-			match = Pattern.matches(pattern_string, password);
-			if (match) {
-				return true;
-			} else {
 
-				throw new InvalidUserException("Invalid password.");
-			}
-		} catch (PatternSyntaxException e) {
-			System.out.println(e.getMessage());
+		String patternString = "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=])(?=.*[^\\s]).{8,}$";
+		match = Pattern.matches(patternString, password);
+		if (match) {
+			return true;
+		} else {
+
+			throw new InvalidUserException("Invalid password.");
 		}
 
-		return match;
 	}
 
 	public static boolean validateEmail(String email) throws InvalidUserException {
@@ -77,7 +68,7 @@ public class UserValidator {
 
 	}
 
-	public static boolean ValidateMobileNo(String mobileno) throws InvalidUserException {
+	public static boolean validateMobileNo(String mobileno) throws InvalidUserException {
 		boolean isMatch = false;
 		if (mobileno == null)
 			return false;
@@ -85,20 +76,17 @@ public class UserValidator {
 		String regex = "^[6789]\\d{9}$";
 		isMatch = Pattern.matches(regex, mobileno);
 		if (isMatch) {
-			System.out.println("The mobile number is: Valid");
+			return true;
 		} else {
 			throw new InvalidUserException("The mobile number is: Invalid");
 
 		}
-		return isMatch;
 
 	}
 
-	public static boolean validateType(String type) throws InvalidUserException {
+	public static boolean validateType(String type)  throws InvalidUserException{
 
-		if (type != null && !type.isBlank())
-			return true;
-		else
-			return false;
+		return type != null && !type.isBlank();
+
 	}
 }

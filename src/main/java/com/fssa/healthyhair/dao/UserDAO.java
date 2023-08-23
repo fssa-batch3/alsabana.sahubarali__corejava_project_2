@@ -11,22 +11,22 @@ public class UserDAO {
 
 	public static Connection getConnection() throws SQLException {
 
-		String DB_URL;
-		String DB_USER;
-		String DB_PASSWORD;
+		String dbUrl;
+		String dbUser;
+		String dbPassword;
 
 		if (System.getenv("CI") != null) {
-			DB_URL = System.getenv("DB_URL");
-			DB_USER = System.getenv("DB_USER");
-			DB_PASSWORD = System.getenv("DB_PASSWORD");
+			dbUrl = System.getenv("DB_URL");
+			dbUser = System.getenv("DB_USER");
+			dbPassword = System.getenv("DB_PASSWORD");
 		} else {
 			Dotenv env = Dotenv.load();
-			DB_URL = env.get("DB_URL");
-			DB_USER = env.get("DB_USER");
-			DB_PASSWORD = env.get("DB_PASSWORD");
+			dbUrl = env.get("DB_URL");
+			dbUser = env.get("DB_USER");
+			dbPassword = env.get("DB_PASSWORD");
 		}
 
-		return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+		return DriverManager.getConnection(dbUrl, dbUser, dbPassword);
 	}
 
 	public boolean register(User user) throws DAOException {
@@ -106,8 +106,8 @@ public class UserDAO {
 			stmt.setString(3, user.getNumber());
 			stmt.setString(4, user.getEmail());
 
-			int rows = stmt.executeUpdate();
-			
+			stmt.executeUpdate();
+
 		} catch (SQLException e) {
 			throw new DAOException("Error in updateUser method", e);
 		}
@@ -120,8 +120,7 @@ public class UserDAO {
 
 			stmt.setString(1, email);
 
-			int rows = stmt.executeUpdate();
-			
+			stmt.executeUpdate();
 
 		} catch (SQLException e) {
 			throw new DAOException("Error in deleteTask method", e);
