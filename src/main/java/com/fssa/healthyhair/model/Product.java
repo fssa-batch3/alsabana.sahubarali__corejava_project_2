@@ -5,12 +5,12 @@ public class Product {
 	private int cost;
 	private String productImg;
 	private String productDetail;
-	private String category;
-	private int productId;
+	private String category; 
+	private int productId; 
 
 	public Product(String productName, int cost, String productImg, String productDetail, String category) {
 		this.productName = productName;
-		this.cost = cost;
+		this.cost = cost; 
 		this.productImg = productImg;
 		this.productDetail = productDetail;
 		this.category = category;

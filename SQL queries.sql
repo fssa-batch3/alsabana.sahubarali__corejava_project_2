@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS product(
   
   
 select* from product;
+
 CREATE TABLE IF NOT EXISTS orders (
 order_id INT AUTO_INCREMENT PRIMARY KEY,
 product_name varchar(50),

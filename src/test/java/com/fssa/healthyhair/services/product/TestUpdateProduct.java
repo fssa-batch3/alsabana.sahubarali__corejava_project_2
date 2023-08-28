@@ -16,7 +16,6 @@ class TestUpdateProduct {
 
 	void updateProductSuccess() {
 		ProductDAO productDAO = new ProductDAO();
-		ProductService productService = new ProductService();
 		Product product1 = new Product(8, "Ayurvedicoil", 40,
 				"https://www.gkhair.co.in/cdn/shop/files/Balancing-banner_023150bb-42a3-4452-bbe8-aa23828dfdd1_1600x.png?v=1673589283",
 				"A power-packed, leave in scalp serum strengthens hair roots and promotes fast and healthy hair growth.\r\n"
@@ -28,7 +27,7 @@ class TestUpdateProduct {
 			System.out.println("Successfully updated");
 		} catch (DAOException e) {
 			fail();
-		} 
+		}  
 
 	}
 
@@ -36,7 +35,6 @@ class TestUpdateProduct {
 
 	void updateProductFail() {
 		ProductDAO productDAO = new ProductDAO();
-		ProductService productService = new ProductService();
 		Product product1 = new Product(0, null, 0, null, null, null);
 
 		try {

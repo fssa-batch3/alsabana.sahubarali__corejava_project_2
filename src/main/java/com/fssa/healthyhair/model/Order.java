@@ -1,95 +1,80 @@
 package com.fssa.healthyhair.model;
 
 public class Order { 
-	private int orderId;
-	private Product orderedProduct;
-	private int quantity;
-	private User orderedUser;
-	private String address;
+    private int orderId;
+    private Product orderedProduct;
+    private int quantity;
+    private User orderedUser;   
+    private String address;
 
-	public Order(int orderId, Product orderedProduct, int quantity, User orderedUser) {
+    public Order(int orderId, Product orderedProduct, int quantity, User orderedUser) {
+        this.orderId = orderId;
+        this.orderedProduct = orderedProduct;    
+        this.quantity = quantity;
+        this.orderedUser = orderedUser;
+    }
 
-		this.orderId = orderId;
-		this.orderedProduct = orderedProduct;    
-		this.quantity = quantity;
-		this.orderedUser = orderedUser;
-	}
+    public Order(int orderId, Product orderedProduct, int quantity, User orderedUser, String address) {
+        this.orderId = orderId;
+        this.orderedProduct = orderedProduct;
+        this.quantity = quantity;
+        this.orderedUser = orderedUser;
+        this.address = address;
+    }
 
-	public Order(int orderId, Product orderedProduct, int quantity, User orderedUser, String address) {
-
-		this.orderId = orderId;
-		this.orderedProduct = orderedProduct;
-		this.quantity = quantity;
-		this.orderedUser = orderedUser;
-		this.address = address;
+    public Order() {
+		
 	}
 
 	public Product getOrderedProduct() {
-		return orderedProduct;
-	}
+        return orderedProduct;
+    }
 
-	public void setOrderedProduct(Product orderedProduct) {
-		this.orderedProduct = orderedProduct;
-	}
+    public void setOrderedProduct(Product orderedProduct) {
+        this.orderedProduct = orderedProduct;
+    }
 
-	public User getOrderedUser() {
-		return orderedUser;
-	}
+    public User getOrderedUser() {
+        return orderedUser;
+    }
 
-	public void setOrderedUser(User orderedUser) {
-		this.orderedUser = orderedUser;
-	}
+//    public void setOrderedUser(User orderedUser) {
+//        this.orderedUser = orderedUser;
+//    }
 
-	public String getAddress() {
-		return address;
-	}
+    public String getAddress() {
+        return address;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	public Order(Product orderedProduct, int quantity, User orderedUser) {
+    public void setOrderedUser(User user) {
+        this.orderedUser = user;
+    }
 
-		this.orderedProduct = orderedProduct;
-		this.quantity = quantity;
-		this.orderedUser = orderedUser;
-	}
+    // Removed redundant getOrderedProduct() and setUser(User user) methods
 
-	public User getOrderedUser1() {
-		return orderedUser; 
-	}
+    public int getOrderId() {
+        return orderId;
+    } 
 
-	public void setUser(User user) {
-		this.orderedUser = user;
-	}
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
 
-	public Order() {
-		super();
-	}
+    public int getQuantity() {
+        return quantity;
+    }
 
-	public Product getProduct() {
-		return orderedProduct;
-	}
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
-	public void setProduct(Product product) {
-		this.orderedProduct = product;
-	}
-
-	public int getOrder_id() {
-		return orderId;
-	}
-
-	public void setOrder_id(int order_id) {
-		this.orderId = order_id;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
-
+    @Override
+    public String toString() {
+        return "Order [orderId=" + orderId + ", orderedProduct=" + orderedProduct + ", quantity=" + quantity
+                + ", orderedUser=" + orderedUser + ", address=" + address + "]";
+    }
 }

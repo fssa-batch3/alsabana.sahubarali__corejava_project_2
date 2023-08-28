@@ -9,8 +9,9 @@ import org.junit.jupiter.api.Test;
 import com.fssa.healthyhair.dao.UserDAO;
 import com.fssa.healthyhair.dao.exception.DAOException;
 import com.fssa.healthyhair.model.User;
+import com.fssa.healthyhair.service.exception.ServiceException;
 import com.fssa.healthyhair.services.UserService;
-import com.google.protobuf.ServiceException;
+
 
 class TestRegisterFeature {
 

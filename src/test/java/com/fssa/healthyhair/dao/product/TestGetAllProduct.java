@@ -16,7 +16,7 @@ import com.fssa.healthyhair.services.ProductService;
 
 class TestGetAllProduct {
 
-	@Test
+	@Test 
 	void ValidGetSuccess() {
 		ProductDAO productDAO = new ProductDAO();
 		ProductService service = new ProductService();

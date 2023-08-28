@@ -1,27 +1,28 @@
 package com.fssa.healthyhair.services;
 
-import com.fssa.healthyhair.dao.*;
+import com.fssa.healthyhair.dao.UserDAO;
 import com.fssa.healthyhair.dao.exception.DAOException;
 import com.fssa.healthyhair.model.User;
+import com.fssa.healthyhair.service.exception.ServiceException;
 import com.fssa.healthyhair.validation.UserValidator;
 import com.fssa.healthyhair.validation.exception.InvalidUserException;
-import com.google.protobuf.ServiceException;
 
-public class UserService { 
+public class UserService {
 
 	public boolean registerUser(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
 
 		try {
 			UserValidator.validateUser(user);
+
 			if (userDAO.isEmailAlreadyRegistered(user.getEmail())) {
 				throw new DAOException("Email already exists");
 			}
+
 			if (userDAO.register(user)) {
-				System.out.println(user.getUsername() + "  Succesfully registered");
 				return true;
 			} else {
-				System.out.println("Registration failed");
+				System.err.println("Registered failed");
 				return false;
 			}
 
@@ -32,22 +33,45 @@ public class UserService {
 
 	}
 
-	public boolean loginUser(User user) throws ServiceException {
+	public int loginWithEmail(String email, String password) throws ServiceException {
+		int id = 0;
+		try {
+			if (UserValidator.validateEmail(email) && UserValidator.validatePassword(password)) {
+				UserDAO userDAO = new UserDAO();
+				User user = userDAO.findUserByEmail(email);
+				if (user.getPassword().equals(password)) {
+					id = user.getUserId();
+				} else {
+					throw new ServiceException("invalid Password");
+				}
+			}
+
+		} catch (InvalidUserException | DAOException e) {
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+			throw new ServiceException(e);
+		}
+		return id;
+	}
+
+	public boolean login(String email, String password) throws ServiceException, InvalidUserException {
+		boolean status = false;
+
+		if (!UserValidator.validateEmail(email) && !UserValidator.validatePassword(password)) {
+			throw new InvalidUserException("Invalid User Credentials");
+		}
 
 		try {
-			UserValidator.validateEmail(user.getEmail());
-			UserValidator.validatePassword(user.getPassword());
-
+			
 			UserDAO userDAO = new UserDAO();
-			if (userDAO.isLogin(user) && (userDAO.getUserPasswordFromDb().equals(user.getPassword()))) {
-				System.out.println(user.getEmail() + " Successfully logged in");
-				return true;
-			} else {
-				return false;
-			}
+			status = userDAO.userExists(email, password);
+			
 		} catch (Exception e) {
-			throw new ServiceException(e.getLocalizedMessage());
+			e.printStackTrace();
+			throw new ServiceException(e.getMessage());
 		}
+		
+		return status;
 
 	}
 

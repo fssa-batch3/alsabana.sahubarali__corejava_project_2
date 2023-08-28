@@ -15,7 +15,6 @@ class TestValidProductCategory {
 	 void validCategorySuccess() {
 		try {
 			assertTrue(ProductValidator.validateProductCategory("ayurvedic range"));
-			
 		} catch (InvalidProductInputException e) {
 			System.err.println(e.getMessage());
 			fail();

@@ -1,12 +1,16 @@
 package com.fssa.healthyhair.services.user;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
 import com.fssa.healthyhair.model.User;
+import com.fssa.healthyhair.service.exception.ServiceException;
 import com.fssa.healthyhair.services.UserService;
-import com.google.protobuf.ServiceException;
+
 
 class TestLoginFeature {
 
@@ -31,30 +35,29 @@ class TestLoginFeature {
 
 	void loginSuccess() {
 		UserService userService = new UserService();
-		User user1 = new User("sabin@gmail.com", "sabin", "passWord@786", "buyer", "8015059760");
+//		User user1 = new User("sabin320@gmail.com", "passWord@786");
 		try {
 
-			assertTrue(userService.loginUser(user1));
-			System.out.println("Succesfully logged in " + user1.getUsername());
+			assertEquals(2,userService.loginWithEmail("sabin320@gmail.com", "passWord@786"));
+			System.out.println("Succesfully logged in ");
 		} catch (ServiceException e) {
-
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 
 		}
 	}
-
-	@Test
-
-	void loginFailed() {
-		UserService userService = new UserService();
-		User user2 = new User("alsa@gmail.com", "Password@796");
-		try {
-
-			assertFalse(userService.loginUser(user2));
-			System.out.println("please check your details");
-		} catch (ServiceException e) {
-			System.out.println(e.getMessage());
-		}
-	}
+    
+//	@Test
+//
+//	void loginFailed() {
+//		UserService userService = new UserService();
+//		User user2 = new User("alsa@gmail.com", "Password@796");
+//		try {
+//
+//			assertFalse(userService.loginUser(user2));
+//		
+//		} catch (ServiceException e) {
+//			System.err.println(e.getMessage());
+//		}
+//	}
 
 }

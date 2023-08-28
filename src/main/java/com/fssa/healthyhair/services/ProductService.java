@@ -10,19 +10,24 @@ import com.fssa.healthyhair.validation.ProductValidator;
 import com.fssa.healthyhair.validation.exception.InvalidProductException;
 
 public class ProductService {
+	/*
+	 * Declare the method to create a new product and handle exceptions
+	 */
 
 	public boolean createProduct(Product product) throws ServiceException {
-		ProductDAO productDAO = new ProductDAO();
+		ProductDAO productDAO = new ProductDAO();// Create an instance of ProductDAO
 		try {
-			ProductValidator.validateProduct(product);
+			ProductValidator.validateProduct(product);// Validate the product using ProductValidator
+			// Check if the product creation in the DAO was successful
 			if (productDAO.create(product)) {
- 				System.out.println(product.getProductName() + "  Succesfully product created");
+				System.out.println(product.getProductName() + "  Succesfully product created");
 				return true;
 			} else {
 				System.out.println("Creating failed");
-				return false;
+				return false; 
 			}
-			
+			// Catch exceptions related to invalid products or DAO issues and throw a
+			// ServiceException
 
 		} catch (InvalidProductException | DAOException e) {
 
@@ -31,12 +36,19 @@ public class ProductService {
 
 	}
 
+	/*
+	 * Define the method to retrieve all products and handle exceptions
+	 */
 	public List<Product> getAllProduct(Product product) throws ServiceException {
-		ProductDAO productDAO = new ProductDAO();
+
+		ProductDAO productDAO = new ProductDAO();// Create an instance of ProductDAO
 		try {
-			ProductValidator.validateProduct(product);
-			return productDAO.getAllProduct();
+			ProductValidator.validateProduct(product);// Validate the product using ProductValidator
+
+			return productDAO.getAllProduct(); // Retrieve all products from the DAO and return the list
+
 		} catch (DAOException | InvalidProductException e) {
+
 			throw new ServiceException(e);
 		}
 
@@ -45,34 +57,43 @@ public class ProductService {
 	public boolean updateProduct(Product product) throws ServiceException {
 		ProductDAO productDAO = new ProductDAO();
 		try {
-			ProductValidator.validateProduct(product);
+			ProductValidator.validateProduct(product);// Validate the product using ProductValidator
+			// Check if the product update in the DAO was successful and provide feedback
 			if (productDAO.update(product)) {
 				System.out.println(product.getProductName() + " Successfully updated");
 				return true;
 			} else {
-				System.out.println("Update failed");
+				System.err.println("Update failed");
 				return false;
 			}
+
+			// Catch exceptions related to invalid products or DAO issues and throw a
+			// ServiceException
 		} catch (InvalidProductException | DAOException e) {
+
 			throw new ServiceException(e);
 		}
 	}
 
+	/*
+	 * Define the method to delete a product by ID and handle exceptions
+	 */
 	public boolean deleteProduct(int productId) throws ServiceException {
 		ProductDAO productDAO = new ProductDAO();
 		try {
-
+			// Check if the product deletion in the DAO was successful and provide feedback
 			if (productDAO.delete(productId)) {
 				System.out.println("Product with ID " + productId + " successfully deleted.");
 				return true;
 			} else {
-				System.out.println("Deletion failed for product with ID " + productId + ".");
+				System.err.println("Deletion failed for product with ID " + productId + ".");
 				return false;
 			}
 
 		} catch (DAOException e) {
 
-			throw new ServiceException(e.getMessage(), e);
+			throw new ServiceException(e.getMessage(), e);// Catch exceptions related to DAO issues and throw a
+															// ServiceException
 		}
 	}
 

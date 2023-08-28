@@ -3,7 +3,10 @@ package com.fssa.healthyhair.validation;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.fssa.healthyhair.dao.UserDAO;
+import com.fssa.healthyhair.dao.exception.DAOException;
 import com.fssa.healthyhair.model.User;
+import com.fssa.healthyhair.service.exception.ServiceException;
 import com.fssa.healthyhair.validation.exception.InvalidUserException;
 
 public class UserValidator {
@@ -52,18 +55,26 @@ public class UserValidator {
 
 	public static boolean validateEmail(String email) throws InvalidUserException {
 		boolean isMatch = false;
+		
 		if (email == null) {
 			return false;
 		}
-
-		String regex = "^.*@.*\\..*$";
+		String regex = "^[^@]+@[^.]+\\..+$";
 		isMatch = Pattern.matches(regex, email);
-		if (isMatch) {
-			return true;
-		} else {
-
-			throw new InvalidUserException("The email address is not valid");
+		if (!isMatch) {
+			throw new InvalidUserException("Invalid Email: does not match the pattern");
 		}
+		
+		try {
+			UserDAO userDAO = new UserDAO();
+			@SuppressWarnings("unused")
+			User user = userDAO.findUserByEmail(email);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			throw new InvalidUserException("Invalid Email Id");
+		}
+		
+		return true;
 
 	}
 
