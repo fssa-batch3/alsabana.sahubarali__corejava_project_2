@@ -2,6 +2,7 @@ package com.fssa.healthyhair.util;
 
 import java.sql.Connection;
 
+
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -12,10 +13,13 @@ public class ConnectionUtil {
 		String dbUrl;
 		String dbUser;
 		String dbPassword;
-
+        
+		// Cloud DB
 		dbUrl = System.getenv("DB_URL");
 		dbUser = System.getenv("DB_USER");
 		dbPassword = System.getenv("DB_PASSWORD");
+		
+
          
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");

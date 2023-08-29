@@ -16,7 +16,7 @@ class TestCreateOrder {
  
 @Test
 void testOrderSuccess() {
-    OrderService orderService = new OrderService();  // Assuming OrderService class is defined
+   
 
     try {
         User user = new User();
@@ -34,7 +34,7 @@ void testOrderSuccess() {
         order.setAddress("Chennai");
         order.setOrderedProduct(product1);
 
-        assertTrue(orderService.createOrder(order));
+        assertTrue(OrderService.createOrder(order));
         System.out.println("Successfully your order created");
     } catch (ServiceException e) {
         fail();
@@ -44,13 +44,12 @@ void testOrderSuccess() {
 	 
 	@Test
 	void testOrderFail() {
-	    OrderService orderService = new OrderService();
-	    
+	   
 	    // Create an invalid order (missing required fields)
 	    Order invalidOrder = new Order();
 	    
 	    try {
-	        assertFalse(orderService.createOrder(invalidOrder));
+	        assertFalse(OrderService.createOrder(invalidOrder));
 	        System.err.println("Order creation should have failed due to invalid input");
 	    } catch (ServiceException e) {
 	        // The creation attempt should result in a ServiceException due to invalid input

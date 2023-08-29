@@ -20,10 +20,9 @@ public class ProductService {
 			ProductValidator.validateProduct(product);// Validate the product using ProductValidator
 			// Check if the product creation in the DAO was successful
 			if (productDAO.create(product)) {
-				System.out.println(product.getProductName() + "  Succesfully product created");
 				return true;
 			} else {
-				System.out.println("Creating failed");
+				System.err.println("Creating failed");
 				return false; 
 			}
 			// Catch exceptions related to invalid products or DAO issues and throw a
@@ -60,7 +59,7 @@ public class ProductService {
 			ProductValidator.validateProduct(product);// Validate the product using ProductValidator
 			// Check if the product update in the DAO was successful and provide feedback
 			if (productDAO.update(product)) {
-				System.out.println(product.getProductName() + " Successfully updated");
+				
 				return true;
 			} else {
 				System.err.println("Update failed");
@@ -83,7 +82,6 @@ public class ProductService {
 		try {
 			// Check if the product deletion in the DAO was successful and provide feedback
 			if (productDAO.delete(productId)) {
-				System.out.println("Product with ID " + productId + " successfully deleted.");
 				return true;
 			} else {
 				System.err.println("Deletion failed for product with ID " + productId + ".");

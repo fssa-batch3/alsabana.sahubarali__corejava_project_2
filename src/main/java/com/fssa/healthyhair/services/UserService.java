@@ -54,25 +54,7 @@ public class UserService {
 		return id;
 	}
 
-	public boolean login(String email, String password) throws ServiceException, InvalidUserException {
-		boolean status = false;
 
-		if (!UserValidator.validateEmail(email) && !UserValidator.validatePassword(password)) {
-			throw new InvalidUserException("Invalid User Credentials");
-		}
-
-		try {
-			
-			UserDAO userDAO = new UserDAO();
-			status = userDAO.userExists(email, password);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new ServiceException(e.getMessage());
-		}
-		
-		return status;
-
-	}
+	
 
 }

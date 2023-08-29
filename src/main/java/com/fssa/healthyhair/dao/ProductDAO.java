@@ -1,4 +1,5 @@
 package com.fssa.healthyhair.dao;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,10 +9,10 @@ import java.util.List;
 import com.fssa.healthyhair.dao.exception.DAOException;
 import com.fssa.healthyhair.model.Product;
 import com.fssa.healthyhair.util.ConnectionUtil;
- 
+
 public class ProductDAO {
 	/*
-	 *  Define the method to create a new product in the database
+	 * Define the method to create a new product in the database
 	 */
 	public boolean create(Product product) throws DAOException {
 		// the SQL query for inserting a new product
@@ -24,14 +25,14 @@ public class ProductDAO {
 			pmt.setString(3, product.getProductImg());
 			pmt.setString(4, product.getProductDetail());
 			pmt.setString(5, product.getCategory());
-         //Execute the update and get the number of rows affected
+			// Execute the update and get the number of rows affected
 			int rowsAffected = pmt.executeUpdate();
-        //Return a boolean indicating whether the insertion was successful
+			// Return a boolean indicating whether the insertion was successful
 			return rowsAffected > 0;
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
-	} 
+	}
 
 	public List<Product> getAllProduct() throws DAOException {
 		// Create an empty list to store products
@@ -81,15 +82,15 @@ public class ProductDAO {
 	}
 
 	public boolean delete(int productId) throws DAOException {
-         //Start a try block with a prepared statement for deleting a product
+		// Start a try block with a prepared statement for deleting a product
 		try (PreparedStatement stmt = ConnectionUtil.getConnection()
 				.prepareStatement("DELETE from product WHERE product_id=?")) {
- 
-			stmt.setInt(1, productId);//Set the product ID in the prepared statement for deletion
+
+			stmt.setInt(1, productId);// Set the product ID in the prepared statement for deletion
 
 			int rows = stmt.executeUpdate();
-			
-			return rows > 0;//Return a boolean indicating whether the deletion was successful
+
+			return rows > 0;// Return a boolean indicating whether the deletion was successful
 
 		} catch (SQLException e) {
 			throw new DAOException("Error in delete product method", e);

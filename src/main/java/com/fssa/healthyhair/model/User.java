@@ -7,9 +7,10 @@ public class User {
 	private String number;
 	private String type;
 	private int userId;
+	private String address;
 
 	public int getUserId() {
-		return userId; 
+		return userId;
 	}
 
 	public User() {
@@ -31,7 +32,7 @@ public class User {
 		this.password = password;
 		this.type = type;
 		this.number = number;
-	} 
+	}
 
 	public User(String email, String username, String password, String type, String number, int userId) {
 		super();
@@ -43,12 +44,23 @@ public class User {
 		this.userId = userId;
 	}
 
+	public User(String email, String username, String password, String type, String number, int userId,
+			String address) {
+		super();
+		this.email = email;
+		this.username = username;
+		this.password = password;
+		this.type = type;
+		this.number = number;
+		this.userId = userId;
+		this.address = address;
+	}
+
 	public User(String email, String password) {
 		super();
 		this.email = email;
 		this.password = password;
 	}
-
 
 	public String getEmail() {
 		return email;
@@ -88,6 +100,20 @@ public class User {
 
 	public void setNumber(String number) {
 		this.number = number;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	@Override
+	public String toString() {
+		return "User [email=" + email + ", username=" + username + ", password=" + password + ", number=" + number
+				+ ", type=" + type + ", userId=" + userId + ", address=" + address + "]";
 	}
 
 }

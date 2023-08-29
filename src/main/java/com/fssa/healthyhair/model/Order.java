@@ -21,6 +21,12 @@ public class Order {
         this.orderedUser = orderedUser;
         this.address = address;
     }
+    public Order( Product orderedProduct, int quantity, User orderedUser, String address) {
+        this.orderedProduct = orderedProduct;
+        this.quantity = quantity;
+        this.orderedUser = orderedUser;
+        this.address = address;
+    }
 
     public Order() {
 		
@@ -38,9 +44,6 @@ public class Order {
         return orderedUser;
     }
 
-//    public void setOrderedUser(User orderedUser) {
-//        this.orderedUser = orderedUser;
-//    }
 
     public String getAddress() {
         return address;
@@ -54,7 +57,7 @@ public class Order {
         this.orderedUser = user;
     }
 
-    // Removed redundant getOrderedProduct() and setUser(User user) methods
+
 
     public int getOrderId() {
         return orderId;
