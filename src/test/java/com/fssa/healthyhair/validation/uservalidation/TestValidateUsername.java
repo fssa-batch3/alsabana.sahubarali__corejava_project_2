@@ -66,7 +66,7 @@ class TestValidateUsername {
 	}
 
 	@Test
-	public void testInvalidUsernameTooLong() {
+	 void testInvalidUsernameTooLong() {
 		try {
 
 			assertFalse(UserValidator.validateName("Sabannnnnnnnnnnnnnnnnnnnnnnnnna"));

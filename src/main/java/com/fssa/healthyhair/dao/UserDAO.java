@@ -96,7 +96,7 @@ public class UserDAO {
 		}
 	}
 
-	public List<User> allUser(User user) throws DAOException {
+	public List<User> allUser() throws DAOException {
 		// Create an empty list to store user list
 		List<User> user1 = new ArrayList<>();
 		// //Start a try block with a prepared statement for selecting all users
@@ -139,13 +139,6 @@ public class UserDAO {
 
 	}
 
-	public static void main(String[] args) {
-		try {
-			User user = new UserDAO().findUserByEmail("hasan@gmail.com");
-			System.out.println(user.toString());
-		} catch (DAOException e) {
-			e.printStackTrace();
-		}
-	}
+	
 
 }

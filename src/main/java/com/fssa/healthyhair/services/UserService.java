@@ -47,7 +47,7 @@ public class UserService {
 			}
 
 		} catch (InvalidUserException | DAOException e) {
-			e.printStackTrace();
+			
 			System.err.println(e.getMessage());
 			throw new ServiceException(e);
 		}

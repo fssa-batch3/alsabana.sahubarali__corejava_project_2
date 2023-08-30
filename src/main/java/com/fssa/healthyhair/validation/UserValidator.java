@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 import com.fssa.healthyhair.dao.UserDAO;
 import com.fssa.healthyhair.dao.exception.DAOException;
 import com.fssa.healthyhair.model.User;
-import com.fssa.healthyhair.service.exception.ServiceException;
 import com.fssa.healthyhair.validation.exception.InvalidUserException;
 
 public class UserValidator {

@@ -54,14 +54,14 @@ public class OrderService {
 	/*
 	 * Define the method to delete a order by ID and handle exceptions
 	 */
-	public boolean deleteOrder(int OrderId) throws ServiceException {
+	public boolean deleteOrder(int orderId) throws ServiceException {
 		try {
 			// Check if the order deletion in the DAO was successful and provide feedback
-			if (OrderDAO.delete(OrderId)) {
+			if (OrderDAO.delete(orderId)) {
 				
 				return true;
 			} else {
-				System.err.println("Deletion failed for order with ID " + OrderId + ".");
+				System.err.println("deleting failed");
 				return false;
 			}
 
@@ -71,31 +71,6 @@ public class OrderService {
 		}
 	}
 
-	public static void main(String[] args) {
-	    try {
-	        // Create an example Order object
-	    	Product product = new Product(4,"Ayurvedashampoo", 3700,
-					"https://www.gkhair.co.in/cdn/shop/files/Balancing-banner_023150bb-42a3-4452-bbe8-aa23828dfdd1_1600x.png?v=1673589283",
-					"A power-packed, leave in scalp serum strengthens hair roots and promotes fast and healthy hair growth.\r\n"
-							+ "A vital scalp treatment that helps remove dead skin cells, product build up and give roots the chance to thrive, control hyper production of scalp serum, tackle itchiness and flakiness.",
-					"ayurvedic");
-	    	User user = new User();
-	    	user.setUserId(3);
-	        Order order = new Order(product,2,user,"chennai");
-
-	        // Call the createOrder method
-	        boolean isSuccess = createOrder(order);
-
-	        if (isSuccess) {
-	           
-	        } else {
-	            System.out.println("Main: Order creation failed");
-	        }
-
-	    } catch (ServiceException e) {
-	        System.err.println("Main: ServiceException - " + e.getMessage());
-	        e.printStackTrace();
-	    }
-	}
+	
 
 }

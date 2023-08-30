@@ -26,7 +26,7 @@ class TestCreateFeature {
 
 		try {
 			// Use an assertion to check if the product creation is successful
-			productservice.createProduct(product1);
+			assertTrue(productservice.createProduct(product1));
 			System.out.println("Your product successfully created");
 		} catch (ServiceException e) {
 			// Catch and print any ServiceException that occurs
