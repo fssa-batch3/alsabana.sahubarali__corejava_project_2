@@ -69,7 +69,7 @@ public class UserValidator {
 			@SuppressWarnings("unused")
 			User user = userDAO.findUserByEmail(email);
 		} catch (DAOException e) {
-			e.printStackTrace();
+			
 			throw new InvalidUserException("Invalid Email Id");
 		}
 		
