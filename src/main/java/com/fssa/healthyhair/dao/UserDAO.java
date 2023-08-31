@@ -138,15 +138,6 @@ public class UserDAO {
 
 	}
 
-	public static void main(String[] args) {
-		try {
-			List<User> users = new UserDAO().allUser();
-
-			for (User user : users)
-				System.out.println(user.toString());
-		} catch (DAOException e) {
-			e.printStackTrace();
-		}
-	}
+	
 
 }
