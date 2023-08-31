@@ -1,4 +1,4 @@
-package com.fssa.healthyhair.services;
+package com.fssa.healthyhair.service;
 
 import com.fssa.healthyhair.dao.UserDAO;
 import com.fssa.healthyhair.dao.exception.DAOException;

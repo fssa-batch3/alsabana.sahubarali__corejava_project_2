@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 import com.fssa.healthyhair.model.Order;
 import com.fssa.healthyhair.model.Product;
 import com.fssa.healthyhair.model.User;
+import com.fssa.healthyhair.service.OrderService;
 import com.fssa.healthyhair.service.exception.ServiceException;
-import com.fssa.healthyhair.services.OrderService;
 
 class TestCreateOrder {
  

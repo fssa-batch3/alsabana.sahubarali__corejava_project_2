@@ -1,4 +1,4 @@
-package com.fssa.healthyhair.services.product;
+package com.fssa.healthyhair.service.product;
 
 import static org.junit.Assert.*;
 
@@ -6,8 +6,8 @@ import static org.junit.Assert.*;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.healthyhair.model.Product;
+import com.fssa.healthyhair.service.ProductService;
 import com.fssa.healthyhair.service.exception.ServiceException;
-import com.fssa.healthyhair.services.ProductService;
 
 class TestCreateFeature {
 	/*
@@ -31,6 +31,7 @@ class TestCreateFeature {
 		} catch (ServiceException e) {
 			// Catch and print any ServiceException that occurs
 			System.err.println(e.getMessage());
+			fail();
 		}
 
 	}
@@ -52,6 +53,7 @@ class TestCreateFeature {
 		try {
 			// Use an assertion to check if the product creation fails as expected
 			assertFalse(productservice.createProduct(product2));
+			fail();
 			System.out.println("Creating product failed");
 		} catch (ServiceException e) {
 			// Catch and print any ServiceException that occurs

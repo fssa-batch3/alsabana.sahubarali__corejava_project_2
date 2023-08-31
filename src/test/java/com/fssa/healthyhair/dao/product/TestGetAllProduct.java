@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import com.fssa.healthyhair.dao.ProductDAO;
 import com.fssa.healthyhair.dao.exception.DAOException;
 import com.fssa.healthyhair.model.Product;
+import com.fssa.healthyhair.service.ProductService;
 import com.fssa.healthyhair.service.exception.ServiceException;
-import com.fssa.healthyhair.services.ProductService;
 
 class TestGetAllProduct {
 	final ProductDAO productDAO = new ProductDAO();

@@ -1,6 +1,7 @@
 package com.fssa.healthyhair.dao;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,7 +39,8 @@ public class UserDAO {
 	public boolean isEmailAlreadyRegistered(String email) throws DAOException {
 		final String SELECTQUERY = "SELECT email FROM user WHERE email = ?";
 
-		try (PreparedStatement pstmt = ConnectionUtil.getConnection().prepareStatement(SELECTQUERY)) {
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(SELECTQUERY)) {
 
 			pstmt.setString(1, email);
 
@@ -52,9 +54,10 @@ public class UserDAO {
 
 	public User findUserByEmail(String email) throws DAOException {
 		final String SELECTQUERY = "SELECT * FROM user WHERE email = ?";
-		
+
 		User user = new User();
-		try (PreparedStatement pstmt = ConnectionUtil.getConnection().prepareStatement(SELECTQUERY)) {
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(SELECTQUERY)) {
 
 			pstmt.setString(1, email);
 
@@ -78,10 +81,9 @@ public class UserDAO {
 	}
 
 	public void update(User user) throws DAOException {
-
+		final String SELECTQUERY = "UPDATE user SET  password=?,name=?,phonenumber=?,email=?,address=? WHERE user_id=?";
 		try (Connection connection = ConnectionUtil.getConnection();
-				PreparedStatement stmt = connection.prepareStatement(
-						"UPDATE user SET  password=?,name=?,phonenumber=?,email=?,address=? WHERE user_id=?")) {
+				PreparedStatement stmt = connection.prepareStatement(SELECTQUERY)) {
 
 			stmt.setString(1, user.getPassword());
 			stmt.setString(2, user.getUsername());
@@ -100,8 +102,10 @@ public class UserDAO {
 	public List<User> allUser() throws DAOException {
 		// Create an empty list to store user list
 		List<User> user1 = new ArrayList<>();
-		// //Start a try block with a prepared statement for selecting all users
-		try (PreparedStatement stmt = ConnectionUtil.getConnection().prepareStatement("SELECT * FROM user");
+		final String SELECTQUERY = "SELECT * FROM user";
+		// Start a try block with a prepared statement for selecting all users
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement stmt = connection.prepareStatement(SELECTQUERY);
 				ResultSet rs = stmt.executeQuery()) {
 			// Iterate through the result set and extract user information
 			while (rs.next()) {
@@ -124,9 +128,9 @@ public class UserDAO {
 	}
 
 	public void deleteUser(String email) throws DAOException {
-
+		final String SELECTQUERY = "DELETE from user WHERE user_id=?";
 		try (Connection connection = ConnectionUtil.getConnection();
-				PreparedStatement stmt = connection.prepareStatement("DELETE from user WHERE user_id=?")) {
+				PreparedStatement stmt = connection.prepareStatement(SELECTQUERY)) {
 
 			stmt.setString(1, email);
 
@@ -137,7 +141,5 @@ public class UserDAO {
 		}
 
 	}
-
-	
 
 }

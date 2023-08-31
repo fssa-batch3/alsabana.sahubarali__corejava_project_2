@@ -1,5 +1,6 @@
 package com.fssa.healthyhair.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,9 +18,14 @@ public class ProductDAO {
 	public boolean create(Product product) throws DAOException {
 		// the SQL query for inserting a new product
 		final String QUERY = "INSERT INTO product (product_name, cost, product_image, product_detail, category) VALUES (?, ?, ?, ?, ?)";
+		
 		// Start a try block with a prepared statement for the insert query
-		try (PreparedStatement pmt = ConnectionUtil.getConnection().prepareStatement(QUERY)) {
+		try (Connection connection = ConnectionUtil.getConnection();
+				
+				PreparedStatement pmt = connection.prepareStatement(QUERY)) {
+			
 			// Set the product attributes in the prepared statement
+			
 			pmt.setString(1, product.getProductName());
 			pmt.setInt(2, product.getCost());
 			pmt.setString(3, product.getProductImg());
@@ -37,10 +43,12 @@ public class ProductDAO {
 	public List<Product> getAllProduct() throws DAOException {
 		// Create an empty list to store products
 		List<Product> product1 = new ArrayList<>();
-		// //Start a try block with a prepared statement for selecting all products
-		try (PreparedStatement stmt = ConnectionUtil.getConnection().prepareStatement(
-				"SELECT product_id, product_name,cost, product_image,product_detail,category FROM product");
-				ResultSet rs = stmt.executeQuery()) {
+
+		final String QUERY = "SELECT product_id, product_name,cost, product_image,product_detail,category FROM product";
+		// Start a try block with a prepared statement for selecting all products
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement pmt = connection.prepareStatement(QUERY);
+				ResultSet rs = pmt.executeQuery()) {
 			// Iterate through the result set and extract product information
 			while (rs.next()) {
 				int productId = rs.getInt("product_id");
@@ -60,18 +68,19 @@ public class ProductDAO {
 		}
 
 	}
-	
-	public Product findProductById(String productId) throws DAOException{
+
+	public Product findProductById(String productId) throws DAOException {
 		final String SELECTQUERY = "SELECT * FROM product WHERE product_id = ?";
-		
+
 		Product product = new Product();
-		try (PreparedStatement pstmt = ConnectionUtil.getConnection().prepareStatement(SELECTQUERY)) {
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement pmt = connection.prepareStatement(SELECTQUERY)) {
 
-			pstmt.setString(1, productId);
+			pmt.setString(1, productId);
 
-			try (ResultSet rs = pstmt.executeQuery()) {
+			try (ResultSet rs = pmt.executeQuery()) {
 				if (rs.next()) {
-                    product.setProductId(rs.getInt("product_id"));
+					product.setProductId(rs.getInt("product_id"));
 					product.setProductName(rs.getString("product_name"));
 					product.setCost(rs.getInt("cost"));
 					product.setProductImg(rs.getString("product_image"));
@@ -88,8 +97,10 @@ public class ProductDAO {
 
 	// Define the method to update a product in the database
 	public boolean update(Product product) throws DAOException {
-		try (PreparedStatement stmt = ConnectionUtil.getConnection().prepareStatement(
-				"UPDATE product SET  product_name=?,cost=?,product_image=?,product_detail=?,category=? WHERE product_id=?")) {
+		final String SELECTQUERY = "UPDATE product SET  product_name=?,cost=?,product_image=?,product_detail=?,category=? WHERE product_id=?";
+
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement stmt = connection.prepareStatement(SELECTQUERY)) {
 			// Set the updated product attributes in the prepared statement
 			stmt.setString(1, product.getProductName());
 			stmt.setInt(2, product.getCost());
@@ -107,9 +118,10 @@ public class ProductDAO {
 	}
 
 	public boolean delete(int productId) throws DAOException {
+		final String SELECTQUERY = "DELETE from product WHERE product_id=?";
 		// Start a try block with a prepared statement for deleting a product
-		try (PreparedStatement stmt = ConnectionUtil.getConnection()
-				.prepareStatement("DELETE from product WHERE product_id=?")) {
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement stmt = connection.prepareStatement(SELECTQUERY)) {
 
 			stmt.setInt(1, productId);// Set the product ID in the prepared statement for deletion
 
@@ -122,7 +134,5 @@ public class ProductDAO {
 		}
 
 	}
-
-	
 
 }

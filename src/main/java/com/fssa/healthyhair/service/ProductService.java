@@ -1,4 +1,4 @@
-package com.fssa.healthyhair.services;
+package com.fssa.healthyhair.service;
 
 
 import java.util.List;
@@ -14,7 +14,12 @@ public class ProductService {
 	/*
 	 * Declare the method to create a new product and handle exceptions
 	 */
-
+/**
+ * 
+ * @param product
+ * @return
+ * @throws ServiceException
+ */
 	public boolean createProduct(Product product) throws ServiceException {
 		ProductDAO productDAO = new ProductDAO();// Create an instance of ProductDAO
 		try {

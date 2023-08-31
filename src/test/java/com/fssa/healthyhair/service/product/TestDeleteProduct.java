@@ -1,11 +1,11 @@
-package com.fssa.healthyhair.services.product;
+package com.fssa.healthyhair.service.product;
 
 import static org.junit.Assert.*;
 
 import org.junit.jupiter.api.Test;
 
+import com.fssa.healthyhair.service.*;
 import com.fssa.healthyhair.service.exception.ServiceException;
-import com.fssa.healthyhair.services.*;
 
 class TestDeleteProduct {
 
@@ -14,9 +14,10 @@ class TestDeleteProduct {
 	void deleteProductSuccess() {
 		ProductService productService = new ProductService();
 		try {
-			assertTrue(productService.deleteProduct(30));
+			assertTrue(productService.deleteProduct(45));
 		} catch (ServiceException e) {
 			System.err.println(e.getMessage());
+			fail();
 		}
   
 	}

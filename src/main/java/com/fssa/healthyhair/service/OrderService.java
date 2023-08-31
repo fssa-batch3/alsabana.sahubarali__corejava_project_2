@@ -1,4 +1,4 @@
-package com.fssa.healthyhair.services;
+package com.fssa.healthyhair.service;
 
 import java.util.List;
 
