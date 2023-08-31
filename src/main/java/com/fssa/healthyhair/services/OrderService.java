@@ -16,16 +16,8 @@ public class OrderService {
 
 		try {
 			OrderValidator.validateOrder(order);
-			if (orderDAO.create(order)) {
-			
-				return true;
-			} else {
-				System.err.println("Creating failed");
-				return false;
-			}
-
-		}catch (InvalidProductInputException|InvalidOrderException | DAOException e) {
-
+			return orderDAO.create(order);
+		} catch (InvalidProductInputException | InvalidOrderException | DAOException e) {
 			throw new ServiceException(e);
 		}
 
@@ -47,27 +39,19 @@ public class OrderService {
 		}
 
 	}
-	
+
 	/*
 	 * Define the method to delete a order by ID and handle exceptions
 	 */
 	public boolean deleteOrder(int orderId) throws ServiceException {
 		try {
 			// Check if the order deletion in the DAO was successful and provide feedback
-			if (OrderDAO.delete(orderId)) {
-				
-				return true;
-			} else {
-				System.err.println("deleting failed");
-				return false;
-			}
+			return OrderDAO.delete(orderId);
 
 		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage(), e);// Catch exceptions related to DAO issues and throw a
 															// ServiceException
 		}
 	}
-
-	
 
 }
