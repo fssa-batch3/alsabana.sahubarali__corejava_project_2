@@ -52,6 +52,7 @@ public class UserDAO {
 
 	public User findUserByEmail(String email) throws DAOException {
 		final String SELECTQUERY = "SELECT * FROM user WHERE email = ?";
+		
 		User user = new User();
 		try (PreparedStatement pstmt = ConnectionUtil.getConnection().prepareStatement(SELECTQUERY)) {
 
@@ -76,7 +77,7 @@ public class UserDAO {
 
 	}
 
-	public void updateUser(User user) throws DAOException {
+	public void update(User user) throws DAOException {
 
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement stmt = connection.prepareStatement(
@@ -100,8 +101,7 @@ public class UserDAO {
 		// Create an empty list to store user list
 		List<User> user1 = new ArrayList<>();
 		// //Start a try block with a prepared statement for selecting all users
-		try (PreparedStatement stmt = ConnectionUtil.getConnection()
-				.prepareStatement("SELECT user_id, name,email, phonenumber,address,type,password FROM user");
+		try (PreparedStatement stmt = ConnectionUtil.getConnection().prepareStatement("SELECT * FROM user");
 				ResultSet rs = stmt.executeQuery()) {
 			// Iterate through the result set and extract user information
 			while (rs.next()) {
@@ -109,11 +109,10 @@ public class UserDAO {
 				String name = rs.getString("name");
 				String email = rs.getString("email");
 				String number = rs.getString("phonenumber");
-				String address = rs.getString("address");
 				String type = rs.getString("type");
 				String password = rs.getString("password");
 
-				user1.add(new User(email, name, password, type, number, userId, address));
+				user1.add(new User(email, name, password, type, number, userId));
 
 			}
 			// Return the list of user
@@ -139,6 +138,15 @@ public class UserDAO {
 
 	}
 
-	
+	public static void main(String[] args) {
+		try {
+			List<User> users = new UserDAO().allUser();
+
+			for (User user : users)
+				System.out.println(user.toString());
+		} catch (DAOException e) {
+			e.printStackTrace();
+		}
+	}
 
 }

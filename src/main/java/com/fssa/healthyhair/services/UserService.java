@@ -47,14 +47,12 @@ public class UserService {
 			}
 
 		} catch (InvalidUserException | DAOException e) {
-			
+
 			System.err.println(e.getMessage());
 			throw new ServiceException(e);
 		}
 		return id;
 	}
 
-
 	
-
 }

@@ -1,8 +1,9 @@
 package com.fssa.healthyhair.services;
 
+
 import java.util.List;
 
-import com.fssa.healthyhair.dao.*;
+import com.fssa.healthyhair.dao.ProductDAO;
 import com.fssa.healthyhair.dao.exception.DAOException;
 import com.fssa.healthyhair.model.Product;
 import com.fssa.healthyhair.service.exception.ServiceException;
@@ -35,6 +36,7 @@ public class ProductService {
 
 	}
 
+	
 	/*
 	 * Define the method to retrieve all products and handle exceptions
 	 */
@@ -52,7 +54,6 @@ public class ProductService {
 		}
 
 	}
-
 	public boolean updateProduct(Product product) throws ServiceException {
 		ProductDAO productDAO = new ProductDAO();
 		try {

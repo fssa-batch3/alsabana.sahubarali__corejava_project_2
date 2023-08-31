@@ -16,7 +16,7 @@ public class ProductValidator {
 			throw new InvalidProductException("Product details are not valid");
 		}
 
-		try { 
+		try {
 			// Validate various product details
 			return validateProductName(product.getProductName()) && validateProductCost(product.getCost())
 					&& validateProductImageURL(product.getProductImg())
@@ -36,7 +36,7 @@ public class ProductValidator {
 		boolean match = m.matches();
 
 		if (match) {
-			return true; 
+			return true;
 		} else {
 			// Throw exception with a descriptive error message
 			throw new InvalidProductInputException(
@@ -78,8 +78,7 @@ public class ProductValidator {
 	public static boolean validateProductDetail(String productDetail) throws InvalidProductInputException {
 		int minLength = 100;// Set the minimum length of product details
 		int maxLength = 400;// Set the maximum length of product details
-		
-		
+
 		// Handle the case where product details are empty or null
 		if (productDetail != null && !productDetail.isEmpty() && productDetail.trim().length() >= minLength
 				&& productDetail.trim().length() <= maxLength) {

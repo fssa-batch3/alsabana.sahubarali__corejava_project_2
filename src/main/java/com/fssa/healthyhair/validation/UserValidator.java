@@ -20,7 +20,7 @@ public class UserValidator {
 		if (id > 0)
 			return true;
 		else
-			throw new InvalidUserException("print some valid id.");
+			throw new InvalidUserException("Invalid User Id");
 	}
 
 	public static boolean validateName(String name) throws InvalidUserException {
@@ -33,7 +33,7 @@ public class UserValidator {
 		if (match) {
 			return true;
 		} else {
-			throw new InvalidUserException("The user name is not valid");
+			throw new InvalidUserException("Invalid Username");
 		}
 
 	}
@@ -61,7 +61,7 @@ public class UserValidator {
 		String regex = "^[^@]+@[^.]+\\..+$";
 		isMatch = Pattern.matches(regex, email);
 		if (!isMatch) {
-			throw new InvalidUserException("Invalid Email: does not match the pattern");
+			throw new InvalidUserException("Invalid Email");
 		}
 		
 		try {
@@ -87,7 +87,7 @@ public class UserValidator {
 		if (isMatch) {
 			return true;
 		} else {
-			throw new InvalidUserException("The mobile number is: Invalid");
+			throw new InvalidUserException("The mobile number is Invalid");
 
 		}
 
@@ -97,7 +97,7 @@ public class UserValidator {
 		if (!type.isBlank())
 			return true;
 		else
-			throw new InvalidUserException("The mobile number is: Invalid");
+			throw new InvalidUserException("Invalid category");
 
 	}
 }

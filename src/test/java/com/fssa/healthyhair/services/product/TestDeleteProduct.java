@@ -14,7 +14,7 @@ class TestDeleteProduct {
 	void deleteProductSuccess() {
 		ProductService productService = new ProductService();
 		try {
-			assertTrue(productService.deleteProduct(7));
+			assertTrue(productService.deleteProduct(30));
 		} catch (ServiceException e) {
 			System.err.println(e.getMessage());
 		}

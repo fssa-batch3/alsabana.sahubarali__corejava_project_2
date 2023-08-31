@@ -11,9 +11,7 @@ class TestValidProductName {
 	@Test
 	void testValidProductName() {
 		try {
-
 			assertTrue(ProductValidator.validateProductName("Ayuvedic shampoo"));
-			
 		} catch (InvalidProductInputException e) {
 			System.err.println(e.getMessage());
 			fail();
@@ -27,7 +25,6 @@ class TestValidProductName {
 			assertFalse(ProductValidator.validateProductName("@!Hair colour %^shampoo"));
 			System.err.println("Product name shouldn't contains special character");
 		} catch (InvalidProductInputException e) {
-
 			System.err.println(e.getMessage());
 		}
 	}
@@ -47,7 +44,7 @@ class TestValidProductName {
 	void testInvalidProductNameTooLong() {
 		try {
 			assertFalse(ProductValidator.validateProductName(
-					"Sabannnnnnnnnnnnnnnnnnnnnnnnnna.................................................................................................................................."));
+					"Ayurvediccccccccccc  shampoooooooo.................................................................................................................................."));
 			System.err.println("Product name should not be too long ");
 		} catch (InvalidProductInputException e) {
 			System.err.println(e.getMessage());

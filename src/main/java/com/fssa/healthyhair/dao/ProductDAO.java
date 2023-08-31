@@ -30,7 +30,7 @@ public class ProductDAO {
 			// Return a boolean indicating whether the insertion was successful
 			return rowsAffected > 0;
 		} catch (SQLException e) {
-			throw new DAOException(e);
+			throw new DAOException("Error in Creating a Product");
 		}
 	}
 
@@ -56,9 +56,34 @@ public class ProductDAO {
 			return product1;
 
 		} catch (SQLException e) {
-			throw new DAOException("Error in getAllPproduct", e);
+			throw new DAOException("Error in getting All Product", e);
 		}
 
+	}
+	
+	public Product findProductById(String productId) throws DAOException{
+		final String SELECTQUERY = "SELECT * FROM product WHERE product_id = ?";
+		
+		Product product = new Product();
+		try (PreparedStatement pstmt = ConnectionUtil.getConnection().prepareStatement(SELECTQUERY)) {
+
+			pstmt.setString(1, productId);
+
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+                    product.setProductId(rs.getInt("product_id"));
+					product.setProductName(rs.getString("product_name"));
+					product.setCost(rs.getInt("cost"));
+					product.setProductImg(rs.getString("product_image"));
+					product.setProductDetail(rs.getString("product_detail"));
+					product.setCategory(rs.getString("category"));
+				}
+			}
+
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+		return product;
 	}
 
 	// Define the method to update a product in the database
@@ -97,5 +122,7 @@ public class ProductDAO {
 		}
 
 	}
+
+	
 
 }

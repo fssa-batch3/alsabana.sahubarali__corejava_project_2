@@ -15,10 +15,11 @@ import com.fssa.healthyhair.service.exception.ServiceException;
 import com.fssa.healthyhair.services.ProductService;
 
 class TestGetAllProduct {
+	final ProductDAO productDAO = new ProductDAO();
 
-	@Test 
+	@Test
 	void ValidGetSuccess() {
-		ProductDAO productDAO = new ProductDAO();
+
 		ProductService service = new ProductService();
 		try {
 			assertTrue(service.createProduct(new Product("Ayurvedic shampoo", 300,
@@ -28,10 +29,10 @@ class TestGetAllProduct {
 					"ayurvedic")));
 			List<Product> list = productDAO.getAllProduct();
 			assertNotNull(list);
- 
+
 			for (Product p : list) {
 				System.out.println(p.toString());
-			} 
+			}
 
 			System.out.println("Successfully Viewed");
 
@@ -48,12 +49,12 @@ class TestGetAllProduct {
 		try {
 
 			List<Product> list = service.getAllProduct(null);
-
 			assertNotNull(list);
-
+            fail();
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
 	}
-} 
+
+}
