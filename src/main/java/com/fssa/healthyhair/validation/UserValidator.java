@@ -70,7 +70,7 @@ public class UserValidator {
 			User user = userDAO.findUserByEmail(email);
 		} catch (DAOException e) {
 			
-			throw new InvalidUserException("Invalid Email Id");
+			throw new InvalidUserException("Email is not registered");
 		}
 		
 		return true;

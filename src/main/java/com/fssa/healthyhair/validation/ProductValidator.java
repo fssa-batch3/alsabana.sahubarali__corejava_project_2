@@ -1,7 +1,7 @@
 package com.fssa.healthyhair.validation;
 
+import java.util.List;
 import java.util.regex.Matcher;
-
 import java.util.regex.Pattern;
 
 import com.fssa.healthyhair.model.Product;
@@ -25,6 +25,13 @@ public class ProductValidator {
 		} catch (InvalidProductInputException e) {
 			throw new InvalidProductException("Product inputs detail are not valid");
 		}
+	}
+
+	public static void validateGetAllProducts(List<Product> products) throws InvalidProductException {
+
+		if (products == null || products.isEmpty())
+			throw new InvalidProductException("There is no product");
+
 	}
 
 	public static boolean validateProductName(String productName) throws InvalidProductInputException {

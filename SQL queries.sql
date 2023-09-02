@@ -11,6 +11,7 @@ USE alsabana_sahubarali_corejava_project;
 
   select*from user;	
   
+  
 CREATE TABLE IF NOT EXISTS product(
  product_id INT AUTO_INCREMENT PRIMARY KEY,
  

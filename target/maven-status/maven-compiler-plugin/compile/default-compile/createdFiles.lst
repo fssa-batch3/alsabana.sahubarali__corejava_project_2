@@ -1,4 +1,3 @@
-com\fssa\healthyhair\services\UserService.class
 com\fssa\healthyhair\validation\UserValidator.class
 com\fssa\healthyhair\dao\exception\DAOException.class
 com\fssa\healthyhair\dao\UserDAO.class
@@ -10,10 +9,8 @@ com\fssa\healthyhair\dao\OrderDAO.class
 com\fssa\healthyhair\validation\exception\InvalidProductInputException.class
 com\fssa\healthyhair\validation\OrderValidator.class
 com\fssa\healthyhair\model\Order.class
-com\fssa\healthyhair\services\OrderService.class
 com\fssa\healthyhair\dao\ProductDAO.class
 com\fssa\healthyhair\model\User.class
-com\fssa\healthyhair\services\ProductService.class
 com\fssa\healthyhair\service\exception\ServiceException.class
 com\fssa\healthyhair\validation\exception\InvalidOrderException.class
 com\fssa\healthyhair\validation\exception\InvalidUserException.class

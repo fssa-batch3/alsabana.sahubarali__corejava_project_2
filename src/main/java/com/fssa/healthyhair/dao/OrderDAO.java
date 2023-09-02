@@ -1,5 +1,6 @@
 package com.fssa.healthyhair.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,21 +11,22 @@ import com.fssa.healthyhair.dao.exception.DAOException;
 import com.fssa.healthyhair.model.Order;
 import com.fssa.healthyhair.model.Product;
 import com.fssa.healthyhair.model.User;
-import com.fssa.healthyhair.util.ConnectionUtil; 
+import com.fssa.healthyhair.util.ConnectionUtil;
 
 public class OrderDAO {
- 
+
 	public boolean create(Order order) throws DAOException {
 		final String QUERY = "INSERT INTO orders (order_id, product_id, quantity, user_id ,address) VALUES (?, ?, ?, ?,?)";
 
-		try (PreparedStatement pmt = ConnectionUtil.getConnection().prepareStatement(QUERY)) {
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement pmt = connection.prepareStatement(QUERY)) {
 			pmt.setInt(1, order.getOrderId());
 			pmt.setInt(2, order.getOrderedProduct().getProductId());
 			pmt.setInt(3, order.getQuantity());
 			pmt.setInt(4, order.getOrderedUser().getUserId());
 			pmt.setString(5, order.getAddress());
 
-		 	int rows = pmt.executeUpdate();
+			int rows = pmt.executeUpdate();
 			return rows > 0;
 		} catch (SQLException e) {
 			throw new DAOException(e);
@@ -34,13 +36,14 @@ public class OrderDAO {
 	public List<Order> view() throws DAOException {
 		List<Order> orders = new ArrayList<>();
 
-		final String query = "SELECT user.name, user.email, user.phonenumber, "
+		final String QUERY = "SELECT user.name, user.email, user.phonenumber, "
 				+ "product.product_name, product.cost, product.product_image, product.product_detail,product.category "
 				+ "orders.quantity, orders.address, orders.order_id " + "FROM user "
 				+ "INNER JOIN orders ON user.user_id = orders.user_id "
 				+ "INNER JOIN product ON orders.product_id = product.product_id";
 
-		try (PreparedStatement pst = ConnectionUtil.getConnection().prepareStatement(query);
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement pst = connection.prepareStatement(QUERY);
 				ResultSet rs = pst.executeQuery()) {
 			while (rs.next()) {
 				String username = rs.getString("name");
@@ -79,16 +82,18 @@ public class OrderDAO {
 
 		return orders;
 	}
-	public static boolean delete(int orderId) throws DAOException {
-        //Start a try block with a prepared statement for deleting a product
-		try (PreparedStatement stmt = ConnectionUtil.getConnection()
-				.prepareStatement("DELETE from orders WHERE order_id=?")) {
 
-			stmt.setInt(1, orderId);//Set the product ID in the prepared statement for deletion
+	public static boolean delete(int orderId) throws DAOException {
+		final String QUERY = "DELETE from orders WHERE order_id=?";
+		// Start a try block with a prepared statement for deleting a product
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement stmt = connection.prepareStatement(QUERY)) {
+
+			stmt.setInt(1, orderId);// Set the product ID in the prepared statement for deletion
 
 			int rows = stmt.executeUpdate();
-			
-			return rows > 0;//Return a boolean indicating whether the deletion was successful
+
+			return rows > 0;// Return a boolean indicating whether the deletion was successful
 
 		} catch (SQLException e) {
 			throw new DAOException("Error in cancelling order", e);

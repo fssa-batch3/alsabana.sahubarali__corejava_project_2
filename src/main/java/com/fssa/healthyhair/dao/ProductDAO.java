@@ -40,7 +40,7 @@ public class ProductDAO {
 		}
 	}
 
-	public List<Product> getAllProduct() throws DAOException {
+	public List<Product> getAllProducts() throws DAOException {
 		// Create an empty list to store products
 		List<Product> product1 = new ArrayList<>();
 
@@ -61,7 +61,7 @@ public class ProductDAO {
 
 			}
 			// Return the list of products
-			return product1;
+			return product1; 
 
 		} catch (SQLException e) {
 			throw new DAOException("Error in getting All Product", e);

@@ -1,6 +1,5 @@
 package com.fssa.healthyhair.service;
 
-
 import java.util.List;
 
 import com.fssa.healthyhair.dao.ProductDAO;
@@ -14,12 +13,12 @@ public class ProductService {
 	/*
 	 * Declare the method to create a new product and handle exceptions
 	 */
-/**
- * 
- * @param product
- * @return
- * @throws ServiceException
- */
+	/**
+	 * 
+	 * @param product
+	 * @return
+	 * @throws ServiceException
+	 */
 	public boolean createProduct(Product product) throws ServiceException {
 		ProductDAO productDAO = new ProductDAO();// Create an instance of ProductDAO
 		try {
@@ -29,7 +28,7 @@ public class ProductService {
 				return true;
 			} else {
 				System.err.println("Creating failed");
-				return false; 
+				return false;
 			}
 			// Catch exceptions related to invalid products or DAO issues and throw a
 			// ServiceException
@@ -41,17 +40,18 @@ public class ProductService {
 
 	}
 
-	
 	/*
 	 * Define the method to retrieve all products and handle exceptions
 	 */
-	public List<Product> getAllProduct(Product product) throws ServiceException {
+	public static List<Product> getAllProduct() throws ServiceException {
 
 		ProductDAO productDAO = new ProductDAO();// Create an instance of ProductDAO
 		try {
-			ProductValidator.validateProduct(product);// Validate the product using ProductValidator
 
-			return productDAO.getAllProduct(); // Retrieve all products from the DAO and return the list
+			List<Product> products = productDAO.getAllProducts();
+			ProductValidator.validateGetAllProducts(products);
+
+			return products;
 
 		} catch (DAOException | InvalidProductException e) {
 
@@ -59,13 +59,14 @@ public class ProductService {
 		}
 
 	}
+
 	public boolean updateProduct(Product product) throws ServiceException {
 		ProductDAO productDAO = new ProductDAO();
 		try {
 			ProductValidator.validateProduct(product);// Validate the product using ProductValidator
 			// Check if the product update in the DAO was successful and provide feedback
 			if (productDAO.update(product)) {
-				
+
 				return true;
 			} else {
 				System.err.println("Update failed");
@@ -100,5 +101,7 @@ public class ProductService {
 															// ServiceException
 		}
 	}
+
+	
 
 }
