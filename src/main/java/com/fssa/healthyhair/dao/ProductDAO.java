@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.fssa.healthyhair.dao.exception.DAOException;
 import com.fssa.healthyhair.model.Product;
+import com.fssa.healthyhair.model.User;
 import com.fssa.healthyhair.util.ConnectionUtil;
 
 public class ProductDAO {
@@ -17,26 +18,27 @@ public class ProductDAO {
 	 */
 	public boolean create(Product product) throws DAOException {
 		// the SQL query for inserting a new product
-		final String QUERY = "INSERT INTO product (product_name, cost, product_image, product_detail, category) VALUES (?, ?, ?, ?, ?)";
-		
+		final String QUERY = "INSERT INTO product (product_name, cost, product_image, product_detail, category,user_id) VALUES (?, ?, ?, ?, ?,?)";
+
 		// Start a try block with a prepared statement for the insert query
 		try (Connection connection = ConnectionUtil.getConnection();
-				
+
 				PreparedStatement pmt = connection.prepareStatement(QUERY)) {
-			
+
 			// Set the product attributes in the prepared statement
-			
+
 			pmt.setString(1, product.getProductName());
 			pmt.setInt(2, product.getCost());
 			pmt.setString(3, product.getProductImg());
 			pmt.setString(4, product.getProductDetail());
 			pmt.setString(5, product.getCategory());
+			pmt.setInt(6, product.getCreatedUser().getUserId());
 			// Execute the update and get the number of rows affected
 			int rowsAffected = pmt.executeUpdate();
 			// Return a boolean indicating whether the insertion was successful
 			return rowsAffected > 0;
 		} catch (SQLException e) {
-			throw new DAOException("Error in Creating a Product");
+			throw new DAOException("Error in Creating a Product", e);
 		}
 	}
 
@@ -44,7 +46,7 @@ public class ProductDAO {
 		// Create an empty list to store products
 		List<Product> product1 = new ArrayList<>();
 
-		final String QUERY = "SELECT product_id, product_name,cost, product_image,product_detail,category FROM product";
+		final String QUERY = "SELECT product_id, product_name,cost, product_image,product_detail,category,user_id FROM product";
 		// Start a try block with a prepared statement for selecting all products
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement pmt = connection.prepareStatement(QUERY);
@@ -57,11 +59,16 @@ public class ProductDAO {
 				String productImage = rs.getString("product_image");
 				String productDetail = rs.getString("product_detail");
 				String category = rs.getString("category");
-				product1.add(new Product(productId, productName, cost, productImage, productDetail, category));
+
+				int userId = rs.getInt("user_id");
+				User user = new User();
+				user.setUserId(userId);
+
+				product1.add(new Product(productName, cost, productImage, productDetail, category, productId, user));
 
 			}
 			// Return the list of products
-			return product1; 
+			return product1;
 
 		} catch (SQLException e) {
 			throw new DAOException("Error in getting All Product", e);
@@ -69,14 +76,14 @@ public class ProductDAO {
 
 	}
 
-	public Product findProductById(String productId) throws DAOException {
+	public static Product findProductById(int productId) throws DAOException {
 		final String SELECTQUERY = "SELECT * FROM product WHERE product_id = ?";
 
 		Product product = new Product();
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement pmt = connection.prepareStatement(SELECTQUERY)) {
 
-			pmt.setString(1, productId);
+			pmt.setInt(1, productId);
 
 			try (ResultSet rs = pmt.executeQuery()) {
 				if (rs.next()) {
@@ -107,6 +114,7 @@ public class ProductDAO {
 			stmt.setString(3, product.getProductImg());
 			stmt.setString(4, product.getProductDetail());
 			stmt.setString(5, product.getCategory());
+
 			stmt.setInt(6, product.getProductId());
 			// Execute the update and get the number of rows affected
 			int rows = stmt.executeUpdate();

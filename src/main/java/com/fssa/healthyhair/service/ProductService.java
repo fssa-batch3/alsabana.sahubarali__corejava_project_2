@@ -40,8 +40,11 @@ public class ProductService {
 
 	}
 
-	/*
+	/**
 	 * Define the method to retrieve all products and handle exceptions
+	 * 
+	 * @return
+	 * @throws ServiceException
 	 */
 	public static List<Product> getAllProduct() throws ServiceException {
 
@@ -88,12 +91,7 @@ public class ProductService {
 		ProductDAO productDAO = new ProductDAO();
 		try {
 			// Check if the product deletion in the DAO was successful and provide feedback
-			if (productDAO.delete(productId)) {
-				return true;
-			} else {
-				System.err.println("Deletion failed for product with ID " + productId + ".");
-				return false;
-			}
+			return productDAO.delete(productId);
 
 		} catch (DAOException e) {
 
@@ -102,6 +100,19 @@ public class ProductService {
 		}
 	}
 
+	
+	public static Product findProductById(int productId) throws ServiceException {
+		Product products;
+		try {
+			// Call the DAO to retrieve the product by ID.
+			products = ProductDAO.findProductById(productId);
+
+		} catch (DAOException e) {
+			// Handle any exceptions or rethrow them as ServiceException if necessary.
+			throw new ServiceException("Failed to retrieve product by ID", e);
+		}
+		return products;
+	}
 	
 
 }

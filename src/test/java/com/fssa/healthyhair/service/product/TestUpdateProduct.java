@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import com.fssa.healthyhair.dao.ProductDAO;
 import com.fssa.healthyhair.dao.exception.DAOException;
 import com.fssa.healthyhair.model.Product;
+import com.fssa.healthyhair.model.User;
 import com.fssa.healthyhair.service.ProductService;
 
 class TestUpdateProduct {
@@ -16,16 +17,26 @@ class TestUpdateProduct {
 
 	void updateProductSuccess() {
 		ProductDAO productDAO = new ProductDAO();
-		Product product1 = new Product(37, "Hair Serum", 299,
-				"https://truhairandskin.com/cdn/shop/products/p2_2_be881497-52ff-4fbd-b688-cc89b932deb7.webp?v=1684230007&width=493",
-				"A power-packed, leave in scalp serum strengthens hair roots and promotes fast and healthy hair growth.\r\n"
-						+ "A vital scalp treatment that helps remove dead skin cells, product build up and give roots the chance to thrive, control hyper production of scalp serum, tackle itchiness and flakiness.",
-				"ayurvedic");
+String productName = "Ayurvedashampoo";
+		
+		int cost = 3200;
+		
+		String imageURL = "https://www.gkhair.co.in/cdn/shop/files/Balancing-banner_023150bb-42a3-4452-bbe8-aa23828dfdd1_1600x.png?v=1673589283";
+		
+		String detail = "A power-packed, leave in scalp serum strengthens hair roots and promotes fast and healthy hair growth A vital scalp treatment that helps remove dead skin cells, product build up and give roots the chance to thrive, control hyper production of scalp serum, tackle itchiness and flakiness.";
+		
+		String category = "samples";
+		
+		
+		
+		Product product1 = new Product(43,productName,cost,imageURL,detail,category);
  
 		try {
 			assertTrue(productDAO.update(product1));
 		} catch (DAOException e) {
+		
 			fail();
+			e.printStackTrace();
 		}  
 
 	}
