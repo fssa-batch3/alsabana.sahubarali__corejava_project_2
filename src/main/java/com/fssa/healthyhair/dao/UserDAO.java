@@ -81,7 +81,7 @@ public class UserDAO {
 
 	}
 
-	public void update(User user) throws DAOException {
+	public boolean update(User user) throws DAOException {
 		final String SELECTQUERY = "UPDATE user SET  password=?,name=?,phonenumber=?,email=?,address=? WHERE user_id=?";
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement stmt = connection.prepareStatement(SELECTQUERY)) {
@@ -98,6 +98,7 @@ public class UserDAO {
 		} catch (SQLException e) {
 			throw new DAOException("Error in to update User", e);
 		}
+		return false;
 	}
 
 	public List<User> allUser() throws DAOException {
@@ -128,18 +129,19 @@ public class UserDAO {
 		}
 	}
 
-	public void deleteUser(String email) throws DAOException {
+	public boolean deleteUser(int userId) throws DAOException {
 		final String SELECTQUERY = "DELETE from user WHERE user_id=?";
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement stmt = connection.prepareStatement(SELECTQUERY)) {
 
-			stmt.setString(1, email);
+			stmt.setInt(1, userId);
 
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
 			throw new DAOException("Error in to delete user", e);
 		}
+		return false;
 
 	}
 

@@ -61,16 +61,6 @@ class TestRegisterFeature {
 
 	}
 
-	@AfterAll
-	static void deleteByEmail() {
-		UserDAO dao = new UserDAO();
-
-		try {
-			dao.deleteUser("sabin321@gmail.com");
-		} catch (DAOException e) {
-			e.printStackTrace();
-		}
-
-	}
+	
 
 }
