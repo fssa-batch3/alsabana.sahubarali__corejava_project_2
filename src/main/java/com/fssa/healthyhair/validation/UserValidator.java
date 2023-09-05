@@ -1,5 +1,6 @@
 package com.fssa.healthyhair.validation;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,7 +23,12 @@ public class UserValidator {
 		else
 			throw new InvalidUserException("Invalid User Id");
 	}
+	public static void validateGetAllUser(List<User> user) throws InvalidUserException {
 
+		if (user == null || user.isEmpty())
+			throw new InvalidUserException("There is no product");
+
+	}
 	public static boolean validateName(String name) throws InvalidUserException {
 		boolean match = false;
 

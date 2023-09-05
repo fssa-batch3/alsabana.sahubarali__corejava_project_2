@@ -39,6 +39,14 @@ public class User implements Serializable{
 		this.number = number;
 	}
 
+	public User(String email, String username, String number, String address) {
+		super();
+		this.email = email;
+		this.username = username;
+		this.number = number;
+		this.address = address;
+	}
+
 	public User(String email, String username, String password, String type, String number, int userId) {
 		super();
 		this.email = email;

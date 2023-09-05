@@ -1,5 +1,7 @@
 package com.fssa.healthyhair.service;
 
+import java.util.List;
+
 import com.fssa.healthyhair.dao.ProductDAO;
 import com.fssa.healthyhair.dao.UserDAO;
 import com.fssa.healthyhair.dao.exception.DAOException;
@@ -41,8 +43,8 @@ public class UserService {
 		int id = 0;
 		try {
 			if (UserValidator.validateEmail(email) && UserValidator.validatePassword(password)) {
-				UserDAO userDAO = new UserDAO();
-				User user = userDAO.findUserByEmail(email);
+
+				User user = UserDAO.findUserByEmail(email);
 				if (user.getPassword().equals(password)) {
 					id = user.getUserId();
 				} else {
@@ -92,5 +94,34 @@ public class UserService {
 			throw new ServiceException(e.getMessage(), e);// Catch exceptions related to DAO issues and throw a
 															// ServiceException
 		}
+
 	}
+
+	public User findingUserByEmail(String email) throws ServiceException {
+		try {
+			// Call the DAO method to retrieve the user by email
+			return UserDAO.findUserByEmail(email);
+		} catch (DAOException e) {
+			// You can handle or throw the exception as needed
+			throw new ServiceException("Error while finding user by email", e);
+		}
+	}
+
+	public static List<User> getAllUser() throws ServiceException {
+
+		UserDAO userDAO = new UserDAO();// Create an instance of ProductDAO
+		try {
+
+			List<User> user = userDAO.allUser();
+			UserValidator.validateGetAllUser(user);
+
+			return user;
+
+		} catch (DAOException | InvalidUserException e) {
+
+			throw new ServiceException(e);
+		}
+
+	}
+
 }

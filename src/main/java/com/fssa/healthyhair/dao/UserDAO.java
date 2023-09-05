@@ -52,7 +52,7 @@ public class UserDAO {
 		}
 	}
 
-	public User findUserByEmail(String email) throws DAOException {
+	public static User findUserByEmail(String email) throws DAOException {
 		final String SELECTQUERY = "SELECT * FROM user WHERE email = ?";
 
 		User user = new User();
