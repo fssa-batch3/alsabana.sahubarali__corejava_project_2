@@ -2,15 +2,12 @@ package com.fssa.healthyhair.service;
 
 import java.util.List;
 
-import com.fssa.healthyhair.dao.ProductDAO;
 import com.fssa.healthyhair.dao.UserDAO;
 import com.fssa.healthyhair.dao.exception.DAOException;
 import com.fssa.healthyhair.model.Product;
 import com.fssa.healthyhair.model.User;
 import com.fssa.healthyhair.service.exception.ServiceException;
-import com.fssa.healthyhair.validation.ProductValidator;
 import com.fssa.healthyhair.validation.UserValidator;
-import com.fssa.healthyhair.validation.exception.InvalidProductException;
 import com.fssa.healthyhair.validation.exception.InvalidUserException;
 
 public class UserService {
@@ -34,7 +31,7 @@ public class UserService {
 
 		} catch (DAOException | InvalidUserException e) {
 
-			throw new ServiceException(e);
+			throw new ServiceException(e.getMessage());
 		}
 
 	}
@@ -44,7 +41,7 @@ public class UserService {
 		try {
 			if (UserValidator.validateEmail(email) && UserValidator.validatePassword(password)) {
 
-				User user = UserDAO.findUserByEmail(email);
+				User user = new UserDAO().findUserByEmail(email);
 				if (user.getPassword().equals(password)) {
 					id = user.getUserId();
 				} else {
@@ -55,7 +52,7 @@ public class UserService {
 		} catch (InvalidUserException | DAOException e) {
 
 			System.err.println(e.getMessage());
-			throw new ServiceException(e);
+			throw new ServiceException(e.getMessage());
 		}
 		return id;
 	}
@@ -63,20 +60,17 @@ public class UserService {
 	public boolean updateUser(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
 		try {
-			UserValidator.validateUser(user);// Validate the user using UserValidator
+			UserValidator.validateName(user.getUsername());
+			UserValidator.validateMobileNo(user.getNumber());
+			// Validate the user using UserValidator
 			// Check if the user update in the DAO was successful and provide feedback
-			if (userDAO.update(user)) {
-				return true;
-			} else {
-				System.err.println("Update failed");
-				return false;
-			}
+			return userDAO.update(user);
 
 			// Catch exceptions related to invalid user or DAO issues and throw a
 			// ServiceException
 		} catch (InvalidUserException | DAOException e) {
 
-			throw new ServiceException(e);
+			throw new ServiceException(e.getMessage());
 		}
 	}
 
@@ -100,10 +94,16 @@ public class UserService {
 	public User findingUserByEmail(String email) throws ServiceException {
 		try {
 			// Call the DAO method to retrieve the user by email
-			return UserDAO.findUserByEmail(email);
+
+			User user = new UserDAO().findUserByEmail(email);
+
+			if (user == null)
+				throw new ServiceException("user obj is null");
+
+			return user;
 		} catch (DAOException e) {
 			// You can handle or throw the exception as needed
-			throw new ServiceException("Error while finding user by email", e);
+			throw new ServiceException("Error dao in service", e);
 		}
 	}
 
@@ -119,9 +119,10 @@ public class UserService {
 
 		} catch (DAOException | InvalidUserException e) {
 
-			throw new ServiceException(e);
+			throw new ServiceException(e.getMessage());
 		}
 
 	}
-
+	
+	
 }

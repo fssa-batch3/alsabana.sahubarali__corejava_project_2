@@ -9,7 +9,8 @@ USE alsabana_sahubarali_corejava_project;
  type varchar(10)
 );
 
-  select*from user;	
+  select*from user;
+  describe user;
   
   
 CREATE TABLE IF NOT EXISTS product(

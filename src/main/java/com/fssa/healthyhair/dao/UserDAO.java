@@ -1,7 +1,6 @@
 package com.fssa.healthyhair.dao;
 
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -52,10 +51,11 @@ public class UserDAO {
 		}
 	}
 
-	public static User findUserByEmail(String email) throws DAOException {
+	public User findUserByEmail(String email) throws DAOException {
 		final String SELECTQUERY = "SELECT * FROM user WHERE email = ?";
 
 		User user = new User();
+		
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(SELECTQUERY)) {
 
@@ -63,6 +63,7 @@ public class UserDAO {
 
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
+					
 
 					user.setEmail(rs.getString("email"));
 					user.setUserId(rs.getInt("user_id"));
@@ -71,34 +72,36 @@ public class UserDAO {
 					user.setNumber(rs.getString("phonenumber"));
 					user.setType(rs.getString("type"));
 
+					
 				}
 			}
 
 		} catch (SQLException e) {
-			throw new DAOException(e);
+			throw new DAOException("error in dao", e);
 		}
 		return user;
 
 	}
 
+
+
 	public boolean update(User user) throws DAOException {
-		final String SELECTQUERY = "UPDATE user SET  password=?,name=?,phonenumber=?,email=?,address=? WHERE user_id=?";
+		final String SELECTQUERY = "UPDATE user SET  name=?,phonenumber=?,email=? WHERE user_id=?";
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement stmt = connection.prepareStatement(SELECTQUERY)) {
 
-			stmt.setString(1, user.getPassword());
-			stmt.setString(2, user.getUsername());
-			stmt.setString(3, user.getNumber());
-			stmt.setString(4, user.getEmail());
-			stmt.setString(5, user.getAddress());
-			stmt.setInt(6, user.getUserId());
+			stmt.setString(1, user.getUsername());
+			stmt.setString(2, user.getNumber());
+			stmt.setString(3, user.getEmail());
+			stmt.setInt(4, user.getUserId());
 
-			stmt.executeUpdate();
+			int row = stmt.executeUpdate();
+
+			return row > 0;
 
 		} catch (SQLException e) {
 			throw new DAOException("Error in to update User", e);
 		}
-		return false;
 	}
 
 	public List<User> allUser() throws DAOException {

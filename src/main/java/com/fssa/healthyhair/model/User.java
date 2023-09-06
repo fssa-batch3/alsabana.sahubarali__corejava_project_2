@@ -2,10 +2,10 @@ package com.fssa.healthyhair.model;
 
 import java.io.Serializable;
 
-public class User implements Serializable{
-	
+public class User implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private String email;
 	private String username;
 	private String password;
@@ -19,7 +19,7 @@ public class User implements Serializable{
 	}
 
 	public User() {
-		super();
+		
 	}
 
 	public void setUserId(int userId) {
@@ -39,12 +39,13 @@ public class User implements Serializable{
 		this.number = number;
 	}
 
-	public User(String email, String username, String number, String address) {
+	public User(String email, String username, String number, int userId) {
 		super();
 		this.email = email;
 		this.username = username;
 		this.number = number;
-		this.address = address;
+		this.userId = userId;
+
 	}
 
 	public User(String email, String username, String password, String type, String number, int userId) {

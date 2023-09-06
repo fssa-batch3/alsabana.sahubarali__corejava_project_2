@@ -23,7 +23,7 @@ public class ProductValidator {
 					&& validateProductDetail(product.getProductDetail())
 					&& validateProductCategory(product.getCategory());
 		} catch (InvalidProductInputException e) {
-			throw new InvalidProductException("Product inputs detail are not valid");
+			throw new InvalidProductException(e.getMessage());
 		}
 	}
 
@@ -93,7 +93,7 @@ public class ProductValidator {
 		} else {
 			// Throw exception with a descriptive error message
 			throw new InvalidProductInputException(
-					"Invalid product detail length. The product detail should be between " + minLength + " and "
+					"Invalid product detail length. The product detail should be between " + minLength + " to "
 							+ maxLength + " characters.");
 		}
 	}
