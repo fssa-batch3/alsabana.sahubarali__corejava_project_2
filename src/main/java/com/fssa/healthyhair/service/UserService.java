@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.fssa.healthyhair.dao.UserDAO;
 import com.fssa.healthyhair.dao.exception.DAOException;
-import com.fssa.healthyhair.model.Product;
 import com.fssa.healthyhair.model.User;
 import com.fssa.healthyhair.service.exception.ServiceException;
 import com.fssa.healthyhair.validation.UserValidator;
@@ -45,7 +44,7 @@ public class UserService {
 				if (user.getPassword().equals(password)) {
 					id = user.getUserId();
 				} else {
-					throw new ServiceException("invalid Password");
+					throw new ServiceException("Invalid Password");
 				}
 			}
 
@@ -123,6 +122,5 @@ public class UserService {
 		}
 
 	}
-	
-	
+
 }

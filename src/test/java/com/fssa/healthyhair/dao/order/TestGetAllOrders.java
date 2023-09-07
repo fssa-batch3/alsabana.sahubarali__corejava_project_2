@@ -19,13 +19,11 @@ import com.fssa.healthyhair.service.exception.ServiceException;
 class TestGetAllOrders {
 	@Test
 	void testOrderSuccess() {
-	    OrderService orderService = new OrderService(); 
-
 	    try {
 	        User user = new User();
 	        user.setUserId(3);
 
-	        Product product1 = new Product(1, "Ayurvedashampoo", 3700,
+	        Product product1 = new Product(64, "Ayurvedashampoo", 3700,
 	                "https://www.gkhair.co.in/cdn/shop/files/Balancing-banner_023150bb-42a3-4452-bbe8-aa23828dfdd1_1600x.png?v=1673589283",
 	                "A power-packed, leave in scalp serum strengthens hair roots and promotes fast and healthy hair growth.\r\n"
 	                        + "A vital scalp treatment that helps remove dead skin cells, product build up and give roots the chance to thrive, control hyper production of scalp serum, tackle itchiness and flakiness.",
@@ -37,7 +35,7 @@ class TestGetAllOrders {
 	        order.setAddress("Chennai");
 	        order.setOrderedProduct(product1);
 
-	        assertTrue(orderService.createOrder(order));
+	        assertTrue(OrderService.createOrder(order));
 	        System.out.println("Successfully your order created");
 	    } catch (ServiceException e) {
 	        fail();
@@ -50,7 +48,7 @@ class TestGetAllOrders {
 		OrderDAO orderDAO = new OrderDAO();
 		OrderService service = new OrderService();
 		try {
-			assertTrue(service.createOrder(new Order()));
+			assertTrue(OrderService.createOrder(new Order()));
 			List<Order> orderlist = orderDAO.view();
 			assertNotNull(orderlist);
  

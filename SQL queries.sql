@@ -1,5 +1,6 @@
 
 USE alsabana_sahubarali_corejava_project;
+
  CREATE TABLE IF NOT EXISTS user(
  user_id INT AUTO_INCREMENT PRIMARY KEY,
  name varchar(50),
@@ -10,9 +11,8 @@ USE alsabana_sahubarali_corejava_project;
 );
 
   select*from user;
-  describe user;
   
-  
+
 CREATE TABLE IF NOT EXISTS product(
  product_id INT AUTO_INCREMENT PRIMARY KEY,
  
@@ -22,9 +22,10 @@ CREATE TABLE IF NOT EXISTS product(
  product_detail varchar(500),
  category varchar(10)
   );
-  
-describe product;  
+
 select* from product;
+
+
 ALTER TABLE product
 ADD CONSTRAINT fk_user_product_user_id
 FOREIGN KEY (user_id)

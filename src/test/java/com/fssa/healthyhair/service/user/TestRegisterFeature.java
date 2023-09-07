@@ -2,16 +2,13 @@ package com.fssa.healthyhair.service.user;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
-import com.fssa.healthyhair.dao.UserDAO;
-import com.fssa.healthyhair.dao.exception.DAOException;
 import com.fssa.healthyhair.model.User;
 import com.fssa.healthyhair.service.UserService;
 import com.fssa.healthyhair.service.exception.ServiceException;
-
 
 class TestRegisterFeature {
 
@@ -26,10 +23,10 @@ class TestRegisterFeature {
 			System.out.println("Successfully registered " + user1.getUsername());
 		} catch (ServiceException e) {
 			e.printStackTrace();
-		
+			fail();
 
 		}
- 
+
 	}
 
 	@Test
@@ -42,6 +39,7 @@ class TestRegisterFeature {
 
 			assertFalse(userService.registerUser(invalidUser));
 			System.err.println("please fill your input");
+			fail();
 		} catch (ServiceException e) {
 			System.err.println(e.getMessage());
 		}
@@ -54,13 +52,12 @@ class TestRegisterFeature {
 		try {
 			assertFalse(userservice.registerUser(user1));
 			System.err.println("Can not be null");
+			fail();
 		} catch (ServiceException e) {
 			System.err.println(e.getMessage());
 
 		}
 
 	}
-
-	
 
 }

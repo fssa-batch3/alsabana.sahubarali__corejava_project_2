@@ -31,9 +31,9 @@ class TestCreateFeature {
 		String detail = "A power-packed, leave in scalp serum strengthens hair roots and promotes fast and healthy hair growth A vital scalp treatment that helps remove dead skin cells, product build up and give roots the chance to thrive, control hyper production of scalp serum, tackle itchiness and flakiness.";
 		
 		String category = "ayurvedic";
-		
+		 
 		User user = new User();
-		user.setUserId(19);
+		user.setUserId(24);
 		
 		Product product1 = new Product(productName,cost,imageURL,detail,category,user);
 
@@ -43,10 +43,9 @@ class TestCreateFeature {
 			System.out.println("Your product successfully created");
 		} catch (ServiceException e) {
 			// Catch and print any ServiceException that occurs
-
 			e.printStackTrace();
 			fail();
-		}
+		} 
 
 	}
 

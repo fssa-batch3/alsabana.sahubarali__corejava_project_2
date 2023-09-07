@@ -14,19 +14,18 @@ import com.fssa.healthyhair.model.User;
 import com.fssa.healthyhair.service.UserService;
 import com.fssa.healthyhair.service.exception.ServiceException;
 
- class TestGetAllUsers {
-	@Test 
+class TestGetAllUsers {
+	@Test
 	void ValidGetSuccess() {
-		UserDAO userDAO = new UserDAO();
-	     UserService service = new UserService();
-		try {
-			service.registerUser(new User("mambumigu@gmail.com", "gopikanan", "passWord@786", "buyer", "8018059760"));
-			List<User> list = userDAO.allUser();
-			assertNotNull(list);
- 
-			
 
-		} catch (DAOException | ServiceException e) {
+		try {
+
+			List<User> list = UserService.getAllUser();
+			assertNotNull(list);
+
+			System.err.println(list.toString());
+
+		} catch (ServiceException e) {
 			e.printStackTrace();
 			fail();
 		}

@@ -10,14 +10,16 @@ import com.fssa.healthyhair.validation.ProductValidator;
 import com.fssa.healthyhair.validation.exception.InvalidProductException;
 
 public class ProductService {
-	/*
-	 * Declare the method to create a new product and handle exceptions
-	 */
+
 	/**
-	 * 
-	 * @param product
-	 * @return
-	 * @throws ServiceException
+	 * Creates a new product and inserts it into the database, while handling
+	 * validation and exceptions.
+	 *
+	 * @param product The Product object containing product information to be
+	 *                created.
+	 * @return true if the product creation is successful, false otherwise.
+	 * @throws ServiceException If there's an error during the product creation
+	 *                          process.
 	 */
 	public boolean createProduct(Product product) throws ServiceException {
 		ProductDAO productDAO = new ProductDAO();// Create an instance of ProductDAO
@@ -41,10 +43,12 @@ public class ProductService {
 	}
 
 	/**
-	 * Define the method to retrieve all products and handle exceptions
-	 * 
-	 * @return
-	 * @throws ServiceException
+	 * Retrieves a list of all products from the database, handling validation and
+	 * exceptions.
+	 *
+	 * @return A list of Product objects representing all products in the database.
+	 * @throws ServiceException If there's an error while retrieving the product
+	 *                          list.
 	 */
 	public static List<Product> getAllProduct() throws ServiceException {
 
@@ -63,6 +67,15 @@ public class ProductService {
 
 	}
 
+	/**
+	 * Updates product information in the database, handling validation and
+	 * exceptions.
+	 *
+	 * @param product The Product object containing updated product information.
+	 * @return true if the update is successful, false otherwise.
+	 * @throws ServiceException If there's an error during the product update
+	 *                          process.
+	 */
 	public boolean updateProduct(Product product) throws ServiceException {
 		ProductDAO productDAO = new ProductDAO();
 		try {
@@ -84,8 +97,13 @@ public class ProductService {
 		}
 	}
 
-	/*
-	 * Define the method to delete a product by ID and handle exceptions
+	/**
+	 * Deletes a product from the database based on its ID, handling exceptions.
+	 *
+	 * @param productId The ID of the product to be deleted.
+	 * @return true if the product is successfully deleted, false otherwise.
+	 * @throws ServiceException If there's an error during the product deletion
+	 *                          process.
 	 */
 	public boolean deleteProduct(int productId) throws ServiceException {
 		ProductDAO productDAO = new ProductDAO();
@@ -100,7 +118,13 @@ public class ProductService {
 		}
 	}
 
-	
+	/**
+	 * Retrieves a product by its ID from the database, handling exceptions.
+	 *
+	 * @param productId The ID of the product to retrieve.
+	 * @return The Product object if found, or null if not found.
+	 * @throws ServiceException If there's an error during the retrieval process.
+	 */
 	public static Product findProductById(int productId) throws ServiceException {
 		Product products;
 		try {
@@ -113,6 +137,5 @@ public class ProductService {
 		}
 		return products;
 	}
-	
 
 }

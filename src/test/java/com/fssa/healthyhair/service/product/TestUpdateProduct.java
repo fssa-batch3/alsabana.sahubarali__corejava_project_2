@@ -17,27 +17,25 @@ class TestUpdateProduct {
 
 	void updateProductSuccess() {
 		ProductDAO productDAO = new ProductDAO();
-String productName = "Ayurvedashampoo";
-		
+		String productName = "Ayurvedic conditioner";
+
 		int cost = 3200;
-		
+
 		String imageURL = "https://www.gkhair.co.in/cdn/shop/files/Balancing-banner_023150bb-42a3-4452-bbe8-aa23828dfdd1_1600x.png?v=1673589283";
-		
+
 		String detail = "A power-packed, leave in scalp serum strengthens hair roots and promotes fast and healthy hair growth A vital scalp treatment that helps remove dead skin cells, product build up and give roots the chance to thrive, control hyper production of scalp serum, tackle itchiness and flakiness.";
-		
+
 		String category = "samples";
-		
-		
-		
-		Product product1 = new Product(43,productName,cost,imageURL,detail,category);
- 
+
+		Product product1 = new Product(72, productName, cost, imageURL, detail, category);
+
 		try {
 			assertTrue(productDAO.update(product1));
 		} catch (DAOException e) {
-		
+
 			fail();
 			e.printStackTrace();
-		}  
+		}
 
 	}
 
@@ -49,7 +47,7 @@ String productName = "Ayurvedashampoo";
 
 		try {
 			assertFalse(productDAO.update(product1));
-	
+
 		} catch (DAOException e) {
 			System.err.println(e.getMessage());
 		}

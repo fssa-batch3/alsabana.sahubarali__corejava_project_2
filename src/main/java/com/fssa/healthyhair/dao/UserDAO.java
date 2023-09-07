@@ -13,6 +13,13 @@ import com.fssa.healthyhair.util.ConnectionUtil;
 
 public class UserDAO {
 
+	/**
+	 * Registers a new user in the database.
+	 *
+	 * @param user The user object containing user information to be registered.
+	 * @return true if the user registration is successful, false otherwise.
+	 * @throws DAOException If there's an error during the registration process.
+	 */
 	public boolean register(User user) throws DAOException {
 
 		String query = "INSERT INTO user (email,name,password,phonenumber,type) VALUES (?,?,?,?,?)";
@@ -35,6 +42,13 @@ public class UserDAO {
 		}
 	}
 
+	/**
+	 * Checks if an email address is already registered in the database.
+	 *
+	 * @param email The email address to check for registration.
+	 * @return true if the email is already registered, false otherwise.
+	 * @throws DAOException If there's an error while checking email existence.
+	 */
 	public boolean isEmailAlreadyRegistered(String email) throws DAOException {
 		final String SELECTQUERY = "SELECT email FROM user WHERE email = ?";
 
@@ -51,11 +65,18 @@ public class UserDAO {
 		}
 	}
 
+	/**
+	 * Finds a user by their email address in the database.
+	 *
+	 * @param email The email address of the user to retrieve.
+	 * @return The User object if found, or an empty User object if not found.
+	 * @throws DAOException If there's an error while querying the database.
+	 */
 	public User findUserByEmail(String email) throws DAOException {
 		final String SELECTQUERY = "SELECT * FROM user WHERE email = ?";
 
 		User user = new User();
-		
+
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(SELECTQUERY)) {
 
@@ -63,7 +84,6 @@ public class UserDAO {
 
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
-					
 
 					user.setEmail(rs.getString("email"));
 					user.setUserId(rs.getInt("user_id"));
@@ -72,7 +92,6 @@ public class UserDAO {
 					user.setNumber(rs.getString("phonenumber"));
 					user.setType(rs.getString("type"));
 
-					
 				}
 			}
 
@@ -83,8 +102,13 @@ public class UserDAO {
 
 	}
 
-
-
+	/**
+	 * Updates user information in the database.
+	 *
+	 * @param user The User object containing updated user information.
+	 * @return true if the update is successful, false otherwise.
+	 * @throws DAOException If there's an error during the update process.
+	 */
 	public boolean update(User user) throws DAOException {
 		final String SELECTQUERY = "UPDATE user SET  name=?,phonenumber=?,email=? WHERE user_id=?";
 		try (Connection connection = ConnectionUtil.getConnection();
@@ -104,6 +128,12 @@ public class UserDAO {
 		}
 	}
 
+	/**
+	 * Retrieves a list of all users from the database.
+	 *
+	 * @return A list of User objects representing all users in the database.
+	 * @throws DAOException If there's an error while retrieving the user list.
+	 */
 	public List<User> allUser() throws DAOException {
 		// Create an empty list to store user list
 		List<User> user1 = new ArrayList<>();
@@ -131,6 +161,14 @@ public class UserDAO {
 			throw new DAOException("Error in List user", e);
 		}
 	}
+
+	/**
+	 * Deletes a user from the database based on their user ID.
+	 *
+	 * @param userId The ID of the user to be deleted.
+	 * @return true if the user is successfully deleted, false otherwise.
+	 * @throws DAOException If there's an error during the deletion process.
+	 */
 
 	public boolean deleteUser(int userId) throws DAOException {
 		final String SELECTQUERY = "DELETE from user WHERE user_id=?";
