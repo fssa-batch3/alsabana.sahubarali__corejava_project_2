@@ -22,7 +22,7 @@ class TestCreateFeature {
 		// Create a Product object for testing
 
 		
-		String productName = "Ayurvedashampoo";
+		String productName = "Ayurvedic shampoo";
 		
 		int cost = 3200;
 		

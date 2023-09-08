@@ -27,7 +27,7 @@ class TestUpdateProduct {
 
 		String category = "samples";
 
-		Product product1 = new Product(72, productName, cost, imageURL, detail, category);
+		Product product1 = new Product(67, productName, cost, imageURL, detail, category);
 
 		try {
 			assertTrue(productDAO.update(product1));
