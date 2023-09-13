@@ -1,79 +1,57 @@
--- ----------------------------------------------------------------------------
--- MySQL Workbench Migration
--- Migrated Schemata: alsabana_sahubarali_corejava_project
--- Source Schemata: alsabana_sahubarali_corejava_project
--- Created: Fri Sep  8 09:54:34 2023
--- Workbench Version: 8.0.32
--- ----------------------------------------------------------------------------
 
-SET FOREIGN_KEY_CHECKS = 0;
+USE alsabana_sahubarali_corejava_project;
 
--- ----------------------------------------------------------------------------
--- Schema alsabana_sahubarali_corejava_project
--- ----------------------------------------------------------------------------
-DROP SCHEMA IF EXISTS `alsabana_sahubarali_corejava_project` ;
-CREATE SCHEMA IF NOT EXISTS `alsabana_sahubarali_corejava_project` ;
+ CREATE TABLE IF NOT EXISTS user(
+ user_id INT AUTO_INCREMENT PRIMARY KEY,
+ name varchar(50),
+ email varchar(50),
+ password varchar(50),
+ phonenumber varchar(10),
+ type varchar(10)
+);
 
--- ----------------------------------------------------------------------------
--- Table alsabana_sahubarali_corejava_project.orders
--- ----------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `alsabana_sahubarali_corejava_project`.`orders` (
-  `order_id` INT NOT NULL AUTO_INCREMENT,
-  `quantity` INT NULL DEFAULT NULL,
-  `user_id` INT NULL DEFAULT NULL,
-  `product_id` INT NULL DEFAULT NULL,
-  `address` VARCHAR(500) NULL DEFAULT NULL,
-  PRIMARY KEY (`order_id`),
-  INDEX `fk_user_user_id` (`user_id` ASC) VISIBLE,
-  INDEX `fk_product_product_id` (`product_id` ASC) VISIBLE,
-  CONSTRAINT `fk_product_product_id`
-    FOREIGN KEY (`product_id`)
-    REFERENCES `alsabana_sahubarali_corejava_project`.`product` (`product_id`),
-  CONSTRAINT `fk_product_productid`
-    FOREIGN KEY (`product_id`)
-    REFERENCES `alsabana_sahubarali_corejava_project`.`product` (`product_id`),
-  CONSTRAINT `fk_user_user_id`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `alsabana_sahubarali_corejava_project`.`user` (`user_id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 34
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+  select*from user;
+  
 
--- ----------------------------------------------------------------------------
--- Table alsabana_sahubarali_corejava_project.product
--- ----------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `alsabana_sahubarali_corejava_project`.`product` (
-  `product_id` INT NOT NULL AUTO_INCREMENT,
-  `product_name` VARCHAR(50) NULL DEFAULT NULL,
-  `cost` INT NULL DEFAULT NULL,
-  `product_image` VARCHAR(500) NULL DEFAULT NULL,
-  `product_detail` VARCHAR(500) NULL DEFAULT NULL,
-  `category` VARCHAR(100) NULL DEFAULT NULL,
-  `user_id` INT NULL DEFAULT NULL,
-  PRIMARY KEY (`product_id`),
-  INDEX `fk_user_product_user_id` (`user_id` ASC) VISIBLE,
-  CONSTRAINT `fk_user_product_user_id`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `alsabana_sahubarali_corejava_project`.`user` (`user_id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 78
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+CREATE TABLE IF NOT EXISTS product(
+ product_id INT AUTO_INCREMENT PRIMARY KEY,
+ 
+ product_name varchar(50),
+ cost int,
+ product_image varchar(500),
+ product_detail varchar(500),
+ category varchar(10)
+  );
 
--- ----------------------------------------------------------------------------
--- Table alsabana_sahubarali_corejava_project.user
--- ----------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `alsabana_sahubarali_corejava_project`.`user` (
-  `user_id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(50) NULL DEFAULT NULL,
-  `email` VARCHAR(50) NULL DEFAULT NULL,
-  `password` VARCHAR(50) NULL DEFAULT NULL,
-  `phonenumber` VARCHAR(10) NULL DEFAULT NULL,
-  `type` VARCHAR(10) NULL DEFAULT NULL,
-  PRIMARY KEY (`user_id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 43
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-SET FOREIGN_KEY_CHECKS = 1;
+select* from product;
+
+
+ALTER TABLE product
+ADD CONSTRAINT fk_user_product_user_id
+FOREIGN KEY (user_id)
+REFERENCES user(user_id);
+
+CREATE TABLE IF NOT EXISTS orders (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    quantity INT,
+    buyer_id INT ,
+    address varchar(200),
+    seller_id INT
+);
+ALTER TABLE orders
+ADD COLUMN product_id INT;
+
+ALTER TABLE orders
+ADD CONSTRAINT fk_product_product_id
+FOREIGN KEY (product_id)
+REFERENCES product(product_id);
+    
+ describe orders;
+select* from orders;
+
+ALTER TABLE orders
+ADD CONSTRAINT fk_user_buyer_id
+FOREIGN KEY (buyer_id)
+REFERENCES user(user_id);
+    
+drop table orders;

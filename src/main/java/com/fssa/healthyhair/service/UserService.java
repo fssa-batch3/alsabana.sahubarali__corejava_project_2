@@ -13,7 +13,7 @@ public class UserService {
 
 	public boolean registerUser(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
-
+ 
 		try {
 			UserValidator.validateUser(user);
 
@@ -84,25 +84,25 @@ public class UserService {
 
 		} catch (DAOException e) {
 
-			throw new ServiceException(e.getMessage(), e);// Catch exceptions related to DAO issues and throw a
+			throw new ServiceException(e.getMessage());// Catch exceptions related to DAO issues and throw a
 															// ServiceException
 		}
 
 	}
 
-	public User findingUserByEmail(String email) throws ServiceException {
+	public static User findingUserByEmail(String email) throws ServiceException {
 		try {
 			// Call the DAO method to retrieve the user by email
 
 			User user = new UserDAO().findUserByEmail(email);
 
 			if (user == null)
-				throw new ServiceException("user obj is null");
+				throw new ServiceException("user object is null");
 
 			return user;
 		} catch (DAOException e) {
 			// You can handle or throw the exception as needed
-			throw new ServiceException("Error dao in service", e);
+			throw new ServiceException(e.getMessage());
 		}
 	}
 

@@ -23,7 +23,7 @@ public class UserDAO {
 	public boolean register(User user) throws DAOException {
 
 		String query = "INSERT INTO user (email,name,password,phonenumber,type) VALUES (?,?,?,?,?)";
-
+ 
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement pmt = connection.prepareStatement(query)) {
 
@@ -96,7 +96,7 @@ public class UserDAO {
 			}
 
 		} catch (SQLException e) {
-			throw new DAOException("error in dao", e);
+			throw new DAOException("Finding user failed", e);
 		}
 		return user;
 

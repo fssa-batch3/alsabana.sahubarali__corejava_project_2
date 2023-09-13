@@ -24,7 +24,7 @@ public class OrderValidator {
 	public static boolean validateQuantity(int quantity) throws InvalidOrderException {
 		boolean check = false;
 		try {
-			if (quantity >= 0)
+			if (quantity > 0)
 				check = true;
 
 		} catch (Exception e) {
@@ -45,6 +45,15 @@ public class OrderValidator {
 	
 			
 
+	}
+	
+	public static boolean validateOrderId(int id) throws InvalidOrderException{
+		if(id>0) {
+			return true;
+		}else {
+			throw new InvalidOrderException("Order Id is invalid");
+		}
+		
 	}
 
 }

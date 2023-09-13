@@ -18,7 +18,7 @@ public class ConnectionUtil {
 //		dbUser = System.getenv("DB_USER");
 //		dbPassword = System.getenv("DB_PASSWORD");
 //		
-		dbUrl = "jdbc:mysql://localhost:3306/gopikannan_saravanan_corejava_project";
+		dbUrl = "jdbc:mysql://localhost:3306/alsabana_sahubarali_corejava_project";
 		dbUser = "root";
 		dbPassword = "123456";
 

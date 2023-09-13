@@ -30,6 +30,6 @@ class TestGetAllProduct {
 			fail();
 		}
 
-	}
+	} 
 
 }

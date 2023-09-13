@@ -12,11 +12,10 @@ import com.fssa.healthyhair.validation.exception.InvalidProductInputException;
 
 public class OrderService {
 	public static boolean createOrder(Order order) throws ServiceException {
-		OrderDAO orderDAO = new OrderDAO();
-
+		
 		try {
 			OrderValidator.validateOrder(order);
-			return orderDAO.create(order);
+			return OrderDAO.create(order);
 		} catch (InvalidProductInputException | InvalidOrderException | DAOException e) {
 			throw new ServiceException(e);
 		}
@@ -26,15 +25,14 @@ public class OrderService {
 	/*
 	 * Define the method to retrieve all orders and handle exceptions
 	 */
-	public List<Order> getAllOrder(Order order) throws ServiceException {
+	public List<Order> getAllOrder() throws ServiceException {
 
 		OrderDAO orderDAO = new OrderDAO();// Create an instance of OrderDAO
 		try {
-			OrderValidator.validateOrder(order);// Validate the order using ProductValidator
 
 			return orderDAO.view(); // Retrieve all orders from the DAO and return the order list
 
-		} catch (DAOException | InvalidOrderException | InvalidProductInputException e) {
+		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}
 
@@ -46,12 +44,16 @@ public class OrderService {
 	public boolean deleteOrder(int orderId) throws ServiceException {
 		try {
 			// Check if the order deletion in the DAO was successful and provide feedback
+			OrderValidator.validateOrderId(orderId);
 			return OrderDAO.delete(orderId);
 
-		} catch (DAOException e) {
+		} catch (DAOException |InvalidOrderException  e) {
 			throw new ServiceException(e.getMessage(), e);// Catch exceptions related to DAO issues and throw a
 															// ServiceException
 		}
 	}
 
+	
+	
+	
 }

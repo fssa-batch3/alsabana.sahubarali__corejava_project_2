@@ -45,5 +45,10 @@
 		</dependency>
 
 
+		<dependency>
+			<groupId>com.fssa.corejava</groupId>
+			<artifactId>template</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 	</dependencies>
 </project>
