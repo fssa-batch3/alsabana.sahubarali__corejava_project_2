@@ -76,15 +76,18 @@ public class UserService {
 	/*
 	 * Define the method to delete a user by ID and handle exceptions
 	 */
-	public boolean deleteUser(int userId) throws ServiceException {
-		UserDAO userDAO = new UserDAO();
+	public  boolean deleteUser(int userId) throws ServiceException {
+		
 		try {
 			// Check if the user deletion in the DAO was successful and provide feedback
-			return userDAO.deleteUser(userId);
+						return UserDAO.deleteUser(userId);
+			
 
 		} catch (DAOException e) {
-
-			throw new ServiceException(e.getMessage());// Catch exceptions related to DAO issues and throw a
+	
+			throw new ServiceException(e);
+			
+			// Catch exceptions related to DAO issues and throw a
 															// ServiceException
 		}
 
@@ -122,5 +125,6 @@ public class UserService {
 		}
 
 	}
-
+	
+	
 }

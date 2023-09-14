@@ -9,6 +9,8 @@ import java.util.List;
 
 import com.fssa.healthyhair.dao.exception.DAOException;
 import com.fssa.healthyhair.model.User;
+import com.fssa.healthyhair.service.UserService;
+import com.fssa.healthyhair.service.exception.ServiceException;
 import com.fssa.healthyhair.util.ConnectionUtil;
 
 public class UserDAO {
@@ -170,20 +172,25 @@ public class UserDAO {
 	 * @throws DAOException If there's an error during the deletion process.
 	 */
 
-	public boolean deleteUser(int userId) throws DAOException {
+	public static boolean deleteUser(int userId) throws DAOException {
 		final String SELECTQUERY = "DELETE from user WHERE user_id=?";
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement stmt = connection.prepareStatement(SELECTQUERY)) {
 
 			stmt.setInt(1, userId);
 
-			stmt.executeUpdate();
+			int rows = stmt.executeUpdate();
 
+			return rows > 0;
+			
+			
+			
 		} catch (SQLException e) {
-			throw new DAOException("Error in to delete user", e);
+			throw new DAOException("Deletion account failed",e);
 		}
-		return false;
+		
 
 	}
+  
 
 }
