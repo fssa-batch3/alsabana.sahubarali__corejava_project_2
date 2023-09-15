@@ -7,7 +7,13 @@ USE alsabana_sahubarali_corejava_project;
  email varchar(50),
  password varchar(50),
  phonenumber varchar(10),
- type varchar(10)
+ profile_img varchar(500),
+ type varchar(10),
+ address varchar(300),
+ company_name varchar(200),
+ company_address varchar(200),
+ company_license varchar(500)
+ 
 );
 
   select*from user;
