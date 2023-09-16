@@ -13,7 +13,7 @@ public class UserService {
 
 	public boolean registerUser(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
- 
+
 		try {
 			UserValidator.validateUser(user);
 
@@ -56,11 +56,17 @@ public class UserService {
 		return id;
 	}
 
-	public boolean updateUser(User user) throws ServiceException {
+	public static boolean updateUser(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
 		try {
 			UserValidator.validateName(user.getUsername());
 			UserValidator.validateMobileNo(user.getNumber());
+			UserValidator.validateCompanyAddress(user.getCompanyAddress());
+			UserValidator.validateEmail(user.getEmail());
+			UserValidator.validateCompanyName(user.getCompanyName());
+			UserValidator.validateLicenseImageURL(user.getCompanylicense());
+			UserValidator.validateCompanyName(user.getAddress());
+
 			// Validate the user using UserValidator
 			// Check if the user update in the DAO was successful and provide feedback
 			return userDAO.update(user);
@@ -76,19 +82,18 @@ public class UserService {
 	/*
 	 * Define the method to delete a user by ID and handle exceptions
 	 */
-	public  boolean deleteUser(int userId) throws ServiceException {
-		
+	public boolean deleteUser(int userId) throws ServiceException {
+
 		try {
 			// Check if the user deletion in the DAO was successful and provide feedback
-						return UserDAO.deleteUser(userId);
-			
+			return UserDAO.deleteUser(userId);
 
 		} catch (DAOException e) {
-	
+
 			throw new ServiceException(e);
-			
+
 			// Catch exceptions related to DAO issues and throw a
-															// ServiceException
+			// ServiceException
 		}
 
 	}
@@ -127,4 +132,6 @@ public class UserService {
 	}
 	
 	
+	
+
 }

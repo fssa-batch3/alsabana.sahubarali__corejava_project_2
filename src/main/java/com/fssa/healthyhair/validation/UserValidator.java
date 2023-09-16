@@ -1,7 +1,6 @@
 package com.fssa.healthyhair.validation;
 
 import java.util.List;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -107,4 +106,54 @@ public class UserValidator {
 			throw new InvalidUserException("Invalid category");
 
 	}
+	
+	public static boolean validateCompanyName(String companyName) throws InvalidUserException {
+	    boolean match = false;
+
+	    // Define your regex pattern for validating company names
+	    String regex = "^[A-Za-z]\\\\w{3,100}$"; 
+	    Pattern p = Pattern.compile(regex);
+	    Matcher m = p.matcher(companyName);
+	    match = m.matches();
+	    
+	    if (match) {
+	        return true;
+	    } else {
+	        throw new InvalidUserException("Invalid Company Name");
+	    }
+	}
+
+	public static boolean validateCompanyAddress(String companyAddress) throws InvalidUserException {
+	    boolean match = false;
+
+	    // Define your regex pattern for validating company addresses
+	    String regex = "^[A-Za-z]\\w{3,100}$"; 
+	    Pattern p = Pattern.compile(regex);
+	    Matcher m = p.matcher(companyAddress);
+	    match = m.matches();
+	    
+	    if (match) {
+	        return true;
+	    } else {
+	        throw new InvalidUserException("Invalid Company Address");
+	    }
+	}
+	
+	public static boolean validateLicenseImageURL(String imageUrl) throws InvalidUserException {
+		String regex = "^(https?|ftp)://.*$";
+		Pattern p = Pattern.compile(regex);
+		Matcher m = p.matcher(imageUrl);
+		boolean match = m.matches();
+
+		if (match) {
+			return true;
+		} else {
+			// Throw exception with a descriptive error message
+			throw new InvalidUserException(
+					"Invalid product image URL format. Please provide a valid URL starting with 'http' or 'https'.");
+		}
+	}
+	
+	
+
 }

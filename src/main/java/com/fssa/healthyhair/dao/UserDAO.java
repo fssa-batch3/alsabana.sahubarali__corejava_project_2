@@ -25,7 +25,7 @@ public class UserDAO {
 	public boolean register(User user) throws DAOException {
 
 		String query = "INSERT INTO user (email,name,password,phonenumber,type) VALUES (?,?,?,?,?)";
- 
+
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement pmt = connection.prepareStatement(query)) {
 
@@ -112,14 +112,20 @@ public class UserDAO {
 	 * @throws DAOException If there's an error during the update process.
 	 */
 	public boolean update(User user) throws DAOException {
-		final String SELECTQUERY = "UPDATE user SET  name=?,phonenumber=?,email=? WHERE user_id=?";
+		final String SELECTQUERY = "UPDATE user SET  name=?,phonenumber=?,email=?,address=?,profile_img=?,company_name=?,company_address=?,company_license=? WHERE user_id=?";
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement stmt = connection.prepareStatement(SELECTQUERY)) {
 
 			stmt.setString(1, user.getUsername());
 			stmt.setString(2, user.getNumber());
 			stmt.setString(3, user.getEmail());
-			stmt.setInt(4, user.getUserId());
+			stmt.setString(4,user.getAddress());
+			stmt.setString(5, user.getProfileUrl());
+			stmt.setString(6,user.getCompanyName());
+			stmt.setString(7, user.getCompanyAddress());
+			stmt.setString(8, user.getCompanylicense());
+			stmt.setInt(9, user.getUserId());
+			
 
 			int row = stmt.executeUpdate();
 
@@ -182,15 +188,11 @@ public class UserDAO {
 			int rows = stmt.executeUpdate();
 
 			return rows > 0;
-			
-			
-			
+
 		} catch (SQLException e) {
-			throw new DAOException("Deletion account failed",e);
+			throw new DAOException("Deletion account failed", e);
 		}
-		
 
 	}
-  
 
 }

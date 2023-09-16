@@ -13,13 +13,17 @@ public class User implements Serializable {
 	private String type;
 	private int userId;
 	private String address;
+	private String profileUrl;
+	private String companyName;
+	private String companyAddress;
+	private String companylicense;
 
 	public int getUserId() {
 		return userId;
 	}
 
 	public User() {
-		
+
 	}
 
 	public void setUserId(int userId) {
@@ -68,6 +72,18 @@ public class User implements Serializable {
 		this.number = number;
 		this.userId = userId;
 		this.address = address;
+	}
+
+	public User(String email, String username, String number, String companyName, String companyAddress,
+			String companylicense,int userId) {
+		super();
+		this.email = email;
+		this.username = username;
+		this.number = number;
+		this.companyName = companyName;
+		this.companyAddress = companyAddress;
+		this.companylicense = companylicense;
+		this.userId=userId;
 	}
 
 	public User(String email, String password) {
@@ -122,6 +138,38 @@ public class User implements Serializable {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getProfileUrl() {
+		return profileUrl;
+	}
+
+	public void setProfileUrl(String profileUrl) {
+		this.profileUrl = profileUrl;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public String getCompanyAddress() {
+		return companyAddress;
+	}
+
+	public void setCompanyAddress(String companyAddress) {
+		this.companyAddress = companyAddress;
+	}
+
+	public String getCompanylicense() {
+		return companylicense;
+	}
+
+	public void setCompanylicense(String companylicense) {
+		this.companylicense = companylicense;
 	}
 
 	@Override
