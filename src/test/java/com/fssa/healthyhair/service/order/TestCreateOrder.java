@@ -15,29 +15,32 @@ class TestCreateOrder {
 
 	@Test
 	void testCreateOrderSuccess() {
-		Order order = new Order();
-		order.setOrderId(4);
+		 Order order = new Order();
+			order.setOrderId(13);
+			order.setNumber("8015059769");
+			order.setCity("ramdn");
 
-		Product product = new Product();
-		product.setProductId(64);
+			Product product = new Product();
+			product.setProductId(64);
 
-		User orderedUser = new User();
-		orderedUser.setUserId(27);
+			User orderedUser = new User();
+			orderedUser.setUserId(27);
 
-		User createdUser = new User();
-		createdUser.setUserId(28);
+			User createdUser = new User();
+			createdUser.setUserId(28);
 
-		order.setOrderedProduct(product);
-		order.setQuantity(2);
-		order.setAddress("Chennai");
-		order.setOrderedUser(orderedUser);
-		product.setCreatedUser(createdUser);
+			order.setOrderedProduct(product);
+			order.setQuantity(2);
+			order.setAddress("Chennai");
+			order.setOnline(false);
+			order.setOrderedUser(orderedUser);
+			product.setCreatedUser(createdUser);
 
-		try {
-			assertTrue(OrderService.createOrder(order));
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
+			try {
+				assertTrue(OrderService.createOrder(order));
+			} catch (ServiceException e) {
+				e.printStackTrace();
+			}
 
 	}
 	

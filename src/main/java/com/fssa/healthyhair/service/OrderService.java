@@ -1,10 +1,14 @@
 package com.fssa.healthyhair.service;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.List;
 
 import com.fssa.healthyhair.dao.OrderDAO;
 import com.fssa.healthyhair.dao.exception.DAOException;
 import com.fssa.healthyhair.model.Order;
+import com.fssa.healthyhair.model.Product;
+import com.fssa.healthyhair.model.User;
 import com.fssa.healthyhair.service.exception.ServiceException;
 import com.fssa.healthyhair.validation.OrderValidator;
 import com.fssa.healthyhair.validation.exception.InvalidOrderException;
@@ -53,7 +57,4 @@ public class OrderService {
 		}
 	}
 
-	
-	
-	
 }

@@ -1,5 +1,7 @@
 package com.fssa.healthyhair.validation;
 
+import java.util.regex.Pattern;
+
 import com.fssa.healthyhair.model.Order;
 import com.fssa.healthyhair.validation.exception.InvalidOrderException;
 import com.fssa.healthyhair.validation.exception.InvalidProductInputException;
@@ -11,7 +13,7 @@ public class OrderValidator {
 		try {
 			if (validateQuantity(order.getQuantity()) && validateAddress(order.getAddress())
 					&& UserValidator.validateUserId(order.getOrderedUser().getUserId())
-					&& ProductValidator.validateProductId(order.getOrderedProduct().getProductId())) {
+					&& ProductValidator.validateProductId(order.getOrderedProduct().getProductId()) && validateMobileNo(order.getNumber()) && validateCityName(order.getCity())) {
 				return true;
 			}
 		} catch (InvalidOrderException | InvalidUserException e) {
@@ -38,22 +40,45 @@ public class OrderValidator {
 		try {
 			if (!address.isEmpty())
 				return true;
-		}catch(Exception e) {
+		} catch (Exception e) {
 			throw new InvalidOrderException("Address should not be null");
 		}
 		return false;
-	
-			
 
 	}
-	
-	public static boolean validateOrderId(int id) throws InvalidOrderException{
-		if(id>0) {
+
+	public static boolean validateOrderId(int id) throws InvalidOrderException {
+		if (id > 0) {
 			return true;
-		}else {
+		} else {
 			throw new InvalidOrderException("Order Id is invalid");
 		}
-		
+
+	}
+
+	public static boolean validateMobileNo(String number) throws InvalidUserException {
+		boolean isMatch = false;
+		if (number == null)
+			return false;
+
+		String regex = "^[6789]\\d{9}$";
+		isMatch = Pattern.matches(regex, number);
+		if (isMatch) {
+			return true;
+		} else {
+			throw new InvalidUserException("The mobile number is Invalid");
+
+		}
+
+	}
+
+	public static boolean validateCityName(String cityName) throws InvalidUserException {
+
+		if (cityName != null) {
+			return true;
+		}else {
+			throw new InvalidUserException("The city name is invalid");
+		}
 	}
 
 }

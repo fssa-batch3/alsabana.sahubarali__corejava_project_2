@@ -6,8 +6,36 @@ public class Order {
 	private int quantity;
 	private String address;
 	private User orderedUser;
+	private String city;
+	private String number;
+	private boolean online;
+	
+
+	public boolean isOnline() {
+		return online;
+	}
+
+	public void setOnline(boolean online) {
+		this.online = online;
+	}
 
 	
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
 
 	public Order(int orderId, Product orderedProduct, int quantity) {
 		this.orderId = orderId;
@@ -31,6 +59,17 @@ public class Order {
 		this.orderedUser = orderedUser;
 	}
 
+	public Order(Product orderedProduct, int quantity, User orderedUser, String address, String city, String number,boolean online) {
+		this.orderedProduct = orderedProduct;
+		this.quantity = quantity;
+		this.address = address;
+		this.orderedUser = orderedUser;
+		this.city = city;
+		this.number = number;
+		this.online=online;
+		
+	}
+
 	public Order() {
 
 	}
@@ -46,7 +85,7 @@ public class Order {
 	public String getAddress() {
 		return address;
 	}
- 
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
@@ -67,7 +106,6 @@ public class Order {
 		this.quantity = quantity;
 	}
 
-
 	public User getOrderedUser() {
 		return orderedUser;
 	}
@@ -75,8 +113,7 @@ public class Order {
 	public void setOrderedUser(User orderedUser) {
 		this.orderedUser = orderedUser;
 	}
-	
-	
+
 	@Override
 	public String toString() {
 		return "Order [orderId=" + orderId + ", orderedProduct=" + orderedProduct + ", quantity=" + quantity

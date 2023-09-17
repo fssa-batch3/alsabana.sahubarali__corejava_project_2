@@ -16,7 +16,7 @@ import com.fssa.healthyhair.util.ConnectionUtil;
 public class OrderDAO {
 
 	public static boolean create(Order order) throws DAOException {
-		final String QUERY = "INSERT INTO orders (order_id, product_id, quantity, buyer_id ,address,seller_id) VALUES (?, ?, ?, ?,?,?)";
+		final String QUERY = "INSERT INTO orders (order_id, product_id, quantity, buyer_id ,address,city,number,seller_id,isonline) VALUES (?, ?, ?, ?,?,?,?,?,?)";
 
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement pmt = connection.prepareStatement(QUERY)) {
@@ -25,7 +25,10 @@ public class OrderDAO {
 			pmt.setInt(3, order.getQuantity());
 			pmt.setInt(4, order.getOrderedUser().getUserId());
 			pmt.setString(5, order.getAddress());
-			pmt.setInt(6, order.getOrderedProduct().getCreatedUser().getUserId());
+			pmt.setString(6, order.getCity());
+			pmt.setString(7, order.getNumber());
+			pmt.setInt(8, order.getOrderedProduct().getCreatedUser().getUserId());
+			pmt.setBoolean(9, order.isOnline());
 
 			int rows = pmt.executeUpdate();
 			return rows > 0;
