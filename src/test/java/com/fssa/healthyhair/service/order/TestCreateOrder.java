@@ -16,10 +16,10 @@ class TestCreateOrder {
 	@Test
 	void testCreateOrderSuccess() {
 		 Order order = new Order();
-			order.setOrderId(13);
+			order.setOrderId(14);
 			order.setNumber("8015059769");
 			order.setCity("ramdn");
-
+			order.setPincode("623525");
 			Product product = new Product();
 			product.setProductId(64);
 
@@ -34,7 +34,7 @@ class TestCreateOrder {
 			order.setAddress("Chennai");
 			order.setOnline(false);
 			order.setOrderedUser(orderedUser);
-			product.setCreatedUser(createdUser);
+	
 
 			try {
 				assertTrue(OrderService.createOrder(order));

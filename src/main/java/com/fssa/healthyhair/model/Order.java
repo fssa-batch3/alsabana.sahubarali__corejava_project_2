@@ -9,6 +9,7 @@ public class Order {
 	private String city;
 	private String number;
 	private boolean online;
+	private String pincode;
 	
 
 	public boolean isOnline() {
@@ -59,7 +60,7 @@ public class Order {
 		this.orderedUser = orderedUser;
 	}
 
-	public Order(Product orderedProduct, int quantity, User orderedUser, String address, String city, String number,boolean online) {
+	public Order(Product orderedProduct, int quantity, User orderedUser, String address, String city, String number,boolean online,String pincode) {
 		this.orderedProduct = orderedProduct;
 		this.quantity = quantity;
 		this.address = address;
@@ -67,6 +68,7 @@ public class Order {
 		this.city = city;
 		this.number = number;
 		this.online=online;
+		this.pincode=pincode;
 		
 	}
 
@@ -118,5 +120,13 @@ public class Order {
 	public String toString() {
 		return "Order [orderId=" + orderId + ", orderedProduct=" + orderedProduct + ", quantity=" + quantity
 				+ ", address=" + address + ", orderedUser=" + orderedUser.getUsername() + "]";
+	}
+
+	public String getPincode() {
+		return pincode;
+	}
+
+	public void setPincode(String pincode) {
+		this.pincode = pincode;
 	}
 }

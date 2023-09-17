@@ -16,7 +16,7 @@ import com.fssa.healthyhair.util.ConnectionUtil;
 public class OrderDAO {
 
 	public static boolean create(Order order) throws DAOException {
-		final String QUERY = "INSERT INTO orders (order_id, product_id, quantity, buyer_id ,address,city,number,seller_id,isonline) VALUES (?, ?, ?, ?,?,?,?,?,?)";
+		final String QUERY = "INSERT INTO orders (order_id, product_id, quantity, buyer_id ,address,city,number,pincode,isonline) VALUES (?, ?, ?, ?,?,?,?,?,?)";
 
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement pmt = connection.prepareStatement(QUERY)) {
@@ -27,7 +27,7 @@ public class OrderDAO {
 			pmt.setString(5, order.getAddress());
 			pmt.setString(6, order.getCity());
 			pmt.setString(7, order.getNumber());
-			pmt.setInt(8, order.getOrderedProduct().getCreatedUser().getUserId());
+			pmt.setString(8, order.getPincode());
 			pmt.setBoolean(9, order.isOnline());
 
 			int rows = pmt.executeUpdate();
@@ -37,7 +37,6 @@ public class OrderDAO {
 		}
 	}
 
-	
 	public List<Order> view() throws DAOException {
 		List<Order> orders = new ArrayList<>();
 
@@ -50,7 +49,7 @@ public class OrderDAO {
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement pst = connection.prepareStatement(QUERY);
 				ResultSet rs = pst.executeQuery()) {
-		 	while (rs.next()) {
+			while (rs.next()) {
 				String username = rs.getString("name");
 				String email = rs.getString("email");
 				String number = rs.getString("phonenumber");
@@ -78,18 +77,17 @@ public class OrderDAO {
 				user.setUsername(username);
 				user.setEmail(email);
 				user.setNumber(number);
-				
 
 				// Create Order object and add to the list
-				Order order = new Order(orderId, product,user, quantity,  address);
+				Order order = new Order(orderId, product, user, quantity, address);
 				orders.add(order);
 			}
 		} catch (SQLException e) {
-			throw new DAOException( e);
+			throw new DAOException(e);
 		}
 
 		return orders;
-	} 
+	}
 
 	public static boolean delete(int orderId) throws DAOException {
 		final String QUERY = "DELETE from orders WHERE order_id=?";

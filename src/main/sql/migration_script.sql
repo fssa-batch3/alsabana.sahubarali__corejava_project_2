@@ -55,6 +55,7 @@ REFERENCES product(product_id);
  describe orders;
 select* from orders;
 
+
 ALTER TABLE orders
 ADD CONSTRAINT fk_user_buyer_id
 FOREIGN KEY (buyer_id)
