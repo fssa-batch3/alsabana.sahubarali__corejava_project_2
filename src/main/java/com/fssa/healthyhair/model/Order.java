@@ -6,11 +6,30 @@ public class Order {
 	private int quantity;
 	private String address;
 	private User orderedUser;
+	private String name;
 	private String city;
 	private String number;
 	private boolean online;
 	private String pincode;
+	private String date;
+	private String deliveryDate;
 	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
 
 	public boolean isOnline() {
 		return online;
@@ -60,7 +79,7 @@ public class Order {
 		this.orderedUser = orderedUser;
 	}
 
-	public Order(Product orderedProduct, int quantity, User orderedUser, String address, String city, String number,boolean online,String pincode) {
+	public Order(Product orderedProduct, int quantity, User orderedUser, String address, String city, String number,boolean online,String pincode,String name) {
 		this.orderedProduct = orderedProduct;
 		this.quantity = quantity;
 		this.address = address;
@@ -69,6 +88,8 @@ public class Order {
 		this.number = number;
 		this.online=online;
 		this.pincode=pincode;
+		this.name=name;
+		
 		
 	}
 
@@ -128,5 +149,13 @@ public class Order {
 
 	public void setPincode(String pincode) {
 		this.pincode = pincode;
+	}
+
+	public String getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(String deliveryDate) {
+		this.deliveryDate = deliveryDate;
 	}
 }

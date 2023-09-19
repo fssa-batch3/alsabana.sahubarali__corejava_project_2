@@ -111,7 +111,7 @@ public class UserValidator {
 	    boolean match = false;
 
 	    // Define your regex pattern for validating company names
-	    String regex = "^[A-Za-z]\\\\w{3,100}$"; 
+	    String regex = "^[A-Za-z]\\w{3,29}$";
 	    Pattern p = Pattern.compile(regex);
 	    Matcher m = p.matcher(companyName);
 	    match = m.matches();

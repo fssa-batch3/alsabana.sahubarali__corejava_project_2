@@ -63,9 +63,9 @@ public class UserService {
 			UserValidator.validateMobileNo(user.getNumber());
 			UserValidator.validateCompanyAddress(user.getCompanyAddress());
 			UserValidator.validateEmail(user.getEmail());
-			UserValidator.validateCompanyName(user.getCompanyName());
+//			UserValidator.validateCompanyName(user.getCompanyName());
 			UserValidator.validateLicenseImageURL(user.getCompanylicense());
-			UserValidator.validateCompanyName(user.getAddress());
+//			UserValidator.validateCompanyName(user.getAddress());
 
 			// Validate the user using UserValidator
 			// Check if the user update in the DAO was successful and provide feedback

@@ -1,7 +1,5 @@
 package com.fssa.healthyhair.service;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.List;
 
 import com.fssa.healthyhair.dao.OrderDAO;
@@ -41,6 +39,8 @@ public class OrderService {
 		}
 
 	}
+	
+	
 
 	/*
 	 * Define the method to delete a order by ID and handle exceptions
@@ -56,5 +56,17 @@ public class OrderService {
 															// ServiceException
 		}
 	}
+
+	
+	public List<Order> findOrdersByUserId(int userId) throws ServiceException {
+	    try {
+	        return OrderDAO.findOrdersByUserId(userId); // Retrieve orders by userId from the DAO and return the order list
+	    } catch (DAOException e) {
+	        throw new ServiceException(e);
+	    }
+	}
+	
+	
+
 
 }

@@ -4,19 +4,24 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import com.fssa.healthyhair.dao.exception.DAOException;
 import com.fssa.healthyhair.model.Order;
 import com.fssa.healthyhair.model.Product;
 import com.fssa.healthyhair.model.User;
+import com.fssa.healthyhair.service.ProductService;
+import com.fssa.healthyhair.service.exception.ServiceException;
 import com.fssa.healthyhair.util.ConnectionUtil;
 
 public class OrderDAO {
 
 	public static boolean create(Order order) throws DAOException {
-		final String QUERY = "INSERT INTO orders (order_id, product_id, quantity, buyer_id ,address,city,number,pincode,isonline) VALUES (?, ?, ?, ?,?,?,?,?,?)";
+		final String QUERY = "INSERT INTO orders (order_id, product_id, quantity, buyer_id ,address,city,number,pincode,isonline,name,date,delivery_date) VALUES (?, ?, ?, ?,?,?,?,?,?,?,?,?)";
 
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement pmt = connection.prepareStatement(QUERY)) {
@@ -29,8 +34,19 @@ public class OrderDAO {
 			pmt.setString(7, order.getNumber());
 			pmt.setString(8, order.getPincode());
 			pmt.setBoolean(9, order.isOnline());
+			Timestamp orderDate = new Timestamp(System.currentTimeMillis());
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			String formattedDate = dateFormat.format(orderDate);
+			pmt.setString(10, order.getName());
+			pmt.setString(11, formattedDate);
 
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.DAY_OF_MONTH, 7);
+
+			String after7days = dateFormat.format(calendar.getTime());
+			pmt.setString(12, after7days);
 			int rows = pmt.executeUpdate();
+			System.out.println(after7days);
 			return rows > 0;
 		} catch (SQLException e) {
 			throw new DAOException(e);
@@ -89,6 +105,40 @@ public class OrderDAO {
 		return orders;
 	}
 
+	public static List<Order> findOrdersByUserId(int userId) throws DAOException {
+		final String QUERY = "SELECT * FROM orders WHERE buyer_id = ?";
+		List<Order> orderList = new ArrayList<>();
+
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement pmt = connection.prepareStatement(QUERY)) {
+			pmt.setInt(1, userId);
+			User user = new User();
+			user.setUserId(userId);
+
+			try (ResultSet rs = pmt.executeQuery()) {
+				while (rs.next()) {
+					Order order = new Order();
+					order.setOrderId(rs.getInt("order_id"));
+					order.setQuantity(rs.getInt("quantity"));
+					order.setOrderedUser(user);
+					order.setAddress(rs.getString("address"));
+					order.setName(rs.getString("name"));
+					order.setDate(rs.getString("date"));
+					order.setDeliveryDate(rs.getString("delivery_date"));
+					int productId = rs.getInt("product_id");
+					Product product = ProductService.findProductById(productId);
+					order.setOrderedProduct(product);
+					orderList.add(order);
+				}
+			}
+
+		} catch (SQLException | ServiceException e) {
+			throw new DAOException(e);
+		}
+
+		return orderList; // Return the list of orders for the buyer
+	}
+
 	public static boolean delete(int orderId) throws DAOException {
 		final String QUERY = "DELETE from orders WHERE order_id=?";
 		// Start a try block with a prepared statement for deleting a product
@@ -105,4 +155,5 @@ public class OrderDAO {
 			throw new DAOException("Error in cancelling order", e);
 		}
 	}
+
 }

@@ -61,4 +61,3 @@ ADD CONSTRAINT fk_user_buyer_id
 FOREIGN KEY (buyer_id)
 REFERENCES user(user_id);
     
-drop table orders;

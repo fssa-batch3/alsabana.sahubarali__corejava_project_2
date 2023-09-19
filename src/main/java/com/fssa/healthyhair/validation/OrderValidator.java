@@ -13,12 +13,13 @@ public class OrderValidator {
 		try {
 			if (validateQuantity(order.getQuantity()) && validateAddress(order.getAddress())
 					&& UserValidator.validateUserId(order.getOrderedUser().getUserId())
-					&& ProductValidator.validateProductId(order.getOrderedProduct().getProductId()) && validateMobileNo(order.getNumber()) && validateCityName(order.getCity())) {
+					&& ProductValidator.validateProductId(order.getOrderedProduct().getProductId())
+					&& validateMobileNo(order.getNumber())) {
 				return true;
 			}
 		} catch (InvalidOrderException | InvalidUserException e) {
 
-			throw new InvalidOrderException("Order Details are not valid");
+			throw new InvalidOrderException(e.getMessage());
 		}
 		return false;
 	}
@@ -37,13 +38,10 @@ public class OrderValidator {
 	}
 
 	public static boolean validateAddress(String address) throws InvalidOrderException {
-		try {
-			if (!address.isEmpty())
-				return true;
-		} catch (Exception e) {
-			throw new InvalidOrderException("Address should not be null");
-		}
-		return false;
+		if (!address.isEmpty())
+			return true;
+		else
+			throw new InvalidOrderException("Address is not valid");
 
 	}
 
@@ -76,7 +74,7 @@ public class OrderValidator {
 
 		if (cityName != null) {
 			return true;
-		}else {
+		} else {
 			throw new InvalidUserException("The city name is invalid");
 		}
 	}
