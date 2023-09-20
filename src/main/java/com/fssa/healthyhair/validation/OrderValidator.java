@@ -38,11 +38,17 @@ public class OrderValidator {
 	}
 
 	public static boolean validateAddress(String address) throws InvalidOrderException {
-		if (!address.isEmpty())
-			return true;
-		else
-			throw new InvalidOrderException("Address is not valid");
+		if (address == null) {
+			throw new InvalidOrderException("Address is null");
+		}
 
+		String regex = "^[a-zA-Z0-9\\s.,'#\\-]+(\\s[A-Za-z0-9\\-#]+)?$";
+
+		if (!Pattern.matches(regex, address)) {
+			throw new InvalidOrderException("Invalid address format");
+		} else {
+			return true;
+		}
 	}
 
 	public static boolean validateOrderId(int id) throws InvalidOrderException {
@@ -76,6 +82,15 @@ public class OrderValidator {
 			return true;
 		} else {
 			throw new InvalidUserException("The city name is invalid");
+		}
+	}
+
+	public static boolean validateCompanyName(String companyName) throws InvalidUserException {
+
+		if (!companyName.isEmpty()) {
+			return true;
+		} else {
+			throw new InvalidUserException(" Company name is invalid");
 		}
 	}
 

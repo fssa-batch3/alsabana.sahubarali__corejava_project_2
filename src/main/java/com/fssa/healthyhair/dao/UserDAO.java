@@ -93,7 +93,10 @@ public class UserDAO {
 					user.setUsername(rs.getString("name"));
 					user.setNumber(rs.getString("phonenumber"));
 					user.setType(rs.getString("type"));
-
+                    user.setCompanyAddress(rs.getString("company_address"));
+                    user.setCompanyName(rs.getString("company_name"));
+                    user.setCompanylicense(rs.getString("company_license"));
+                    user.setProfileUrl(rs.getString("profile_img"));
 				}
 			}
 

@@ -21,7 +21,7 @@ import com.fssa.healthyhair.util.ConnectionUtil;
 public class OrderDAO {
 
 	public static boolean create(Order order) throws DAOException {
-		final String QUERY = "INSERT INTO orders (order_id, product_id, quantity, buyer_id ,address,city,number,pincode,isonline,name,date,delivery_date) VALUES (?, ?, ?, ?,?,?,?,?,?,?,?,?)";
+		final String QUERY = "INSERT INTO orders (order_id,product_id, quantity, buyer_id ,address,city,number,pincode,isonline,seller_id, name,date,delivery_date) VALUES (?, ?, ?, ?,?,?,?,?,?,?,?,?,?)";
 
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement pmt = connection.prepareStatement(QUERY)) {
@@ -34,19 +34,18 @@ public class OrderDAO {
 			pmt.setString(7, order.getNumber());
 			pmt.setString(8, order.getPincode());
 			pmt.setBoolean(9, order.isOnline());
+			pmt.setInt(10, order.getOrderedProduct().getCreatedUser().getUserId());
+			pmt.setString(11, order.getName());
 			Timestamp orderDate = new Timestamp(System.currentTimeMillis());
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			String formattedDate = dateFormat.format(orderDate);
-			pmt.setString(10, order.getName());
-			pmt.setString(11, formattedDate);
-
+			pmt.setString(12, formattedDate);
 			Calendar calendar = Calendar.getInstance();
 			calendar.add(Calendar.DAY_OF_MONTH, 7);
 
 			String after7days = dateFormat.format(calendar.getTime());
-			pmt.setString(12, after7days);
+			pmt.setString(13, after7days);
 			int rows = pmt.executeUpdate();
-			System.out.println(after7days);
 			return rows > 0;
 		} catch (SQLException e) {
 			throw new DAOException(e);
@@ -56,28 +55,33 @@ public class OrderDAO {
 	public List<Order> view() throws DAOException {
 		List<Order> orders = new ArrayList<>();
 
-		final String QUERY = "SELECT user.name,user.email,user.phonenumber,"
-				+ "product.product_name, product.cost, product.product_image,product.product_detail,category,product.product_id,"
-				+ "orders.quantity, orders.address, orders.order_id " + "FROM user "
-				+ "INNER JOIN orders ON user.user_id = orders.buyer_id "
+		final String QUERY = "SELECT user.email,user.user_id"
+				+ "product.product_name, product.cost, product.product_image,product.product_detail,product.category,product.product_id,"
+				+ "orders.quantity, orders.address, orders.order_id,order.city,order.pincode,order.number,order.name,order.date,order.delivery_date, "
+				+ "FROM user " + "INNER JOIN orders ON user.user_id = orders.buyer_id "
 				+ "INNER JOIN product ON orders.product_id = product.product_id";
 
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement pst = connection.prepareStatement(QUERY);
 				ResultSet rs = pst.executeQuery()) {
 			while (rs.next()) {
-				String username = rs.getString("name");
 				String email = rs.getString("email");
-				String number = rs.getString("phonenumber");
+				int userId = rs.getInt("user_id");
 				String productname = rs.getString("product_name");
 				int productcost = rs.getInt("cost");
 				String productImageURL = rs.getString("product_image");
 				String category = rs.getString("category");
 				String productDetail = rs.getString("product_detail");
+				int productId = rs.getInt("product_id");
 				int quantity = rs.getInt("quantity");
 				String address = rs.getString("address");
+				String city = rs.getString("city");
+				String pincode = rs.getString("pincode");
+				String number = rs.getString("number");
+				String name = rs.getString("name");
+				String orderDate = rs.getString("date");
+				String deliveryDate = rs.getString("delivery_date");
 				int orderId = rs.getInt("order_id");
-				int productId = rs.getInt("product_id");
 
 				// Create Product object with retrieved data
 				Product product = new Product();
@@ -90,12 +94,18 @@ public class OrderDAO {
 
 				// Create User object with retrieved data
 				User user = new User();
-				user.setUsername(username);
+				user.setUserId(userId);
 				user.setEmail(email);
-				user.setNumber(number);
 
 				// Create Order object and add to the list
 				Order order = new Order(orderId, product, user, quantity, address);
+				order.setAddress(address);
+				order.setCity(city);
+				order.setPincode(pincode);
+				order.setNumber(number);
+				order.setName(name);
+				order.setDate(orderDate);
+				order.setDeliveryDate(deliveryDate);
 				orders.add(order);
 			}
 		} catch (SQLException e) {
@@ -125,7 +135,11 @@ public class OrderDAO {
 					order.setName(rs.getString("name"));
 					order.setDate(rs.getString("date"));
 					order.setDeliveryDate(rs.getString("delivery_date"));
+					order.setCity(rs.getString("city"));
+					order.setPincode(rs.getString("pincode"));
+					order.setNumber(rs.getString("number"));
 					int productId = rs.getInt("product_id");
+
 					Product product = ProductService.findProductById(productId);
 					order.setOrderedProduct(product);
 					orderList.add(order);

@@ -112,6 +112,11 @@ public class ProductDAO {
 					product.setProductImg(rs.getString("product_image"));
 					product.setProductDetail(rs.getString("product_detail"));
 					product.setCategory(rs.getString("category"));
+					int userId = rs.getInt("user_id"); // Assuming the column name in the database is "created_user_id"
+					User user = new User();
+					user.setUserId(userId);
+					product.setCreatedUser(user);
+
 				}
 			}
 
@@ -176,4 +181,13 @@ public class ProductDAO {
 
 	}
 
+	public static void main(String[] args) {
+		try {
+			Product product = ProductDAO.findProductById(79);
+			System.out.println(product.getCreatedUser().getUserId());
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
