@@ -150,7 +150,7 @@ public class UserValidator {
 		} else {
 			// Throw exception with a descriptive error message
 			throw new InvalidUserException(
-					"Invalid product image URL format. Please provide a valid URL starting with 'http' or 'https'.");
+					"Invalid  image URL format. Please provide a valid URL starting with 'http' or 'https'.");
 		}
 	}
 	

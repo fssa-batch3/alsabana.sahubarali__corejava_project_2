@@ -42,7 +42,7 @@ public class OrderValidator {
 			throw new InvalidOrderException("Address is null");
 		}
 
-		String regex = "^[a-zA-Z0-9\\s.,'#\\-]+(\\s[A-Za-z0-9\\-#]+)?$";
+		String regex = "^[a-zA-Z0-9\\s.,/'#\\-]+(\\s[A-Za-z0-9\\-#]+)?$";
 
 		if (!Pattern.matches(regex, address)) {
 			throw new InvalidOrderException("Invalid address format");

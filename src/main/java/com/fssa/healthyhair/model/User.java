@@ -52,13 +52,12 @@ public class User implements Serializable {
 
 	}
 
-	public User(String email, String username, String number, int userId, String address, String profileUrl) {
+	public User(String email, String username, String number, int userId, String profileUrl) {
 		super();
 		this.email = email;
 		this.username = username;
 		this.number = number;
 		this.userId = userId;
-		this.address = address;
 		this.profileUrl = profileUrl;
 	}
 
@@ -85,7 +84,7 @@ public class User implements Serializable {
 	}
 
 	public User(String email, String username, String number, String companyName, String companyAddress,
-			String companylicense,int userId) {
+			String companylicense, int userId) {
 		super();
 		this.email = email;
 		this.username = username;
@@ -93,7 +92,7 @@ public class User implements Serializable {
 		this.companyName = companyName;
 		this.companyAddress = companyAddress;
 		this.companylicense = companylicense;
-		this.userId=userId;
+		this.userId = userId;
 	}
 
 	public User(String email, String password) {

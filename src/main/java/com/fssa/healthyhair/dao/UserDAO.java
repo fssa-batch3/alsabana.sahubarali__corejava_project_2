@@ -140,17 +140,16 @@ public class UserDAO {
 	}
 	
 	
-	public boolean updateBuyer(User user) throws DAOException {
-		final String SELECTQUERY = "UPDATE user SET  name=?,phonenumber=?,email=?,address=?,profile_img=? WHERE user_id=?";
+	public static boolean updateBuyer(User user) throws DAOException {
+		final String SELECTQUERY = "UPDATE user SET  name=?,phonenumber=?,email=?,profile_img=? WHERE user_id=?";
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement stmt = connection.prepareStatement(SELECTQUERY)) {
 
 			stmt.setString(1, user.getUsername());
 			stmt.setString(2, user.getNumber());
 			stmt.setString(3, user.getEmail());
-			stmt.setString(4,user.getAddress());
-			stmt.setString(5, user.getProfileUrl());
-			stmt.setString(6,user.getCompanyName());
+			stmt.setString(4, user.getProfileUrl());
+			stmt.setInt(5, user.getUserId());
 			
 
 			int row = stmt.executeUpdate();
@@ -158,7 +157,7 @@ public class UserDAO {
 			return row > 0;
 
 		} catch (SQLException e) {
-			throw new DAOException("Error in to update User", e);
+			throw new DAOException(e.getMessage());
 		}
 	}
 
@@ -220,5 +219,7 @@ public class UserDAO {
 		}
 
 	}
+
+	
 
 }

@@ -60,4 +60,13 @@ ALTER TABLE orders
 ADD CONSTRAINT fk_user_buyer_id
 FOREIGN KEY (buyer_id)
 REFERENCES user(user_id);
+
+
+SELECT user.email, user.user_id, product.product_name, product.cost, product.product_image, product.product_detail, product.category, product.product_id, product.user_id,
+       orders.quantity, orders.address, orders.order_id, orders.city, orders.pincode, orders.number, orders.name, orders.date, orders.delivery_date
+FROM user
+INNER JOIN orders ON user.user_id = orders.buyer_id
+INNER JOIN orders ON product.user_id = product.buyer_id
+INNER JOIN product ON orders.product_id = product.product_id;
+
     
