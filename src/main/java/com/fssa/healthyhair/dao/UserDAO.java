@@ -138,6 +138,29 @@ public class UserDAO {
 			throw new DAOException("Error in to update User", e);
 		}
 	}
+	
+	
+	public boolean updateBuyer(User user) throws DAOException {
+		final String SELECTQUERY = "UPDATE user SET  name=?,phonenumber=?,email=?,address=?,profile_img=? WHERE user_id=?";
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement stmt = connection.prepareStatement(SELECTQUERY)) {
+
+			stmt.setString(1, user.getUsername());
+			stmt.setString(2, user.getNumber());
+			stmt.setString(3, user.getEmail());
+			stmt.setString(4,user.getAddress());
+			stmt.setString(5, user.getProfileUrl());
+			stmt.setString(6,user.getCompanyName());
+			
+
+			int row = stmt.executeUpdate();
+
+			return row > 0;
+
+		} catch (SQLException e) {
+			throw new DAOException("Error in to update User", e);
+		}
+	}
 
 	/**
 	 * Retrieves a list of all users from the database.

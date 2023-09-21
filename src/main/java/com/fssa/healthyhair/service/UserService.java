@@ -79,6 +79,26 @@ public class UserService {
 		}
 	}
 
+	public static boolean updateBuyer(User user) throws ServiceException {
+		UserDAO userDAO = new UserDAO();
+		try {
+			UserValidator.validateName(user.getUsername());
+			UserValidator.validateMobileNo(user.getNumber());
+			UserValidator.validateEmail(user.getEmail());
+			UserValidator.validateCompanyName(user.getAddress());
+
+			// Validate the user using UserValidator
+			// Check if the user update in the DAO was successful and provide feedback
+			return userDAO.updateBuyer(user);
+
+			// Catch exceptions related to invalid user or DAO issues and throw a
+			// ServiceException
+		} catch (InvalidUserException | DAOException e) {
+
+			throw new ServiceException(e.getMessage());
+		}
+	}
+
 	/*
 	 * Define the method to delete a user by ID and handle exceptions
 	 */
@@ -130,8 +150,5 @@ public class UserService {
 		}
 
 	}
-	
-	
-	
 
 }
