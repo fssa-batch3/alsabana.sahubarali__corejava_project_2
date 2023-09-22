@@ -38,9 +38,11 @@ public class UserService {
 	public int loginWithEmail(String email, String password) throws ServiceException {
 		int id = 0;
 		try {
+			UserDAO dao = new UserDAO();
 			if (UserValidator.validateEmail(email) && UserValidator.validatePassword(password)) {
+				
 
-				User user = new UserDAO().findUserByEmail(email);
+				User user = dao.findUserByEmail(email);
 				if (user.getPassword().equals(password)) {
 					id = user.getUserId();
 				} else {
@@ -61,11 +63,11 @@ public class UserService {
 		try {
 			UserValidator.validateName(user.getUsername());
 			UserValidator.validateMobileNo(user.getNumber());
-			UserValidator.validateCompanyAddress(user.getCompanyAddress());
+			UserValidator.validateAddress(user.getCompanyAddress());
 			UserValidator.validateEmail(user.getEmail());
-//			UserValidator.validateCompanyName(user.getCompanyName());
+      		UserValidator.validateCompanyName(user.getCompanyName());
 			UserValidator.validateLicenseImageURL(user.getCompanylicense());
-			UserValidator.validateCompanyName(user.getAddress());
+			
 
 			// Validate the user using UserValidator
 			// Check if the user update in the DAO was successful and provide feedback

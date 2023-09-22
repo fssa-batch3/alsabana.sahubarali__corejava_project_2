@@ -1,12 +1,11 @@
 package com.fssa.healthyhair.validation;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+import java.util.regex.*;
 import com.fssa.healthyhair.dao.UserDAO;
 import com.fssa.healthyhair.dao.exception.DAOException;
 import com.fssa.healthyhair.model.User;
+import com.fssa.healthyhair.validation.exception.InvalidOrderException;
 import com.fssa.healthyhair.validation.exception.InvalidUserException;
 
 public class UserValidator {
@@ -33,14 +32,11 @@ public class UserValidator {
 		boolean match = false;
 
 		String regex = "^[A-Za-z]\\w{3,29}$";
-		Pattern p = Pattern.compile(regex);
-		Matcher m = p.matcher(name);
-		match = m.matches();
-		if (match) {
-			return true;
-		} else {
-			throw new InvalidUserException("Invalid Username");
-		}
+		 if (Pattern.matches(regex, name)) {
+		        return true;
+		    } else {
+		        throw new InvalidUserException("Invalid Username");
+		    }
 
 	}
 
@@ -74,6 +70,8 @@ public class UserValidator {
 			UserDAO userDAO = new UserDAO();
 			@SuppressWarnings("unused")
 			User user = userDAO.findUserByEmail(email);
+			
+			if(user.getEmail() == null) throw new InvalidUserException("Email is not registered");
 		} catch (DAOException e) {
 			
 			throw new InvalidUserException("Email is not registered");
@@ -108,50 +106,42 @@ public class UserValidator {
 	}
 	
 	public static boolean validateCompanyName(String companyName) throws InvalidUserException {
-	    boolean match = false;
-
 	    // Define your regex pattern for validating company names
-	    String regex = "^[A-Za-z]\\w{3,29}$";
-	    Pattern p = Pattern.compile(regex);
-	    Matcher m = p.matcher(companyName);
-	    match = m.matches();
-	    
-	    if (match) {
+	    String regex = "^[A-Za-z0-9 ]{5,30}$";  // Allows letters, numbers, and spaces
+        
+	    if (Pattern.matches(regex, companyName)) {
 	        return true;
 	    } else {
 	        throw new InvalidUserException("Invalid Company Name");
 	    }
 	}
 
-	public static boolean validateCompanyAddress(String companyAddress) throws InvalidUserException {
-	    boolean match = false;
+	public static boolean validateAddress(String address) throws InvalidUserException {
+		if (address == null) {
+			throw new InvalidUserException("Address should not be in null");
+		}
+       String trimAddress = address.trim();
+		String regex = "^[a-zA-Z0-9\\s.,/'#\\-]+(\\s[A-Za-z0-9\\-#]+)?$";
 
-	    // Define your regex pattern for validating company addresses
-	    String regex = "^[A-Za-z]\\w{3,100}$"; 
-	    Pattern p = Pattern.compile(regex);
-	    Matcher m = p.matcher(companyAddress);
-	    match = m.matches();
-	    
-	    if (match) {
-	        return true;
-	    } else {
-	        throw new InvalidUserException("Invalid Company Address");
-	    }
+		if(trimAddress.isEmpty() || trimAddress.length()<5) {
+			throw new InvalidUserException("Invalid address format");
+		}
+		if (!Pattern.matches(regex, address)  ) {
+			throw new InvalidUserException("Invalid address format");
+		} else {
+			return true;
+		}
 	}
 	
 	public static boolean validateLicenseImageURL(String imageUrl) throws InvalidUserException {
-		String regex = "^(https?|ftp)://.*$";
-		Pattern p = Pattern.compile(regex);
-		Matcher m = p.matcher(imageUrl);
-		boolean match = m.matches();
+	    String regex = "^(https?|ftp)://.*$";
 
-		if (match) {
-			return true;
-		} else {
-			// Throw exception with a descriptive error message
-			throw new InvalidUserException(
-					"Invalid  image URL format. Please provide a valid URL starting with 'http' or 'https'.");
-		}
+	    if (Pattern.matches(regex, imageUrl)) {
+	        return true;
+	    } else {
+	        throw new InvalidUserException(
+	                "Invalid image URL format. Please provide a valid URL starting with 'http' or 'https'.");
+	    }
 	}
 	
 	

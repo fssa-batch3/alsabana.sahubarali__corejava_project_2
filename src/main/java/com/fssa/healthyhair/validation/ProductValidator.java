@@ -1,7 +1,7 @@
 package com.fssa.healthyhair.validation;
 
 import java.util.List;
-import java.util.regex.Matcher;
+import java.util.regex.*;
 import java.util.regex.Pattern;
 
 import com.fssa.healthyhair.model.Product;
@@ -38,47 +38,34 @@ public class ProductValidator {
 		// Regular expression to validate product name format
 
 		String regex = "^[A-Za-z0-9\\s]{10,50}$";
-		Pattern p = Pattern.compile(regex);
-		Matcher m = p.matcher(productName);
-		boolean match = m.matches();
-
-		if (match) {
-			return true;
-		} else {
-			// Throw exception with a descriptive error message
-			throw new InvalidProductInputException(
-					"Invalid product name format. The product name should be alphanumeric and between 10 to 50 characters.");
-		}
+		  if (Pattern.matches(regex, productName)) {
+		        return true;
+		    } else {
+		        throw new InvalidProductInputException(
+		                "Invalid product name format. The product name should be alphanumeric and between 10 to 50 characters.");
+		    }
 	}
 
 	public static boolean validateProductCost(int cost) throws InvalidProductInputException {
 //		cost
-		String regex = "^\\d{3,4}$";
-		Pattern p = Pattern.compile(regex);
-		Matcher m = p.matcher(Integer.toString(cost));
-		boolean match = m.matches();
+		 String costString = String.valueOf(cost);
 
-		if (match) {
-			return true;
-		} else {
-			// Throw exception with a descriptive error message
-			throw new InvalidProductInputException(
-					"Invalid product cost format. The product cost should be a 3 or 4-digit number.");
-		}
+		    if (costString.matches("^\\d{3,4}$")) {
+		        return true;
+		    } else {
+		        throw new InvalidProductInputException(
+		                "Invalid product cost format. The product cost should be a 3 or 4-digit number.");
+		    }
 	}
 
 	public static boolean validateProductImageURL(String imageUrl) throws InvalidProductInputException {
 		String regex = "^(https?|ftp)://.*$";
-		Pattern p = Pattern.compile(regex);
-		Matcher m = p.matcher(imageUrl);
-		boolean match = m.matches();
 
-		if (match) {
+		if (Pattern.matches(regex, imageUrl)) {
 			return true;
 		} else {
-			// Throw exception with a descriptive error message
 			throw new InvalidProductInputException(
-					"Invalid product image URL format. Please provide a valid URL starting with 'http' or 'https'.");
+					"Invalid image URL format. Please provide a valid URL starting with 'http' or 'https'.");
 		}
 	}
 
