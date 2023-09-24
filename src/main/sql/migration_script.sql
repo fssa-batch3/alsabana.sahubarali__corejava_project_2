@@ -69,4 +69,28 @@ INNER JOIN orders ON user.user_id = orders.buyer_id
 INNER JOIN orders ON product.user_id = product.buyer_id
 INNER JOIN product ON orders.product_id = product.product_id;
 
-    
+-- cart table --
+CREATE TABLE IF NOT EXISTS cart(
+ cart_id INT AUTO_INCREMENT PRIMARY KEY,
+product_id INT,
+user_id INT
+  );
+  select * from cart;
+  
+  describe cart;
+
+drop table cart;
+
+
+
+-- foreign keys in cart table --
+
+ALTER TABLE cart
+ADD CONSTRAINT fk_user_user_id
+FOREIGN KEY (user_id)
+REFERENCES product(user_id);
+
+ALTER TABLE cart
+ADD CONSTRAINT fk_product_product_id
+FOREIGN KEY (product_id)
+REFERENCES product(product_id);

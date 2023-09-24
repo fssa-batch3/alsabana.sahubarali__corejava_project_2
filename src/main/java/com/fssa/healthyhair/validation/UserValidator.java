@@ -71,7 +71,7 @@ public class UserValidator {
 			@SuppressWarnings("unused")
 			User user = userDAO.findUserByEmail(email);
 			
-			if(user.getEmail() == null) throw new InvalidUserException("Email is not registered");
+			
 		} catch (DAOException e) {
 			
 			throw new InvalidUserException("Email is not registered");

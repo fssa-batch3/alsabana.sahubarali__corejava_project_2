@@ -16,6 +16,7 @@ public class OrderService {
 	public static boolean createOrder(Order order) throws ServiceException {
 		
 		try {
+		
 			OrderValidator.validateOrder(order);
 			return OrderDAO.create(order);
 		} catch (InvalidProductInputException | InvalidOrderException | DAOException e) {

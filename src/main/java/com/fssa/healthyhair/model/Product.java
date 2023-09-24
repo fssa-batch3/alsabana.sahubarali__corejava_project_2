@@ -100,7 +100,7 @@ public class Product {
 	}
 
 	public Product() {
-		super();
+
 	}
 
 	@Override
@@ -116,8 +116,5 @@ public class Product {
 	public void setCreatedUser(User createdUser) {
 		this.createdUser = createdUser;
 	}
-
-	
-	
 
 }

@@ -12,6 +12,7 @@ public class OrderValidator {
 	public static boolean validateOrder(Order order) throws InvalidOrderException, InvalidProductInputException {
 		try {
 			if (validateQuantity(order.getQuantity()) && validateAddress(order.getAddress())
+					&& validateOrderName(order.getName())
 					&& UserValidator.validateUserId(order.getOrderedUser().getUserId())
 					&& ProductValidator.validateProductId(order.getOrderedProduct().getProductId())
 					&& validateMobileNo(order.getNumber())) {
@@ -91,6 +92,15 @@ public class OrderValidator {
 			return true;
 		} else {
 			throw new InvalidUserException(" Company name is invalid");
+		}
+	}
+
+	public static boolean validateOrderName(String ordername) throws InvalidUserException {
+		String trimName = ordername.trim();
+		if (!trimName.isEmpty() || trimName.length() < 5) {
+			return true;
+		} else {
+			throw new InvalidUserException("  Name is invalid");
 		}
 	}
 

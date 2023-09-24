@@ -18,7 +18,7 @@ public class ProductDAO {
 	 * Creates a new product and inserts it into the database.
 	 *
 	 * @param product The Product object containing product information to be
-	 *                created.
+	 *                created
 	 * @return true if the product creation is successful, false otherwise.
 	 * @throws DAOException If there's an error during the product creation process.
 	 */
