@@ -13,6 +13,7 @@ public class Order {
 	private String pincode;
 	private String date;
 	private String deliveryDate;
+	private String orderStatus;
 	
 
 	public String getName() {
@@ -157,5 +158,13 @@ public class Order {
 
 	public void setDeliveryDate(String deliveryDate) {
 		this.deliveryDate = deliveryDate;
+	}
+
+	public String getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
 	}
 }

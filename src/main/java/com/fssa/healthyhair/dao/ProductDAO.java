@@ -181,13 +181,5 @@ public class ProductDAO {
 
 	}
 
-	public static void main(String[] args) {
-		try {
-			Product product = ProductDAO.findProductById(79);
-			System.out.println(product.getCreatedUser().getUserId());
-		} catch (DAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	
 }

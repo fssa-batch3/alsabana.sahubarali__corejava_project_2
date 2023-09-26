@@ -17,6 +17,7 @@ public class User implements Serializable {
 	private String companyName;
 	private String companyAddress;
 	private String companylicense;
+	private String salt;
 
 	public int getUserId() {
 		return userId;
@@ -185,6 +186,14 @@ public class User implements Serializable {
 	public String toString() {
 		return "User [email=" + email + ", username=" + username + ", password=" + password + ", number=" + number
 				+ ", type=" + type + ", userId=" + userId + ", address=" + address + "]";
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 
 }

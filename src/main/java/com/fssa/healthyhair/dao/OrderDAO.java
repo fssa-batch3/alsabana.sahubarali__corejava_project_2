@@ -38,7 +38,7 @@ public class OrderDAO {
 			pmt.setInt(10, order.getOrderedProduct().getCreatedUser().getUserId());
 			pmt.setString(11, order.getName());
 			Timestamp orderDate = new Timestamp(System.currentTimeMillis());
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String formattedDate = dateFormat.format(orderDate);
 			pmt.setString(12, formattedDate);
 			Calendar calendar = Calendar.getInstance();
@@ -154,6 +154,27 @@ public class OrderDAO {
 		return orderList; // Return the list of orders for the buyer
 	}
 
+	public static boolean findOrderByProductId(int productId) throws DAOException {
+		final String QUERY = "SELECT COUNT(*) FROM orders WHERE product_id = ?";
+		int count = 0;
+
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement pmt = connection.prepareStatement(QUERY)) {
+			pmt.setInt(1, productId);
+
+			try (ResultSet rs = pmt.executeQuery()) {
+				if (rs.next()) {
+					count = rs.getInt(1);
+				}
+			}
+
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+
+		return count > 0;
+	}
+
 	public static boolean delete(int orderId) throws DAOException {
 		final String QUERY = "DELETE from orders WHERE order_id=?";
 		// Start a try block with a prepared statement for deleting a product
@@ -168,6 +189,23 @@ public class OrderDAO {
 
 		} catch (SQLException e) {
 			throw new DAOException("Error in cancelling order", e);
+		}
+	}
+	
+	public static boolean update(String status, int orderId)throws DAOException{
+		final String SELECTQUERY = "UPDATE orders SET  order_status=? WHERE order_id=?";
+
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement stmt = connection.prepareStatement(SELECTQUERY)) {
+			// Set the updated order attributes in the prepared statement
+			stmt.setString(1, status);
+			stmt.setInt(2, orderId);
+			// Execute the update and get the number of rows affected
+			int rows = stmt.executeUpdate();
+
+			return rows > 0;// Return a boolean indicating whether the update was successful
+		} catch (SQLException e) {
+			throw new DAOException("Error while updating order");
 		}
 	}
 

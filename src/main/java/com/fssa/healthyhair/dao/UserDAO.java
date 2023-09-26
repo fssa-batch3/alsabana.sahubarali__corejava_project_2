@@ -24,7 +24,7 @@ public class UserDAO {
 	 */
 	public boolean register(User user) throws DAOException {
 
-		String query = "INSERT INTO user (email,name,password,phonenumber,type) VALUES (?,?,?,?,?)";
+		String query = "INSERT INTO user (email,name,password,phonenumber,type,salt) VALUES (?,?,?,?,?,?)";
 
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement pmt = connection.prepareStatement(query)) {
@@ -34,7 +34,8 @@ public class UserDAO {
 			pmt.setString(3, user.getPassword());
 			pmt.setString(4, user.getNumber());
 			pmt.setString(5, user.getType());
-
+			pmt.setString(6, user.getSalt());
+			
 			int rows = pmt.executeUpdate();
 
 			return rows > 0;
@@ -97,6 +98,7 @@ public class UserDAO {
                     user.setCompanyName(rs.getString("company_name"));
                     user.setCompanylicense(rs.getString("company_license"));
                     user.setProfileUrl(rs.getString("profile_img"));
+                    user.setSalt(rs.getString("salt"));
 				}
 			}
 

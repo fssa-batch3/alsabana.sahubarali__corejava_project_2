@@ -1,11 +1,13 @@
 package com.fssa.healthyhair.service;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import com.fssa.healthyhair.dao.UserDAO;
 import com.fssa.healthyhair.dao.exception.DAOException;
 import com.fssa.healthyhair.model.User;
 import com.fssa.healthyhair.service.exception.ServiceException;
+import com.fssa.healthyhair.util.PasswordUtil;
 import com.fssa.healthyhair.validation.UserValidator;
 import com.fssa.healthyhair.validation.exception.InvalidUserException;
 
@@ -16,7 +18,12 @@ public class UserService {
 
 		try {
 			UserValidator.validateUser(user);
-
+			
+			 byte[] salt = PasswordUtil.getSalt();
+			 String saltedString = PasswordUtil.byteArrayToHexString(salt);
+		     user.setSalt(saltedString);
+		     String hashedPassword = PasswordUtil.getSecurePassword(user.getPassword(), salt);
+		     user.setPassword(hashedPassword);
 			if (userDAO.isEmailAlreadyRegistered(user.getEmail())) {
 				throw new DAOException("Email already exists");
 			}
@@ -28,7 +35,7 @@ public class UserService {
 				return false;
 			}
 
-		} catch (DAOException | InvalidUserException e) {
+		} catch (DAOException | InvalidUserException | NoSuchAlgorithmException e) {
 
 			throw new ServiceException(e.getMessage());
 		}
@@ -40,10 +47,11 @@ public class UserService {
 		try {
 			UserDAO dao = new UserDAO();
 			if (UserValidator.validateEmail(email) && UserValidator.validatePassword(password)) {
-				
-
+				UserValidator.isUserExist(email);
 				User user = dao.findUserByEmail(email);
-				if (user.getPassword().equals(password)) {
+				 byte[] salt = PasswordUtil.hexStringToByteArray(user.getSalt());
+				 String saltedPassword = PasswordUtil.getSecurePassword(password, salt);
+				if (saltedPassword.equals(user.getPassword())) {
 					id = user.getUserId();
 				} else {
 					throw new ServiceException("Invalid Password");

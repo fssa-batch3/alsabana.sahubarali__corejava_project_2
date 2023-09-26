@@ -29,7 +29,7 @@ public class UserValidator {
 
 	}
 	public static boolean validateName(String name) throws InvalidUserException {
-		boolean match = false;
+		
 
 		String regex = "^[A-Za-z]\\w{3,29}$";
 		 if (Pattern.matches(regex, name)) {
@@ -66,19 +66,21 @@ public class UserValidator {
 			throw new InvalidUserException("Invalid Email");
 		}
 		
-		try {
-			UserDAO userDAO = new UserDAO();
-			@SuppressWarnings("unused")
-			User user = userDAO.findUserByEmail(email);
-			
-			
-		} catch (DAOException e) {
-			
-			throw new InvalidUserException("Email is not registered");
-		}
+	
 		
 		return true;
 
+	}
+	public static void isUserExist(String email) throws InvalidUserException {
+		try {
+			UserDAO userDAO = new UserDAO();
+		User use =  userDAO.findUserByEmail(email);
+		if(use.getEmail() ==null) throw new InvalidUserException("Email is not registered");
+		} catch (DAOException e) {
+			throw new InvalidUserException("Email is not registered");
+		}
+		
+		
 	}
 
 	public static boolean validateMobileNo(String mobileno) throws InvalidUserException {
