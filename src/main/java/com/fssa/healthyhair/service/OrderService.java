@@ -20,9 +20,9 @@ public class OrderService {
 
 		try {
 
-			OrderValidator.validateOrder(order);
+			OrderValidator.orderDatavalidate(order);
 			return OrderDAO.create(order);
-		} catch (InvalidProductInputException | InvalidOrderException | DAOException e) {
+		} catch (InvalidOrderException | DAOException e) {
 			throw new ServiceException(e);
 		}
 

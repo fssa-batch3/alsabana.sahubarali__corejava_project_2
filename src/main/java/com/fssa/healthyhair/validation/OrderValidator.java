@@ -25,6 +25,21 @@ public class OrderValidator {
 		return false;
 	}
 
+	public static boolean orderDatavalidate(Order order) throws InvalidOrderException {
+
+		try {
+			if (validateCityName(order.getCity()) && validateOrderName(order.getName())
+					&& validateMobileNo(order.getNumber()) && validatePincode(order.getPincode())
+					&& validateAddress(order.getAddress())) {
+				return true;
+			}
+
+		} catch (InvalidOrderException | InvalidUserException e) {
+			throw new InvalidOrderException(e.getMessage());
+		}
+		return false;
+	}
+
 	public static boolean validateQuantity(int quantity) throws InvalidOrderException {
 		boolean check = false;
 		try {
@@ -39,14 +54,24 @@ public class OrderValidator {
 	}
 
 	public static boolean validateAddress(String address) throws InvalidOrderException {
-		if (address == null) {
-			throw new InvalidOrderException("Address is null");
+		String trimmedAddress = address.trim();
+		if (trimmedAddress.isEmpty()) {
+			throw new InvalidOrderException("Invalid Street address");
 		}
 
 		String regex = "^[a-zA-Z0-9\\s.,/'#\\-]+(\\s[A-Za-z0-9\\-#]+)?$";
 
-		if (!Pattern.matches(regex, address)) {
+		if (!Pattern.matches(regex, trimmedAddress)) {
 			throw new InvalidOrderException("Invalid address format");
+		} else {
+			return true;
+		}
+	}
+
+	public static boolean validatePincode(String pincode) throws InvalidOrderException {
+		String trimmedPincode = pincode.trim();
+		if (trimmedPincode.isEmpty()) {
+			throw new InvalidOrderException("Invalid Pincode");
 		} else {
 			return true;
 		}
@@ -78,8 +103,8 @@ public class OrderValidator {
 	}
 
 	public static boolean validateCityName(String cityName) throws InvalidUserException {
-
-		if (cityName != null) {
+		String trimmedCity = cityName.trim();
+		if (trimmedCity != null) {
 			return true;
 		} else {
 			throw new InvalidUserException("The city name is invalid");
@@ -91,7 +116,7 @@ public class OrderValidator {
 		if (!companyName.isEmpty()) {
 			return true;
 		} else {
-			throw new InvalidUserException(" Company name is invalid");
+			throw new InvalidUserException("Company name is invalid");
 		}
 	}
 
@@ -100,7 +125,7 @@ public class OrderValidator {
 		if (!trimName.isEmpty() || trimName.length() < 5) {
 			return true;
 		} else {
-			throw new InvalidUserException("  Name is invalid");
+			throw new InvalidUserException("Name is invalid");
 		}
 	}
 
