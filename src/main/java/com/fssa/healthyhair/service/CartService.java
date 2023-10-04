@@ -1,5 +1,8 @@
 package com.fssa.healthyhair.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fssa.healthyhair.dao.CartDAO;
 import com.fssa.healthyhair.dao.exception.DAOException;
 import com.fssa.healthyhair.model.Cart;
@@ -29,9 +32,19 @@ public class CartService {
 															// ServiceException
 		}
 	}
-	
-	
-	
 
+	public static List<Cart> findCartItemsByuserId(int userId) throws ServiceException {
+		List<Cart> cartList;
+		try {
+			// Call the DAO to retrieve the product by ID.
+			cartList = CartDAO.findCartItembyUserId(userId);
+			return cartList;
+
+		} catch (DAOException e) {
+			// Handle any exceptions or rethrow them as ServiceException if necessary.
+			throw new ServiceException("Failed to retrieve cart by user ID", e);
+		}
+
+	}
 
 }
