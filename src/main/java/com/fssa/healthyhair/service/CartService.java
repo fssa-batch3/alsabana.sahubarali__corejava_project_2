@@ -1,6 +1,5 @@
 package com.fssa.healthyhair.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.fssa.healthyhair.dao.CartDAO;
@@ -15,6 +14,15 @@ public class CartService {
 		try {
 
 			return CartDAO.create(cart);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+
+	}
+
+	public static boolean addToCart(int userId, int productId) throws ServiceException {
+		try {
+			return CartDAO.addToCart(userId, productId);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}

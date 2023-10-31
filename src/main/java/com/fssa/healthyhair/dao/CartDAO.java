@@ -111,8 +111,39 @@ public class CartDAO {
 		}
 		return cartList;
 	}
-	
-	
-	
-	
+
+	public static boolean addToCart(int userId, int productId) throws DAOException {
+		String EXIST = "SELECT cart_id, quantity FROM cart WHERE user_id = ? AND product_id = ?";
+		String INSERT = "INSERT INTO cart (user_id, product_id, quantity) VALUES (?, ?, 1)";
+		String UPDATE = "UPDATE cart SET quantity = ? WHERE cart_id = ?";
+
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement selectPst = connection.prepareStatement(EXIST);
+				PreparedStatement insertPst = connection.prepareStatement(INSERT);
+				PreparedStatement updatePst = connection.prepareStatement(UPDATE)) {
+			selectPst.setInt(1, userId);
+			selectPst.setInt(2, productId);
+			ResultSet existingCartItem = selectPst.executeQuery();
+
+			if (existingCartItem.next()) {
+				int cartId = existingCartItem.getInt("cart_id");
+				int currentQuantity = existingCartItem.getInt("quantity");
+				int newQuantity = currentQuantity + 1;
+				updatePst.setInt(1, newQuantity);
+				updatePst.setInt(2, cartId);
+				int updatedRows = updatePst.executeUpdate();
+
+				return updatedRows > 0;
+			} else {
+				insertPst.setInt(1, userId);
+				insertPst.setInt(2, productId);
+				int insertedRows = insertPst.executeUpdate();
+
+				return insertedRows > 0;
+			}
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+	}
+
 }
