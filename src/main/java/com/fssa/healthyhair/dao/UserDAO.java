@@ -9,8 +9,6 @@ import java.util.List;
 
 import com.fssa.healthyhair.dao.exception.DAOException;
 import com.fssa.healthyhair.model.User;
-import com.fssa.healthyhair.service.UserService;
-import com.fssa.healthyhair.service.exception.ServiceException;
 import com.fssa.healthyhair.util.ConnectionUtil;
 
 public class UserDAO {

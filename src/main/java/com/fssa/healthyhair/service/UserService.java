@@ -1,6 +1,7 @@
 package com.fssa.healthyhair.service;
 
 import java.security.NoSuchAlgorithmException;
+
 import java.util.List;
 
 import com.fssa.healthyhair.dao.UserDAO;

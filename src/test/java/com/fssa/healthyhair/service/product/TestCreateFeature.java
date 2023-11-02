@@ -1,6 +1,7 @@
 package com.fssa.healthyhair.service.product;
 
 import static org.junit.Assert.assertFalse;
+
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -21,31 +22,30 @@ class TestCreateFeature {
 		ProductService productservice = new ProductService();
 		// Create a Product object for testing
 
-		
 		String productName = "Ayurvedic shampoo";
-		
+
 		int cost = 3200;
-		
+
 		String imageURL = "https://www.gkhair.co.in/cdn/shop/files/Balancing-banner_023150bb-42a3-4452-bbe8-aa23828dfdd1_1600x.png?v=1673589283";
-		
+
 		String detail = "A power-packed, leave in scalp serum strengthens hair roots and promotes fast and healthy hair growth A vital scalp treatment that helps remove dead skin cells, product build up and give roots the chance to thrive, control hyper production of scalp serum, tackle itchiness and flakiness.";
-		
+
 		String category = "ayurvedic";
-		 
+
 		User user = new User();
 		user.setUserId(24);
-		
-		Product product1 = new Product(productName,cost,imageURL,detail,category,user);
+
+		Product product1 = new Product(productName, cost, imageURL, detail, category, user);
 
 		try {
 			// Use an assertion to check if the product creation is successful
 			assertTrue(productservice.createProduct(product1));
-			System.out.println("Your product successfully created");
+
 		} catch (ServiceException e) {
 			// Catch and print any ServiceException that occurs
 			e.printStackTrace();
 			fail();
-		} 
+		}
 
 	}
 

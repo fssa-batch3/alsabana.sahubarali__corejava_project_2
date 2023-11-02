@@ -1,6 +1,7 @@
 package com.fssa.healthyhair.service.user;
 
 import static org.junit.Assert.assertTrue;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -36,7 +37,7 @@ class TestLoginFeature {
 		try {
 
 			assertEquals(2, userService.loginWithEmail("sabin320@gmail.com", "passWord@786"));
-			System.out.println("Succesfully logged in ");
+
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			fail();

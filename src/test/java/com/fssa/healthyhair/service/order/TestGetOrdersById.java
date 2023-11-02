@@ -12,7 +12,7 @@ import com.fssa.healthyhair.service.exception.ServiceException;
 public class TestGetOrdersById {
 	
 	    public void testFindOrdersByUserId() {
-	        int userId = 27; // Replace with the actual user ID you want to test
+	        int userId = 76; // Replace with the actual user ID you want to test
 
 	        OrderService orderService = new OrderService(); // Create an instance of your OrderService
 

@@ -5,7 +5,7 @@ public class Cart {
 	private Product cartProduct;
 	private User addedUser;
 	private int quantity;
-	private int cart_id;
+	private int cartId;
 
 	public Cart() {
 		super();
@@ -41,12 +41,12 @@ public class Cart {
 		return "Cart [cartProduct=" + cartProduct + ", addedUser=" + addedUser + ", quantity=" + quantity + "]";
 	}
 
-	public int getCart_id() {
-		return cart_id;
+	public int getCartId() {
+		return cartId;
 	}
 
-	public void setCart_id(int cart_id) {
-		this.cart_id = cart_id;
+	public void setCartId(int cartId) {
+		this.cartId = cartId;
 	}
 
 }

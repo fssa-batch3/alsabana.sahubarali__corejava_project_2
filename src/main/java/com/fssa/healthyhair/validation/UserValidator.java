@@ -1,11 +1,11 @@
 package com.fssa.healthyhair.validation;
 
 import java.util.List;
-import java.util.regex.*;
+import java.util.regex.Pattern;
+
 import com.fssa.healthyhair.dao.UserDAO;
 import com.fssa.healthyhair.dao.exception.DAOException;
 import com.fssa.healthyhair.model.User;
-import com.fssa.healthyhair.validation.exception.InvalidOrderException;
 import com.fssa.healthyhair.validation.exception.InvalidUserException;
 
 public class UserValidator {

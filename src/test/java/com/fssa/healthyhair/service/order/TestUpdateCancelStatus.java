@@ -1,6 +1,7 @@
 package com.fssa.healthyhair.service.order;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -14,7 +15,7 @@ import com.fssa.healthyhair.service.exception.ServiceException;
 	@Test
 	void testStatusSuccess() {
 		try {
-			assertTrue(OrderService.update("canceled", 113));
+			assertTrue(OrderService.update("canceled", 129));
 		} catch (ServiceException e) {
 			fail();
 		}

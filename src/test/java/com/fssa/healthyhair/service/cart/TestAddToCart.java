@@ -20,9 +20,9 @@ class TestAddToCart {
 			// Create a Cart object with the necessary information
 			Cart cart = new Cart();
 			Product product = new Product();
-			product.setProductId(2);
+			product.setProductId(94);
 			User user = new User();
-			user.setUserId(3);
+			user.setUserId(85);
 			cart.setCartProduct(product); // Assuming you have a Product class
 			cart.setAddedUser(user); // Assuming you have a User class
 

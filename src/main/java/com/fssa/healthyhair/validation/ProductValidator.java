@@ -1,7 +1,6 @@
 package com.fssa.healthyhair.validation;
 
 import java.util.List;
-import java.util.regex.*;
 import java.util.regex.Pattern;
 
 import com.fssa.healthyhair.model.Product;

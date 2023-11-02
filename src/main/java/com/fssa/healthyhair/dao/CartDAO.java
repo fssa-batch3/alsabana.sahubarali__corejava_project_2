@@ -9,7 +9,6 @@ import java.util.List;
 
 import com.fssa.healthyhair.dao.exception.DAOException;
 import com.fssa.healthyhair.model.Cart;
-import com.fssa.healthyhair.model.Order;
 import com.fssa.healthyhair.model.Product;
 import com.fssa.healthyhair.model.User;
 import com.fssa.healthyhair.util.ConnectionUtil;
@@ -95,7 +94,7 @@ public class CartDAO {
 
 					// Create Cart object and add to the list
 					Cart cart1 = new Cart();
-					cart1.setCart_id(cartId);
+					cart1.setCartId(cartId);
 					cart1.setQuantity(quantity);
 
 					// Set the User and Product objects in the Cart object
@@ -113,14 +112,14 @@ public class CartDAO {
 	}
 
 	public static boolean addToCart(int userId, int productId) throws DAOException {
-		String EXIST = "SELECT cart_id, quantity FROM cart WHERE user_id = ? AND product_id = ?";
-		String INSERT = "INSERT INTO cart (user_id, product_id, quantity) VALUES (?, ?, 1)";
-		String UPDATE = "UPDATE cart SET quantity = ? WHERE cart_id = ?";
+		String exist = "SELECT cart_id, quantity FROM cart WHERE user_id = ? AND product_id = ?";
+		String insert = "INSERT INTO cart (user_id, product_id, quantity) VALUES (?, ?, 1)";
+		String update = "UPDATE cart SET quantity = ? WHERE cart_id = ?";
 
 		try (Connection connection = ConnectionUtil.getConnection();
-				PreparedStatement selectPst = connection.prepareStatement(EXIST);
-				PreparedStatement insertPst = connection.prepareStatement(INSERT);
-				PreparedStatement updatePst = connection.prepareStatement(UPDATE)) {
+				PreparedStatement selectPst = connection.prepareStatement(exist);
+				PreparedStatement insertPst = connection.prepareStatement(insert);
+				PreparedStatement updatePst = connection.prepareStatement(update)) {
 			selectPst.setInt(1, userId);
 			selectPst.setInt(2, productId);
 			ResultSet existingCartItem = selectPst.executeQuery();

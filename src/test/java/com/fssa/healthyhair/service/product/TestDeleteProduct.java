@@ -2,6 +2,7 @@ package com.fssa.healthyhair.service.product;
 
 import static org.junit.Assert.*;
 
+
 import org.junit.jupiter.api.Test;
 
 import com.fssa.healthyhair.service.*;
@@ -14,7 +15,7 @@ class TestDeleteProduct {
 	void deleteProductSuccess() {
 		ProductService productService = new ProductService();
 		try {
-			assertTrue(productService.deleteProduct(69));
+			assertTrue(productService.deleteProduct(91));
 		} catch (ServiceException e) {
 			System.err.println(e.getMessage());
 			fail();

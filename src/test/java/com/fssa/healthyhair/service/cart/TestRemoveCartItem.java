@@ -13,7 +13,7 @@ import com.fssa.healthyhair.service.exception.ServiceException;
 	@Test
 	 void removeItemSuccess(){
 			try {
-			assertTrue(CartService.remove(3));
+			assertTrue(CartService.remove(33));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}

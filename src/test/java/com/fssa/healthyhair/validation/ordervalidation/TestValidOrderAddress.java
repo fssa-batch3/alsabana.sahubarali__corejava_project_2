@@ -1,6 +1,7 @@
 package com.fssa.healthyhair.validation.ordervalidation;
 
 import org.junit.Assert;
+
 import org.junit.jupiter.api.Test;
 
 import com.fssa.healthyhair.validation.OrderValidator;

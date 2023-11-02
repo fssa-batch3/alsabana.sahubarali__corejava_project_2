@@ -19,7 +19,7 @@ class TestUpdateProduct {
 		ProductDAO productDAO = new ProductDAO();
 		String productName = "Ayurvedic conditioner";
 
-		int cost = 3200;
+		int cost = 230;
 
 		String imageURL = "https://www.gkhair.co.in/cdn/shop/files/Balancing-banner_023150bb-42a3-4452-bbe8-aa23828dfdd1_1600x.png?v=1673589283";
 
@@ -27,7 +27,7 @@ class TestUpdateProduct {
 
 		String category = "samples";
 
-		Product product1 = new Product(67, productName, cost, imageURL, detail, category);
+		Product product1 = new Product(93, productName, cost, imageURL, detail, category);
 
 		try {
 			assertTrue(productDAO.update(product1));

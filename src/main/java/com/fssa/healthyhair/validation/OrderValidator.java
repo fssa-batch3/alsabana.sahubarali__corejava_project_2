@@ -2,6 +2,7 @@ package com.fssa.healthyhair.validation;
 
 import java.util.regex.Pattern;
 
+
 import com.fssa.healthyhair.model.Order;
 import com.fssa.healthyhair.validation.exception.InvalidOrderException;
 import com.fssa.healthyhair.validation.exception.InvalidProductInputException;

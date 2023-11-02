@@ -13,7 +13,7 @@ import com.fssa.healthyhair.service.exception.ServiceException;
 	
 	 @Test
 	     void testDoesOrderExistForExistingProduct() {
-	        int existingProductId = 79; // Replace with an existing product ID in your test database
+	        int existingProductId = 89; // Replace with an existing product ID in your test database
 
 	        try {
 	            boolean orderExists = OrderService.doesOrderExistForProduct(existingProductId);
