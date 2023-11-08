@@ -21,7 +21,7 @@ import com.fssa.healthyhair.service.exception.ServiceException;
 	        } catch (ServiceException e) {
 	            fail("ServiceException should not be thrown for an existing product.");
 	        }
-	    }
+	    } 
 
 	    @Test
 	     void testDoesOrderExistForNonExistingProduct() {
@@ -32,7 +32,7 @@ import com.fssa.healthyhair.service.exception.ServiceException;
 	            assertFalse(orderExists);
 	        } catch (ServiceException e) {
 	            fail("ServiceException should not be thrown for a non-existing product.");
-	        }
+	        } 
 	    }
 
 }

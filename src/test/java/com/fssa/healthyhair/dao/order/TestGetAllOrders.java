@@ -22,7 +22,7 @@ class TestGetAllOrders {
 		} catch (ServiceException e) {
 
 			e.printStackTrace();
-		}
+		} 
 	}
 
 	

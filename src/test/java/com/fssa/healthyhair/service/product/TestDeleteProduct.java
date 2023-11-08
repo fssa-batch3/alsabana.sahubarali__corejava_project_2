@@ -15,11 +15,11 @@ class TestDeleteProduct {
 	void deleteProductSuccess() {
 		ProductService productService = new ProductService();
 		try {
-			assertTrue(productService.deleteProduct(91));
+			assertTrue(productService.deleteProduct(100));
 		} catch (ServiceException e) {
 			System.err.println(e.getMessage());
 			fail();
-		}
+		} 
   
 	}
   

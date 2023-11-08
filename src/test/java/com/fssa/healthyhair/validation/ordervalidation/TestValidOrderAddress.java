@@ -19,7 +19,7 @@ class TestValidOrderAddress {
 
 		}
 	}
-
+ 
 	@Test
 	void testMissingStreetAddress() {
 		String address = "";

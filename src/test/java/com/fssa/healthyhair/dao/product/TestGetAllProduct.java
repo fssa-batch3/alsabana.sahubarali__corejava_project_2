@@ -28,7 +28,7 @@ class TestGetAllProduct {
 		} catch (ServiceException e) {
 			fail();
 		}
-
+ 
 	} 
 
 }

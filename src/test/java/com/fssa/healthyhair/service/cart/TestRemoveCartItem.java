@@ -1,4 +1,4 @@
-package com.fssa.healthyhair.service.cart;
+ package com.fssa.healthyhair.service.cart;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,7 +13,7 @@ import com.fssa.healthyhair.service.exception.ServiceException;
 	@Test
 	 void removeItemSuccess(){
 			try {
-			assertTrue(CartService.remove(33));
+			assertTrue(CartService.remove(37));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
@@ -23,7 +23,7 @@ import com.fssa.healthyhair.service.exception.ServiceException;
 		try {
 			assertFalse(CartService.remove(0));
 		} catch (ServiceException e) {
-			e.printStackTrace();
+			e.printStackTrace(); 
 		}
 	}
 }

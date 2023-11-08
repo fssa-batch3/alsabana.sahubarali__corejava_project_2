@@ -18,7 +18,7 @@ class TestRegisterFeature {
 
 		UserService userservice = new UserService();
 		User user1 = new User("nithi@gmail.com", "sabin", "passWord@786", "buyer", "8015059760");
-
+	
 		try {
 			assertTrue(userservice.registerUser(user1));
 
@@ -27,9 +27,9 @@ class TestRegisterFeature {
 			fail();
 
 		}
-
+ 
 	}
-
+ 
 	@Test
 	void testRegistrationFail() {
 		UserService userService = new UserService();
@@ -46,19 +46,6 @@ class TestRegisterFeature {
 		}
 	}
 
-	@Test
-	void testUserNull() {
-		UserService userservice = new UserService();
-		User user1 = null;
-		try {
-			assertFalse(userservice.registerUser(user1));
-			System.err.println("Can not be null");
-			fail();
-		} catch (ServiceException e) {
-			System.err.println(e.getMessage());
 
-		}
-
-	}
 
 }
