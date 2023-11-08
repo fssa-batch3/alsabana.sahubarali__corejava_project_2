@@ -17,13 +17,12 @@ public class ConnectionUtil {
 
 		
 		dbUrl = System.getenv("DB_URL");
-		dbUser = System.getenv("DB_USER");
+		dbUser = System.getenv("DB_USER"); 
 		dbPassword = System.getenv("DB_PASSWORD");
 
 		try { 
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			return DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-
 		} catch (SQLException e) {
 			System.err.print(e);
 			throw new RuntimeException("Unable to connect database", e);

@@ -20,9 +20,9 @@ public class PasswordUtil {
 	            }
 	            generatedPassword = sb.toString();
 	        } catch (NoSuchAlgorithmException e) {
-	            e.printStackTrace();
+	           System.err.println(e.getMessage());
 	        }
-	        return generatedPassword;
+	        return generatedPassword; 
 	    }
 
 	    public static byte[] getSalt() throws NoSuchAlgorithmException {
